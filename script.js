@@ -6,8 +6,8 @@ const fs = require('fs');
 const VIEWPORT = {width: 1920, height: 1080};
 
 (async () => {
-    //const browser = await puppeteer.launch({headless: false});
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({headless: false});
+    //const browser = await puppeteer.launch();
     const pages = await browser.pages(); // Get the initial pages loaded [a single blank one]
     const page = pages[0];
     // Make it small for video recording so that they don't see my USERNAME/PASS
@@ -63,7 +63,7 @@ const VIEWPORT = {width: 1920, height: 1080};
 
 
 
-    const FIVE_MINUTES = 1000 * 60;
+    const ONE_MINUTE = 1000 * 60;
     let curr_data = '';
     setInterval(async () => {
         let new_data = await fetchData();
@@ -73,10 +73,10 @@ const VIEWPORT = {width: 1920, height: 1080};
         }
 
         await printData(new_data); // [requires more time than 30 seconds]
-        await compareData(curr_data, new_data);
+        //await compareData(curr_data, new_data);
         curr_data = new_data;
         await refreshPages(pages);
-    }, FIVE_MINUTES)
+    }, ONE_MINUTE)
 
     async function refreshPages(pages) {
         pages.forEach(async (page) => {
@@ -84,19 +84,25 @@ const VIEWPORT = {width: 1920, height: 1080};
             await page.waitForSelector('body');
         })
     }
+
     async function fetchData() {
         let data = await Promise.all(pages.map(async (page) => {
             let page_data = await page.evaluate(() => {
-                let title_and_link = [...document.querySelectorAll('div.course-content ul.weeks li[id^="section"] li.activity')].map((el) => {
-                    let links = [...el.querySelectorAll('a[href]')].map(el => el.href);
-                    return {title: el.innerText.replace(/[\n\r]/g, ' ').trim(), links: links}
-                })
-                return title_and_link;
-            })
+                const page_attributes = { pageHeader: document.querySelector('div#page header .page-header-headings').innerText };
+                return ([...document.querySelectorAll('div[class=content]')].map(section => ({
+                        // Page header stays constant for the page
+                        pageHeader: page_attributes.pageHeader,
+                        // Section name, changes every section
+                        sectionName: section.querySelector('h3.sectionname').innerText,
+                        // Links, changes every file
+                        links: [...section.querySelectorAll('ul.section li [href]')].map(aalink => aalink.href)
+                })));
+            });
             return page_data;
-        }))
+        }));
         return data;
     }
+
     async function compareData(curr_data, new_data) {
         // TODO
     }
@@ -104,23 +110,14 @@ const VIEWPORT = {width: 1920, height: 1080};
     async function printData(data) {
         // Delete file if it exists
         fs.unlink('data.txt', (err) => {
-            if(err) throw err;
-            console.log('deleted');
+            if(err) console.log('deleted data.txt');
         })
 
-        let pageNum = 1;
-        let fileNum = 1;
         data.forEach((page) => {
-            page.forEach((el) => {
-                // Write data to file
-                fs.appendFileSync('data.txt', `Page-instance: ${pageNum}-${fileNum++}: ${JSON.stringify(el)}\n`, (err) => {
-                    if(err) throw err;
-                    console.log(`Page-instance: ${pageNum}-${fileNum++}: ${JSON.stringify(el)}\n`);
-                });
-
-            })
-            pageNum++;
-            fileNum = 1; // Reset back so that it always starts at 1 for each page
-        });
+            fs.appendFile('data.txt', JSON.stringify(page), (err) => {
+                if(err) console.log(err);
+            });
+        })
+        console.log('Updated file!');
     }
 })()

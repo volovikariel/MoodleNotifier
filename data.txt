@@ -1,147 +1,525 @@
-Page-instance: 1-1: {"title":"Announcements Forum","links":["https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313111"]}
-Page-instance: 1-2: {"title":"Ordinary Differential Equations File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2342862"]}
-Page-instance: 1-3: {"title":"Lecture External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2342863"]}
-Page-instance: 1-4: {"title":"Tutorials External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2363647"]}
-Page-instance: 1-5: {"title":"Office Hours External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2367245"]}
-Page-instance: 1-6: {"title":"recorded lecture External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2368219"]}
-Page-instance: 1-7: {"title":"ENGR 213 OUTLINE - Fall 2020 V4 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2412753"]}
-Page-instance: 1-8: {"title":"Expectations-of-Originality_213 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2435392"]}
-Page-instance: 1-9: {"title":"To go to COLE, follow the link given by:  http://www.concordia.ca/online/exams.html?utm_source=vanity&utm_campaign=cole","links":["http://www.concordia.ca/online/exams.html?utm_source=vanity&utm_campaign=cole"]}
-Page-instance: 1-10: {"title":"Please login with your concordia netname at the following website   https://cole.concordia.ca/course/view.php?id=4192  Please test that you meet the requirements to take the exam (both midterm and final will use the same system). You need a computer/laptop (mobile devices cannot be used to take the exam), you have to use only Chrome as a web browser, and you need a functional camera and reasonable internet connection. This is a pen and paper exam (in this mock-up you start the exam, scribble something on the paper, and try to upload your written pages using a smart-phone or tablet with internet connection). There is no time limit to try the mock-up exam, but you are allowed to test it only once, so please allocate at least 30 minutes to see how it works. If you have any questions or need technical support please email cole@concordia.ca immediately.","links":["https://cole.concordia.ca/course/view.php?id=4192","mailto:cole@concordia.ca"]}
-Page-instance: 1-11: {"title":"Tutorial #1 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2424158"]}
-Page-instance: 1-12: {"title":"week 2 OneNote File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2425757"]}
-Page-instance: 1-13: {"title":"Week 2 Tutorial Powerpoint File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2436023"]}
-Page-instance: 1-14: {"title":"week 3 OneNote File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2438706"]}
-Page-instance: 1-15: {"title":"Quiz 1","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2438328"]}
-Page-instance: 1-16: {"title":"Week 3 Tutorials File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2447839"]}
-Page-instance: 1-17: {"title":"Week 4 OneNote File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2454158"]}
-Page-instance: 1-18: {"title":"Tutorial #4 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458972"]}
-Page-instance: 1-19: {"title":"","links":["https://moodle.concordia.ca/moodle/pluginfile.php/4502911/mod_label/intro/Quiz1_ENGR213_sol.jpg"]}
-Page-instance: 1-20: {"title":"quiz 2 : Chapters 2.7 and 17  To be done between October 13, 9 AM, and Friday October 16, 11h30 AM","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2457412"]}
-Page-instance: 1-21: {"title":"quiz1 grades File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2459841"]}
-Page-instance: 1-22: {"title":"Week 5 OneNote File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2459885"]}
-Page-instance: 1-23: {"title":"","links":["https://moodle.concordia.ca/moodle/pluginfile.php/4525504/mod_label/intro/quiz%202%20sol.jpg"]}
-Page-instance: 1-24: {"title":"Tutorial 5 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2482984"]}
-Page-instance: 1-25: {"title":"Midterm October 23  At 10 AM, on COLE  pen/paper test, you will have to upload your work on COLE  Topics: chapters 1-2-17  details given during the lecture...","links":[]}
-Page-instance: 1-26: {"title":"Team Assignment","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2472265"]}
-Page-instance: 1-27: {"title":"Team Assignment 1 (Fridays) File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2473902"]}
-Page-instance: 1-28: {"title":"Quiz 3  Quiz 3, chapter 3.3 and 3.4  To do between November 2, 11hAM and November 6, 11h30 AM  Duration: 35 minutes.","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2491858"]}
-Page-instance: 1-29: {"title":"Midterm grades File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492487"]}
-Page-instance: 1-30: {"title":"Week 7 OneNote File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492639"]}
-Page-instance: 1-31: {"title":"Week 6 OneNote File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492640"]}
-Page-instance: 1-32: {"title":"grades quiz 1 2 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2493860"]}
-Page-instance: 1-33: {"title":"Midterm Solution page 1 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495830"]}
-Page-instance: 1-34: {"title":"Midterm Solution page 2 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495831"]}
-Page-instance: 1-35: {"title":"Midterm Solution page 3 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495832"]}
-Page-instance: 1-36: {"title":"Tutorial #7 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2502008"]}
-Page-instance: 1-37: {"title":"quiz 4  Quiz 4 to be done during week of November 16,  open on Monday 11 AM, close on Friday 11h30 AM  chapter 3.8","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2495859"]}
-Page-instance: 1-38: {"title":"team assignment drop box  To drop your team assignment DURING tutorial","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2505578"]}
-Page-instance: 2-1: {"title":"Course outline (tentative) File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2373918"]}
-Page-instance: 2-2: {"title":"Helpful links (and integrity rules) File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2373923"]}
-Page-instance: 2-3: {"title":"Slides Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399496"]}
-Page-instance: 2-4: {"title":"Additional Readings Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2335079"]}
-Page-instance: 2-5: {"title":"Forums","links":[]}
-Page-instance: 2-6: {"title":"Announcements Forum","links":["https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313131"]}
-Page-instance: 2-7: {"title":"Student Discussion Forum","links":["https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2335078"]}
-Page-instance: 2-8: {"title":"Reaction Paper information","links":[]}
-Page-instance: 2-9: {"title":"Guidelines for WRITING Reaction Papers Page","links":["https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335081"]}
-Page-instance: 2-10: {"title":"Guidelines for EVALUATING Reaction Papers Page","links":["https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335195"]}
-Page-instance: 2-11: {"title":"Zoom meeting info ---NOT recordings! External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2353292"]}
-Page-instance: 2-12: {"title":"Uploaded Zoom videos and other vids (on Yuja) External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2353293"]}
-Page-instance: 2-13: {"title":"TA Office Hours: Tuesdays 11-12 (find Amber here!) Page","links":["https://moodle.concordia.ca/moodle/mod/page/view.php?id=2412241"]}
-Page-instance: 2-14: {"title":"Sample of Chomsky Sources Page","links":["https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335399"]}
-Page-instance: 2-15: {"title":"Optional: What's the point of school?","links":[]}
-Page-instance: 2-16: {"title":"Anti-teaching File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335088"]}
-Page-instance: 2-17: {"title":"Video: A Vision of Students Today URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2335089"]}
-Page-instance: 2-18: {"title":"Chapter 2 of textbook File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2408523"]}
-Page-instance: 2-19: {"title":"Computer assignment links","links":[]}
-Page-instance: 2-20: {"title":"Computer assignment instructions Page","links":["https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335085"]}
-Page-instance: 2-21: {"title":"Computer assignment quiz (deadline extended)","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2335090"]}
-Page-instance: 2-22: {"title":"Some external links Page","links":["https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335201"]}
-Page-instance: 2-23: {"title":"Assignment submission","links":[]}
-Page-instance: 2-24: {"title":"Mohawk article RP Workshop","links":["https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335100"]}
-Page-instance: 2-25: {"title":"Chaps34ofTEXTBOOK File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2429009"]}
-Page-instance: 2-26: {"title":"RP 2 on KoL Chapter 1 Workshop","links":["https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335101"]}
-Page-instance: 2-27: {"title":"Bregman's Auditory Scene Analysis Page URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2443488"]}
-Page-instance: 2-28: {"title":"Chapter5 of textbook File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2438888"]}
-Page-instance: 2-29: {"title":"Finite State Machine Practice File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335102"]}
-Page-instance: 2-30: {"title":"Solutions for the FSM Practice File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335104"]}
-Page-instance: 2-31: {"title":"Finite State Machine HW as QUIZ","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2335105"]}
-Page-instance: 2-32: {"title":"Le Peuple Invisible / The Invisible Nation URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2453775"]}
-Page-instance: 2-33: {"title":"Truth and Reconciliation Commission of Canada URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2453785"]}
-Page-instance: 2-34: {"title":"Review sheet for midterm File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335106"]}
-Page-instance: 2-35: {"title":"Midterm Exam Quiz","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2475123"]}
-Page-instance: 2-36: {"title":"Demo for drawing diagrams in Moodle Quiz questions URL  Really weak demo video:","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2476013"]}
-Page-instance: 2-37: {"title":"Sly and the Family Stone Midterm Prep URL  Listen to the song here. The crucial part is at around 27 seconds in.","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2476042"]}
-Page-instance: 2-38: {"title":"Original Despacito Video URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2335108"]}
-Page-instance: 2-39: {"title":"Praat video: Recording and saving sound File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335110"]}
-Page-instance: 2-40: {"title":"RP 3 on octopus intelligence Workshop","links":["https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335111"]}
-Page-instance: 2-41: {"title":"SyntaxSheet File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335115"]}
-Page-instance: 2-42: {"title":"Syntax Quiz","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2500436"]}
-Page-instance: 2-43: {"title":"Binding conditions on pronouns File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2505487"]}
-Page-instance: 3-1: {"title":"Announcements Forum","links":["https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313762"]}
-Page-instance: 4-1: {"title":"Announcements Forum","links":["https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314124"]}
-Page-instance: 4-2: {"title":"Course outline Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2383805"]}
-Page-instance: 4-3: {"title":"Lectures: pdf format Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2383806"]}
-Page-instance: 4-4: {"title":"Lectures: video format External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2383807"]}
-Page-instance: 4-5: {"title":"Zoom lecture link- Friday 5:45 pm - 8:15 pm Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2401814"]}
-Page-instance: 4-6: {"title":"Zoom link: Labs and Tutorials Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2412438"]}
-Page-instance: 4-7: {"title":"Assignments Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2419848"]}
-Page-instance: 4-8: {"title":"Assignment 1 submission link- Due on October 2nd at 11:55 pm.","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2431324"]}
-Page-instance: 4-9: {"title":"Zoom link : OFFICE HOURS-every Tuesday at 12 noon Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2436139"]}
-Page-instance: 4-10: {"title":"Assignment 2 submission link: Due 16 October","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2462805"]}
-Page-instance: 4-11: {"title":"Assignment 3 submission link","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2493397"]}
-Page-instance: 4-12: {"title":"Lab Zoom Meetings:     Section SI-X:   Join Zoom Meeting https://concordia-ca.zoom.us/j/94617756094?pwd=SnRVSkNVZlhLM3VHS0NweGNJdnkyUT09  Meeting ID: 946 1775 6094 Passcode: comp248     Section SJ-X:  Join Zoom Meeting https://concordia-ca.zoom.us/j/98161030036?pwd=YThjZUVudlRhRTFybnVXQkg5TSs4UT09  Meeting ID: 981 6103 0036 Passcode: 538722     Section SK-X:  Join Zoom Meeting https://concordia-ca.zoom.us/j/95663809044?pwd=SjV0Z29aSzdSN1pvZHNTbXhRWWJvUT09  Meeting ID: 956 6380 9044 Passcode: comp248","links":["https://concordia-ca.zoom.us/j/94617756094?pwd=SnRVSkNVZlhLM3VHS0NweGNJdnkyUT09","https://concordia-ca.zoom.us/j/94617756094?pwd=SnRVSkNVZlhLM3VHS0NweGNJdnkyUT09","https://concordia-ca.zoom.us/j/98161030036?pwd=YThjZUVudlRhRTFybnVXQkg5TSs4UT09","https://concordia-ca.zoom.us/j/95663809044?pwd=SjV0Z29aSzdSN1pvZHNTbXhRWWJvUT09"]}
-Page-instance: 4-13: {"title":"Recorded tutorials External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2433979"]}
-Page-instance: 4-14: {"title":"Lab User Manual File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2426017"]}
-Page-instance: 4-15: {"title":"Tutorial#1 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2421793"]}
-Page-instance: 4-16: {"title":"Tutorial#1-Video File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2421891"]}
-Page-instance: 4-17: {"title":"Tutorial#2 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2433930"]}
-Page-instance: 4-18: {"title":"Tutorial#3 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2446772"]}
-Page-instance: 4-19: {"title":"Tutorial#3-Video File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2446778"]}
-Page-instance: 4-20: {"title":"Tutorial#4 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2457730"]}
-Page-instance: 4-21: {"title":"Tutorial 05 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458585"]}
-Page-instance: 4-22: {"title":"Tutorial 06 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458587"]}
-Page-instance: 4-23: {"title":"Tutorial 07 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483901"]}
-Page-instance: 4-24: {"title":"Tutorial 08 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483902"]}
-Page-instance: 4-25: {"title":"Tutorial 09 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483903"]}
-Page-instance: 4-26: {"title":"Tutorial 10 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483908"]}
-Page-instance: 4-27: {"title":"Tutorial 11 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483909"]}
-Page-instance: 4-28: {"title":"Tutorial 12 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483910"]}
-Page-instance: 5-1: {"title":"Announcements Forum","links":["https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369"]}
-Page-instance: 5-2: {"title":"course outline File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2396162"]}
-Page-instance: 5-3: {"title":"comp 232 sect DD zoom link External tool","links":["https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2399500"]}
-Page-instance: 5-4: {"title":"Video of lecture 1 Sept 9 2020 Folder","links":["https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090"]}
-Page-instance: 5-5: {"title":"Doedel lecture notes File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813"]}
-Page-instance: 5-6: {"title":"Assignment 1","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096"]}
-Page-instance: 5-7: {"title":"Assignment 1 solution File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917"]}
-Page-instance: 5-8: {"title":"A1 marks File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736"]}
-Page-instance: 5-9: {"title":"Video of Lecture 2 Sept. 16 URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768"]}
-Page-instance: 5-10: {"title":"Video of Tutorial 1 Section DDDB URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620"]}
-Page-instance: 5-11: {"title":"Lecture 3 slides part 1 from Rosen, pp. 1-32 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432452"]}
-Page-instance: 5-12: {"title":"Lecture 3 slides part 2 from Rosen, pp. 41-57 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432099"]}
-Page-instance: 5-13: {"title":"Video of Lecture 3 Sept. 23 URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2432581"]}
-Page-instance: 5-14: {"title":"Video of Tutorial 2 Section DDDD URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2444105"]}
-Page-instance: 5-15: {"title":"Lecture 4 slides from Rosen, pp. 1-49 File  Part 1 - see above  Part 2 - refer to Doedel's Notes, pp. 87-124","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2443785"]}
-Page-instance: 5-16: {"title":"Video of Lecture 4 URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2448811"]}
-Page-instance: 5-17: {"title":"Assignment 2","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2448926"]}
-Page-instance: 5-18: {"title":"A2 solutions Assignment","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2493331"]}
-Page-instance: 5-19: {"title":"Video of Tutorial 3 Section DDDA URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495992"]}
-Page-instance: 5-20: {"title":"Video of Lecture 5 URL  ED Notes pp. 88-114","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2464411"]}
-Page-instance: 5-21: {"title":"Video of Tutorial 4 Section DDDB URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495996"]}
-Page-instance: 5-22: {"title":"Lecture 6 slides from Rosen, pp. 50-71 File  Part 1 - see above  Part 2- ED Notes, pp. 115-142","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2464467"]}
-Page-instance: 5-23: {"title":"ED Notes with partial solutions pp. 1-142 File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2464470"]}
-Page-instance: 5-24: {"title":"Video of Lecture 6 URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2464504"]}
-Page-instance: 5-25: {"title":"Video of Tutorial 5 Section DDDB URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495999"]}
-Page-instance: 5-26: {"title":"Lecture 7 slides from Rosen 46-75 File  Part 1 - see above  Part 2 ED Notes, pp. 143-186","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2477272"]}
-Page-instance: 5-27: {"title":"Video of Lecture 7 URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495927"]}
-Page-instance: 5-28: {"title":"Video of Tutorial 6 Section DDDB URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2496001"]}
-Page-instance: 5-29: {"title":"Test 1 Part A Quiz","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2485355"]}
-Page-instance: 5-30: {"title":"Test 1 Part B Quiz  This part contains one proof question only. You need to submit your solution separately in Test 1 Q. 11 submission box.","links":["https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2486454","https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2486410"]}
-Page-instance: 5-31: {"title":"Test 1 Question 11 submission box Assignment  Use this assignment box to submit your answer to long Q. 11 on Test 1.","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2486410"]}
-Page-instance: 5-32: {"title":"A3 Assignment  This assignment contains Q. 5 on countability. The slides have been posted last week. We will cover them next week.","links":["https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2487202"]}
-Page-instance: 5-33: {"title":"Video of Lecture 8 URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495950"]}
-Page-instance: 5-34: {"title":"Video of Tutorial 7 Section DDDB URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2496048"]}
-Page-instance: 5-35: {"title":"revised Rosen slides on countability File","links":["https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2477273"]}
-Page-instance: 5-36: {"title":"Video of Lecture 9 URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2504747"]}
-Page-instance: 5-37: {"title":"Video of Tutorial 8 URL","links":["https://moodle.concordia.ca/moodle/mod/url/view.php?id=2504795"]}
+[
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "General",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313111",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2342862",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2342863",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2363647",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2367245",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2368219",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2412753",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2435392",
+      "http://www.concordia.ca/online/exams.html?utm_source=vanity&utm_campaign=cole",
+      "https://cole.concordia.ca/course/view.php?id=4192",
+      "mailto:cole@concordia.ca"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "6 September - 12 September",
+    "links": []
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "13 September - 19 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2424158",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2425757"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "20 September - 26 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2436023",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2438706"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "27 September - 3 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2438328",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2447839",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2454158"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "4 October - 10 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458972",
+      "https://moodle.concordia.ca/moodle/pluginfile.php/4502911/mod_label/intro/Quiz1_ENGR213_sol.jpg"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "11 October - 17 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2457412",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2459841",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2459885",
+      "https://moodle.concordia.ca/moodle/pluginfile.php/4525504/mod_label/intro/quiz%202%20sol.jpg",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2482984"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "18 October - 24 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2472265",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2473902"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "25 October - 31 October",
+    "links": []
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "1 November - 7 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2491858",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492487",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492639",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492640",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2493860",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495830",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495831",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495832"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "8 November - 14 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2502008"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "15 November - 21 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2495859",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2505578"
+    ]
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "22 November - 28 November",
+    "links": []
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "29 November - 5 December",
+    "links": []
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "6 December - 12 December",
+    "links": []
+  },
+  {
+    "pageHeader": "ENGR 213 Y 2202",
+    "sectionName": "13 December - 19 December",
+    "links": []
+  }
+]
+[
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "General",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2373918",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2373923",
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399496",
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2335079",
+      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313131",
+      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2335078",
+      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335081",
+      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335195",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2353292",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2353293",
+      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2412241"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "6 September - 12 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335399",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335088",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2335089"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "13 September - 19 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2408523",
+      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335085",
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2335090",
+      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335201"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "20 September - 26 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335100",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2429009"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "27 September - 3 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335101",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2443488"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "4 October - 10 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2438888",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335102",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335104",
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2335105",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2453775",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2453785"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "11 October - 17 October",
+    "links": []
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "18 October - 24 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335106",
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2475123",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2476013",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2476042"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "25 October - 31 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2335108",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335110",
+      "https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335111"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "1 November - 7 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335115"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "8 November - 14 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2500436",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2505487"
+    ]
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "15 November - 21 November",
+    "links": []
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "22 November - 28 November",
+    "links": []
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "29 November - 5 December",
+    "links": []
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "6 December - 12 December",
+    "links": []
+  },
+  {
+    "pageHeader": "LING 222 A 2202",
+    "sectionName": "Exam period",
+    "links": []
+  }
+]
+[
+  {
+    "pageHeader": "ECON 201 EC 2202",
+    "sectionName": "General",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313762"
+    ]
+  }
+]
+[
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "General",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314124",
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2383805",
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2383806",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2383807",
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2401814",
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2412438",
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2419848",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2431324",
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2436139",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2462805",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2493397",
+      "https://concordia-ca.zoom.us/j/94617756094?pwd=SnRVSkNVZlhLM3VHS0NweGNJdnkyUT09",
+      "https://concordia-ca.zoom.us/j/94617756094?pwd=SnRVSkNVZlhLM3VHS0NweGNJdnkyUT09",
+      "https://concordia-ca.zoom.us/j/98161030036?pwd=YThjZUVudlRhRTFybnVXQkg5TSs4UT09",
+      "https://concordia-ca.zoom.us/j/95663809044?pwd=SjV0Z29aSzdSN1pvZHNTbXhRWWJvUT09",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2433979",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2426017"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "6 September - 12 September",
+    "links": []
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "13 September - 19 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2421793",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2421891"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "20 September - 26 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2433930"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "27 September - 3 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2446772",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2446778"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "4 October - 10 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2457730"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "11 October - 17 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458585"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "18 October - 24 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458587"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "25 October - 31 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483901"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "1 November - 7 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483902"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "8 November - 14 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483903"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "15 November - 21 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483908"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "22 November - 28 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483909"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "29 November - 5 December",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483910"
+    ]
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "6 December - 12 December",
+    "links": []
+  },
+  {
+    "pageHeader": "COMP 248 S 2202",
+    "sectionName": "13 December - 19 December",
+    "links": []
+  }
+]
+[
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "General",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2396162",
+      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2399500"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "6 September - 12 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "13 September - 19 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "20 September - 26 September",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432452",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432099",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2432581",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2444105"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "27 September - 3 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2443785",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2448811",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2448926",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2493331",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495992"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "4 October - 10 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2464411",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495996"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "11 October - 17 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2464467",
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2464470",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2464504",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495999"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "18 October - 24 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2477272",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495927",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2496001"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "25 October - 31 October",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2485355",
+      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2486454",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2486410",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2486410",
+      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2487202",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495950",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2496048"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "1 November - 7 November",
+    "links": [
+      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2477273",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2504747",
+      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2504795"
+    ]
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "8 November - 14 November",
+    "links": []
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "15 November - 21 November",
+    "links": []
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "22 November - 28 November",
+    "links": []
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "29 November - 5 December",
+    "links": []
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "6 December - 12 December",
+    "links": []
+  },
+  {
+    "pageHeader": "COMP 232 DD 2202",
+    "sectionName": "13 December - 19 December",
+    "links": []
+  }
+]
