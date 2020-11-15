@@ -10,9 +10,7 @@ const VIEWPORT = {width: 1920, height: 1080};
     //const browser = await puppeteer.launch();
     const pages = await browser.pages(); // Get the initial pages loaded [a single blank one]
     const page = pages[0];
-    // Make it small for video recording so that they don't see my USERNAME/PASS
     await page.setViewport(VIEWPORT)
-    //await page.setViewport({width:10, height:10}) // DEMO
     await page.goto(MYCONCORDIA_URL);
 
     const usernameSelector = 'input[id=userid]'
@@ -30,8 +28,6 @@ const VIEWPORT = {width: 1920, height: 1080};
     await page.$eval(submitSelector, (el) => {
         el.click();
     }, submitSelector);
-
-    //await page.setViewport(VIEWPORT) // DEMO
 
     // Now logged in
     const accessMoodleSelector = 'div[id=CU_MOODLEINFODISP_Data] script:not([id]):not([src])';
@@ -62,21 +58,27 @@ const VIEWPORT = {width: 1920, height: 1080};
     }
 
 
+    const THREE_MINUTES = 1000 * 45;
+    let currentFiles = '';
 
-    const ONE_MINUTE = 1000 * 60;
-    let curr_data = '';
-    setInterval(async () => {
-        let new_data = await fetchData();
-        if(curr_data == '') {
-            curr_data = new_data;
+    await fetchAndCompare(); // Run once
+    setTimeout(loop, THREE_MINUTES); // Then forever
+
+    async function loop() {
+        await fetchAndCompare();
+        setTimeout(loop, THREE_MINUTES); 
+    }
+
+    async function fetchAndCompare() {
+        let newFiles = await fetchFiles();
+        if(currentFiles == '') {
+            currentFiles = newFiles;
             return;
         }
-
-        await printData(new_data); // [requires more time than 30 seconds]
-        //await compareData(curr_data, new_data);
-        curr_data = new_data;
+        printData(compareData(currentFiles, newFiles)); 
+        currentFiles = newFiles;
         await refreshPages(pages);
-    }, ONE_MINUTE)
+    }
 
     async function refreshPages(pages) {
         pages.forEach(async (page) => {
@@ -85,39 +87,94 @@ const VIEWPORT = {width: 1920, height: 1080};
         })
     }
 
-    async function fetchData() {
+    async function fetchFiles() {
         let data = await Promise.all(pages.map(async (page) => {
-            let page_data = await page.evaluate(() => {
-                const page_attributes = { pageHeader: document.querySelector('div#page header .page-header-headings').innerText };
-                return ([...document.querySelectorAll('div[class=content]')].map(section => ({
-                        // Page header stays constant for the page
-                        pageHeader: page_attributes.pageHeader,
-                        // Section name, changes every section
-                        sectionName: section.querySelector('h3.sectionname').innerText,
-                        // Links, changes every file
-                        links: [...section.querySelectorAll('ul.section li [href]')].map(aalink => aalink.href)
-                })));
+            let files = await page.evaluate(() => {
+                return [...document.querySelectorAll(`a.aalink[href]`)].map(el => ({
+                    fileName: el.querySelector('span.instancename').innerText,
+                    link: el.href,
+                    pageName: el.closest('div#page').querySelector('header .page-header-headings').innerText,
+                    sectionName: el.closest('div[class=content]').querySelector('h3').innerText
+                }));
             });
-            return page_data;
+            return files;
         }));
         return data;
     }
 
-    async function compareData(curr_data, new_data) {
-        // TODO
+    function getArrayDifference(arr1, arr2) {
+        let additions = arr2.filter(x => !arr1.includes(x));
+        let deleletions = arr1.filter(x => !arr2.includes(x));
+        return { addition_urls: additions, deletion_urls: deleletions};
     }
 
-    async function printData(data) {
-        // Delete file if it exists
-        fs.unlink('data.txt', (err) => {
-            if(err) console.log('deleted data.txt');
-        })
+    function compareData(currentFilesPages, newFilePages) {
+        let response = [];
+        for(let i = 0; i < pages.length; i++) {
+            let currentLinks = currentFilesPages[i].map(file => file.link);
+            let newLinks = newFilePages[i].map(file => file.link);
+            let { addition_urls, deletion_urls } = getArrayDifference(currentLinks, newLinks);
 
-        data.forEach((page) => {
-            fs.appendFile('data.txt', JSON.stringify(page), (err) => {
-                if(err) console.log(err);
+            let added_files = getFileInfo(addition_urls, newFilePages);
+            let deleted_files = getFileInfo(deletion_urls, currentFilesPages);
+            response.push({ added_files: added_files, deleted_files: deleted_files });
+        }
+        return response;
+    }
+    function getFileInfo(arrFileURLs, arrPages) {
+        let response = [];
+        arrFileURLs.forEach((fileUrl) => {
+            arrPages.forEach((page) => {
+                let rep = page.filter((file) => {
+                    return file.link == fileUrl;
+                })
+                if(rep.length != 0) response.push(rep);
             });
         })
-        console.log('Updated file!');
+        return response;
+    }
+
+    function printData(arrData) {
+        arrData.forEach(data => {
+            if(data.added_files.length != 0 || data.deleted_files.length != 0) {
+                // TODO: Notify user here
+                fs.appendFile('data.txt', `${new Date()}:\n${JSON.stringify(data)}`, (err) => {
+                    if(err) console.log(err);
+                });
+            }
+        })
     }
 })()
+// Detailed fetchData [ Pages[ Sections(s1, s2, [links] ) ] ]
+//let data = await Promise.all(pages.map(async (page) => {
+//    let page_data = await page.evaluate(() => {
+//        const page_attributes = { pageHeader: document.querySelector('div#page header .page-header-headings').innerText };
+//        return ([...document.querySelectorAll('div[class=content]')].map(section => ({
+//                // Page header stays constant for the page
+//                pageHeader: page_attributes.pageHeader,
+//                // Section name, changes every section
+//                sectionName: section.querySelector('h3.sectionname').innerText,
+//                // Links, changes every file
+//                links: [...section.querySelectorAll('ul.section li [href]')].map(aalink => aalink.href)
+//        })));
+//    });
+//    return page_data;
+//}));
+//return data;
+//
+//
+//function getFilePath(url) {
+//    let filePath = document.querySelector(`a[href="${url}"]`);
+//    return filePath;
+//}
+
+//function getFileInfo(filePath) {
+//    let pageName = filePath.closest('div#page').querySelector('header .page-header-headings').innerText;
+//    let sectionName = filePath.closest('div[class=content]').querySelector('h3').innerText;
+//    let fileName = filePath.querySelector('span.instancename').innerText;
+//    return ({
+//        pageName: pageName,
+//        sectionName: sectionName,
+//        fileName: fileName
+//    });
+//}

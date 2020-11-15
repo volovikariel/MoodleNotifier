@@ -1,525 +1,200 @@
-[
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "General",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313111",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2342862",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2342863",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2363647",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2367245",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2368219",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2412753",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2435392",
-      "http://www.concordia.ca/online/exams.html?utm_source=vanity&utm_campaign=cole",
-      "https://cole.concordia.ca/course/view.php?id=4192",
-      "mailto:cole@concordia.ca"
+{
+  "added_files": [],
+  "deleted_files": []
+}
+{
+  "added_files": [],
+  "deleted_files": []
+}
+{
+  "added_files": [],
+  "deleted_files": []
+}
+{
+  "added_files": [],
+  "deleted_files": []
+}
+{
+  "added_files": [],
+  "deleted_files": []
+}
+Sun Nov 15 2020 18:07:00 GMT-0500 (Eastern Standard Time): 
+{
+  "added_files": [],
+  "deleted_files": [
+    [
+      {
+        "fileName": "Video of lecture 1 Sept 9 2020\nFolder",
+        "link": "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "6 September - 12 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Doedel lecture notes\nFile",
+        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "6 September - 12 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Assignment 1",
+        "link": "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Assignment 1 solution\nFile",
+        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "A1 marks\nFile",
+        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Video of Lecture 2 Sept. 16\nURL",
+        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Video of Tutorial 1 Section DDDB\nURL",
+        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
     ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "6 September - 12 September",
-    "links": []
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "13 September - 19 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2424158",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2425757"
+  ]
+}
+Sun Nov 15 2020 18:09:15 GMT-0500 (Eastern Standard Time): 
+{
+  "added_files": [
+    [
+      {
+        "fileName": "Assignment 1",
+        "link": "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Assignment 1 solution\nFile",
+        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "A1 marks\nFile",
+        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Video of Lecture 2 Sept. 16\nURL",
+        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Video of Tutorial 1 Section DDDB\nURL",
+        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "13 September - 19 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Lecture 3 slides part 1 from Rosen, pp. 1-32\nFile",
+        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432452",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "20 September - 26 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Lecture 3 slides part 2 from Rosen, pp. 41-57\nFile",
+        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432099",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "20 September - 26 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Video of Lecture 3 Sept. 23\nURL",
+        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2432581",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "20 September - 26 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Video of Tutorial 2 Section DDDD\nURL",
+        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2444105",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "20 September - 26 September"
+      }
+    ],
+    [
+      {
+        "fileName": "Lecture 4 slides from Rosen, pp. 1-49\nFile",
+        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2443785",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "27 September - 3 October"
+      }
+    ],
+    [
+      {
+        "fileName": "Video of Lecture 4\nURL",
+        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2448811",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "27 September - 3 October"
+      }
+    ],
+    [
+      {
+        "fileName": "Assignment 2",
+        "link": "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2448926",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "27 September - 3 October"
+      }
+    ],
+    [
+      {
+        "fileName": "A2 solutions\nAssignment",
+        "link": "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2493331",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "27 September - 3 October"
+      }
+    ],
+    [
+      {
+        "fileName": "Video of Tutorial 3 Section DDDA\nURL",
+        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495992",
+        "pageName": "COMP 232 DD 2202",
+        "sectionName": "27 September - 3 October"
+      }
     ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "20 September - 26 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2436023",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2438706"
-    ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "27 September - 3 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2438328",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2447839",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2454158"
-    ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "4 October - 10 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458972",
-      "https://moodle.concordia.ca/moodle/pluginfile.php/4502911/mod_label/intro/Quiz1_ENGR213_sol.jpg"
-    ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "11 October - 17 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2457412",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2459841",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2459885",
-      "https://moodle.concordia.ca/moodle/pluginfile.php/4525504/mod_label/intro/quiz%202%20sol.jpg",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2482984"
-    ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "18 October - 24 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2472265",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2473902"
-    ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "25 October - 31 October",
-    "links": []
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "1 November - 7 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2491858",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492487",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492639",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2492640",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2493860",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495830",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495831",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2495832"
-    ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "8 November - 14 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2502008"
-    ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "15 November - 21 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2495859",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2505578"
-    ]
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "22 November - 28 November",
-    "links": []
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "29 November - 5 December",
-    "links": []
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "6 December - 12 December",
-    "links": []
-  },
-  {
-    "pageHeader": "ENGR 213 Y 2202",
-    "sectionName": "13 December - 19 December",
-    "links": []
-  }
-]
-[
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "General",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2373918",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2373923",
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399496",
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2335079",
-      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313131",
-      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2335078",
-      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335081",
-      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335195",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2353292",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2353293",
-      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2412241"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "6 September - 12 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335399",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335088",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2335089"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "13 September - 19 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2408523",
-      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335085",
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2335090",
-      "https://moodle.concordia.ca/moodle/mod/page/view.php?id=2335201"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "20 September - 26 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335100",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2429009"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "27 September - 3 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335101",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2443488"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "4 October - 10 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2438888",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335102",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335104",
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2335105",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2453775",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2453785"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "11 October - 17 October",
-    "links": []
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "18 October - 24 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335106",
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2475123",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2476013",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2476042"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "25 October - 31 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2335108",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335110",
-      "https://moodle.concordia.ca/moodle/mod/workshop/view.php?id=2335111"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "1 November - 7 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2335115"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "8 November - 14 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2500436",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2505487"
-    ]
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "15 November - 21 November",
-    "links": []
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "22 November - 28 November",
-    "links": []
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "29 November - 5 December",
-    "links": []
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "6 December - 12 December",
-    "links": []
-  },
-  {
-    "pageHeader": "LING 222 A 2202",
-    "sectionName": "Exam period",
-    "links": []
-  }
-]
-[
-  {
-    "pageHeader": "ECON 201 EC 2202",
-    "sectionName": "General",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2313762"
-    ]
-  }
-]
-[
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "General",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314124",
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2383805",
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2383806",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2383807",
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2401814",
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2412438",
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2419848",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2431324",
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2436139",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2462805",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2493397",
-      "https://concordia-ca.zoom.us/j/94617756094?pwd=SnRVSkNVZlhLM3VHS0NweGNJdnkyUT09",
-      "https://concordia-ca.zoom.us/j/94617756094?pwd=SnRVSkNVZlhLM3VHS0NweGNJdnkyUT09",
-      "https://concordia-ca.zoom.us/j/98161030036?pwd=YThjZUVudlRhRTFybnVXQkg5TSs4UT09",
-      "https://concordia-ca.zoom.us/j/95663809044?pwd=SjV0Z29aSzdSN1pvZHNTbXhRWWJvUT09",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2433979",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2426017"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "6 September - 12 September",
-    "links": []
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "13 September - 19 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2421793",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2421891"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "20 September - 26 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2433930"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "27 September - 3 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2446772",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2446778"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "4 October - 10 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2457730"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "11 October - 17 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458585"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "18 October - 24 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2458587"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "25 October - 31 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483901"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "1 November - 7 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483902"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "8 November - 14 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483903"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "15 November - 21 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483908"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "22 November - 28 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483909"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "29 November - 5 December",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2483910"
-    ]
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "6 December - 12 December",
-    "links": []
-  },
-  {
-    "pageHeader": "COMP 248 S 2202",
-    "sectionName": "13 December - 19 December",
-    "links": []
-  }
-]
-[
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "General",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2396162",
-      "https://moodle.concordia.ca/moodle/mod/lti/view.php?id=2399500"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "6 September - 12 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "13 September - 19 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "20 September - 26 September",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432452",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432099",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2432581",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2444105"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "27 September - 3 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2443785",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2448811",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2448926",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2493331",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495992"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "4 October - 10 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2464411",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495996"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "11 October - 17 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2464467",
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2464470",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2464504",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495999"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "18 October - 24 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2477272",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495927",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2496001"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "25 October - 31 October",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2485355",
-      "https://moodle.concordia.ca/moodle/mod/quiz/view.php?id=2486454",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2486410",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2486410",
-      "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2487202",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495950",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2496048"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "1 November - 7 November",
-    "links": [
-      "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2477273",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2504747",
-      "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2504795"
-    ]
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "8 November - 14 November",
-    "links": []
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "15 November - 21 November",
-    "links": []
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "22 November - 28 November",
-    "links": []
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "29 November - 5 December",
-    "links": []
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "6 December - 12 December",
-    "links": []
-  },
-  {
-    "pageHeader": "COMP 232 DD 2202",
-    "sectionName": "13 December - 19 December",
-    "links": []
-  }
-]
+  ],
+  "deleted_files": []
+}
