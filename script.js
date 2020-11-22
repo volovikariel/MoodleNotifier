@@ -3,7 +3,9 @@ const puppeteer = require('puppeteer');
 const MYCONCORDIA_URL = 'https://myconcordia.ca';
 const fs = require('fs');
 const notifier = require('node-notifier');
-const open = require('open');
+const { app, Menu, MenuItem, Tray }  = require('electron');
+
+
 const VIEWPORT = {width: 1920, height: 1080};
 
 (async () => {
@@ -80,6 +82,7 @@ const VIEWPORT = {width: 1920, height: 1080};
         saveDataInFile(newFiles);
         await refreshPages(pages);
     }
+
     function readDataInFile() {
         try {
             let data = fs.readFileSync("currentFiles.txt", "utf8");
@@ -138,6 +141,7 @@ const VIEWPORT = {width: 1920, height: 1080};
             let deleted_files = getFileObject(deletion_urls, currentFilesPages);
             response.push({ added_files: added_files, deleted_files: deleted_files });
         }
+
         return response;
     }
     function getFileObject(arrFileURLs, arrPages) {
@@ -162,10 +166,16 @@ const VIEWPORT = {width: 1920, height: 1080};
                     addedFilesMessage = 'Added files:' +  '\n';
                     data.added_files.forEach(file => {
                         file.forEach(el => {
-                            addedFilesMessage += el.pageName + '\n';
-                            addedFilesMessage += el.sectionName + '\n';
-                            addedFilesMessage += el.fileName + '\n';
-                            addedFilesMessage += el.link + '\n\n\n';
+                            let temp = '';
+                            temp += el.pageName + '\n';
+                            temp += el.sectionName + '\n';
+                            temp += el.fileName + '\n';
+                            temp += el.link + '\n\n\n';
+                            addedFilesMessage += temp;
+                            menu.append(new MenuItem({ label: `Date: ${new Date().toLocaleDateString()} ${new Date().toLocaleDateString()}\nAdded:${temp}\n`, async click() {
+                                const { shell } = require('electron');
+                                await shell.openExternal(el.link);
+                            }}));
                         })
                     });
                 }
@@ -173,19 +183,32 @@ const VIEWPORT = {width: 1920, height: 1080};
                     deletedFilesMessage = 'Deleted files:' + '\n';
                     data.deleted_files.forEach(file => {
                         file.forEach(el => {
-                            deletedFilesMessage += el.pageName + '\n';
-                            deletedFilesMessage += el.sectionName + '\n';
-                            deletedFilesMessage += el.fileName + '\n';
-                            deletedFilesMessage += el.link + '\n\n\n';
+                            let temp = '';
+                            temp += el.pageName + '\n';
+                            temp += el.sectionName + '\n';
+                            temp += el.fileName + '\n';
+                            temp += el.link + '\n\n\n';
+                            deletedFilesMessage += temp;
+                            menu.append(new MenuItem({ label: `Date: ${new Date().toLocaleDateString()} ${new Date().toLocaleDateString()}\nDeleted:${temp}\n`, async click() {
+                                const { shell } = require('electron');
+                                await shell.openExternal(el.link);
+                            }}));
                         })
                     })
                 }
 
                 notifier.notify({
                     title:  `${data.deleted_files.length} files removed. ${data.added_files.length} files added.`,
-                    message: '\n' + new Date().toLocaleDateString() + '\n' + addedFilesMessage + '\n' + deletedFilesMessage,
+                    message: '\n' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '\n' + addedFilesMessage + '\n' + deletedFilesMessage,
                     wait: true
                 });
+
+                menu.append(new MenuItem({ label: 'Clear all notifications.\n NOTE: \nYou can still view the changes in your data.txt file!', click() {
+                    menu = new Menu();
+                    tray.setContextMenu(menu);
+                }}))
+
+                tray.setContextMenu(menu);
 
                 logChanges(data);
             }
@@ -198,6 +221,17 @@ const VIEWPORT = {width: 1920, height: 1080};
         });
     }
 })()
+
+// Declare here because of garbage collection
+let tray = null;
+let menu = new Menu();
+app.whenReady().then(() => {
+    tray = new Tray('./aww.png');
+    tray.setToolTip('Tooltip');
+    tray.setContextMenu(menu);
+    console.log('ready');
+})
+
 // Detailed fetchData [ Pages[ Sections(s1, s2, [links] ) ] ]
 //let data = await Promise.all(pages.map(async (page) => {
 //    let page_data = await page.evaluate(() => {
