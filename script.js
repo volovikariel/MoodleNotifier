@@ -1,8 +1,9 @@
 const {USERNAME, PASSWORD} = require('dotenv').config().parsed;
 const puppeteer = require('puppeteer');
-const {setInterval} = require('timers');
 const MYCONCORDIA_URL = 'https://myconcordia.ca';
 const fs = require('fs');
+const notifier = require('node-notifier');
+const open = require('open');
 const VIEWPORT = {width: 1920, height: 1080};
 
 (async () => {
@@ -58,26 +59,44 @@ const VIEWPORT = {width: 1920, height: 1080};
     }
 
 
-    const THREE_MINUTES = 1000 * 45;
-    let currentFiles = '';
+    const ONE_MIN = 1000 * 60;
 
-    await fetchAndCompare(); // Run once
-    setTimeout(loop, THREE_MINUTES); // Then forever
+    await fetchCompareRefresh(); // Run once
+    setTimeout(loopFetch, ONE_MIN); // Then forever
 
-    async function loop() {
-        await fetchAndCompare();
-        setTimeout(loop, THREE_MINUTES); 
+    async function loopFetch() {
+        await fetchCompareRefresh();
+        setTimeout(loopFetch, ONE_MIN); 
     }
 
-    async function fetchAndCompare() {
+    async function fetchCompareRefresh() {
         let newFiles = await fetchFiles();
-        if(currentFiles == '') {
-            currentFiles = newFiles;
+        let currentFiles = readDataInFile();
+        if(currentFiles == undefined) {
+            saveDataInFile(newFiles);
             return;
         }
         printData(compareData(currentFiles, newFiles)); 
-        currentFiles = newFiles;
+        saveDataInFile(newFiles);
         await refreshPages(pages);
+    }
+    function readDataInFile() {
+        try {
+            let data = fs.readFileSync("currentFiles.txt", "utf8");
+            return JSON.parse(data);
+        } 
+        catch (err) {
+            // File does not exist
+            if(err.code === "ENOENT") {
+                console.error("FILE 'currentFiles.txt' NOT FOUND");
+                return undefined;
+            }
+            console.error("Some other error occured when trying to read currentFiles.txt");
+        }
+    }
+
+    function saveDataInFile(data) {
+        fs.writeFileSync("currentFiles.txt", `${JSON.stringify(data)}\n\n`);
     }
 
     async function refreshPages(pages) {
@@ -115,13 +134,13 @@ const VIEWPORT = {width: 1920, height: 1080};
             let newLinks = newFilePages[i].map(file => file.link);
             let { addition_urls, deletion_urls } = getArrayDifference(currentLinks, newLinks);
 
-            let added_files = getFileInfo(addition_urls, newFilePages);
-            let deleted_files = getFileInfo(deletion_urls, currentFilesPages);
+            let added_files = getFileObject(addition_urls, newFilePages);
+            let deleted_files = getFileObject(deletion_urls, currentFilesPages);
             response.push({ added_files: added_files, deleted_files: deleted_files });
         }
         return response;
     }
-    function getFileInfo(arrFileURLs, arrPages) {
+    function getFileObject(arrFileURLs, arrPages) {
         let response = [];
         arrFileURLs.forEach((fileUrl) => {
             arrPages.forEach((page) => {
@@ -137,12 +156,46 @@ const VIEWPORT = {width: 1920, height: 1080};
     function printData(arrData) {
         arrData.forEach(data => {
             if(data.added_files.length != 0 || data.deleted_files.length != 0) {
-                // TODO: Notify user here
-                fs.appendFile('data.txt', `${new Date()}:\n${JSON.stringify(data)}`, (err) => {
-                    if(err) console.log(err);
+                let addedFilesMessage = '';
+                let deletedFilesMessage = '';
+                if(data.added_files.length != 0) {
+                    addedFilesMessage = 'Added files:' +  '\n';
+                    data.added_files.forEach(file => {
+                        file.forEach(el => {
+                            addedFilesMessage += el.pageName + '\n';
+                            addedFilesMessage += el.sectionName + '\n';
+                            addedFilesMessage += el.fileName + '\n';
+                            addedFilesMessage += el.link + '\n\n\n';
+                        })
+                    });
+                }
+                if(data.deleted_files.length != 0) {
+                    deletedFilesMessage = 'Deleted files:' + '\n';
+                    data.deleted_files.forEach(file => {
+                        file.forEach(el => {
+                            deletedFilesMessage += el.pageName + '\n';
+                            deletedFilesMessage += el.sectionName + '\n';
+                            deletedFilesMessage += el.fileName + '\n';
+                            deletedFilesMessage += el.link + '\n\n\n';
+                        })
+                    })
+                }
+
+                notifier.notify({
+                    title:  `${data.deleted_files.length} files removed. ${data.added_files.length} files added.`,
+                    message: '\n' + new Date().toLocaleDateString() + '\n' + addedFilesMessage + '\n' + deletedFilesMessage,
+                    wait: true
                 });
+
+                logChanges(data);
             }
         })
+    }
+
+    function logChanges(data) {
+        fs.appendFile('data.txt', `${new Date()}:\n${JSON.stringify(data)}\n\n`, (err) => {
+            if(err) console.log(err);
+        });
     }
 })()
 // Detailed fetchData [ Pages[ Sections(s1, s2, [links] ) ] ]

@@ -1,200 +1,38 @@
-{
-  "added_files": [],
-  "deleted_files": []
-}
-{
-  "added_files": [],
-  "deleted_files": []
-}
-{
-  "added_files": [],
-  "deleted_files": []
-}
-{
-  "added_files": [],
-  "deleted_files": []
-}
-{
-  "added_files": [],
-  "deleted_files": []
-}
-Sun Nov 15 2020 18:07:00 GMT-0500 (Eastern Standard Time): 
-{
-  "added_files": [],
-  "deleted_files": [
-    [
-      {
-        "fileName": "Video of lecture 1 Sept 9 2020\nFolder",
-        "link": "https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "6 September - 12 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Doedel lecture notes\nFile",
-        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "6 September - 12 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Assignment 1",
-        "link": "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Assignment 1 solution\nFile",
-        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "A1 marks\nFile",
-        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Video of Lecture 2 Sept. 16\nURL",
-        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Video of Tutorial 1 Section DDDB\nURL",
-        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ]
-  ]
-}
-Sun Nov 15 2020 18:09:15 GMT-0500 (Eastern Standard Time): 
-{
-  "added_files": [
-    [
-      {
-        "fileName": "Assignment 1",
-        "link": "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Assignment 1 solution\nFile",
-        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "A1 marks\nFile",
-        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Video of Lecture 2 Sept. 16\nURL",
-        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Video of Tutorial 1 Section DDDB\nURL",
-        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "13 September - 19 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Lecture 3 slides part 1 from Rosen, pp. 1-32\nFile",
-        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432452",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "20 September - 26 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Lecture 3 slides part 2 from Rosen, pp. 41-57\nFile",
-        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432099",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "20 September - 26 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Video of Lecture 3 Sept. 23\nURL",
-        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2432581",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "20 September - 26 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Video of Tutorial 2 Section DDDD\nURL",
-        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2444105",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "20 September - 26 September"
-      }
-    ],
-    [
-      {
-        "fileName": "Lecture 4 slides from Rosen, pp. 1-49\nFile",
-        "link": "https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2443785",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "27 September - 3 October"
-      }
-    ],
-    [
-      {
-        "fileName": "Video of Lecture 4\nURL",
-        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2448811",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "27 September - 3 October"
-      }
-    ],
-    [
-      {
-        "fileName": "Assignment 2",
-        "link": "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2448926",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "27 September - 3 October"
-      }
-    ],
-    [
-      {
-        "fileName": "A2 solutions\nAssignment",
-        "link": "https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2493331",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "27 September - 3 October"
-      }
-    ],
-    [
-      {
-        "fileName": "Video of Tutorial 3 Section DDDA\nURL",
-        "link": "https://moodle.concordia.ca/moodle/mod/url/view.php?id=2495992",
-        "pageName": "COMP 232 DD 2202",
-        "sectionName": "27 September - 3 October"
-      }
-    ]
-  ],
-  "deleted_files": []
-}
+Mon Nov 16 2020 15:50:40 GMT-0500 (Eastern Standard Time):
+{"added_files":[[{"fileName":"Video of Lecture 10\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2510024","pageName":"COMP 232 DD 2202","sectionName":"8 November - 14 November"}]],"deleted_files":[]}Fri Nov 20 2020 13:36:42 GMT-0500 (Eastern Standard Time):
+{"added_files":[[{"fileName":"Team Assignment 2 (Fridays)\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2507287","pageName":"ENGR 213 Y 2202","sectionName":"15 November - 21 November"}]],"deleted_files":[]}Sun Nov 22 2020 09:54:05 GMT-0500 (Eastern Standard Time):
+{"added_files":[],"deleted_files":[[{"fileName":"Announcements\nForum","link":"https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369","pageName":"COMP 232 DD 2202","sectionName":"General"}],[{"fileName":"Video of lecture 1 Sept 9 2020\nFolder","link":"https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}],[{"fileName":"Doedel lecture notes\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}]]}
+
+Sun Nov 22 2020 09:55:05 GMT-0500 (Eastern Standard Time):
+{"added_files":[[{"fileName":"Announcements\nForum","link":"https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369","pageName":"COMP 232 DD 2202","sectionName":"General"}],[{"fileName":"Video of lecture 1 Sept 9 2020\nFolder","link":"https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}],[{"fileName":"Doedel lecture notes\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}]],"deleted_files":[]}
+
+Sun Nov 22 2020 10:00:33 GMT-0500 (Eastern Standard Time):
+{"added_files":[],"deleted_files":[[{"fileName":"Announcements\nForum","link":"https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369","pageName":"COMP 232 DD 2202","sectionName":"General"}]]}
+
+Sun Nov 22 2020 10:01:33 GMT-0500 (Eastern Standard Time):
+{"added_files":[[{"fileName":"Announcements\nForum","link":"https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369","pageName":"COMP 232 DD 2202","sectionName":"General"}]],"deleted_files":[]}
+
+Sun Nov 22 2020 10:04:35 GMT-0500 (Eastern Standard Time):
+{"added_files":[],"deleted_files":[[{"fileName":"Assignment 1","link":"https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Assignment 1 solution\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"A1 marks\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Video of Lecture 2 Sept. 16\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Video of Tutorial 1 Section DDDB\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}]]}
+
+Sun Nov 22 2020 10:05:35 GMT-0500 (Eastern Standard Time):
+{"added_files":[[{"fileName":"Assignment 1","link":"https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Assignment 1 solution\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"A1 marks\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Video of Lecture 2 Sept. 16\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Video of Tutorial 1 Section DDDB\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}]],"deleted_files":[]}
+
+Sun Nov 22 2020 10:09:29 GMT-0500 (Eastern Standard Time):
+{"added_files":[],"deleted_files":[[{"fileName":"Announcements\nForum","link":"https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369","pageName":"COMP 232 DD 2202","sectionName":"General"}],[{"fileName":"course outline\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2396162","pageName":"COMP 232 DD 2202","sectionName":"General"}]]}
+
+Sun Nov 22 2020 10:11:24 GMT-0500 (Eastern Standard Time):
+{"added_files":[],"deleted_files":[[{"fileName":"Announcements\nForum","link":"https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369","pageName":"COMP 232 DD 2202","sectionName":"General"}]]}
+
+Sun Nov 22 2020 10:16:19 GMT-0500 (Eastern Standard Time):
+{"added_files":[],"deleted_files":[[{"fileName":"Video of lecture 1 Sept 9 2020\nFolder","link":"https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}],[{"fileName":"Doedel lecture notes\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}]]}
+
+Sun Nov 22 2020 10:27:02 GMT-0500 (Eastern Standard Time):
+{"added_files":[],"deleted_files":[[{"fileName":"Announcements\nForum","link":"https://moodle.concordia.ca/moodle/mod/forum/view.php?id=2314369","pageName":"COMP 232 DD 2202","sectionName":"General"}]]}
+
+Sun Nov 22 2020 10:46:17 GMT-0500 (Eastern Standard Time):
+{"added_files":[],"deleted_files":[[{"fileName":"Video of lecture 1 Sept 9 2020\nFolder","link":"https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}],[{"fileName":"Doedel lecture notes\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}],[{"fileName":"Assignment 1","link":"https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Assignment 1 solution\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"A1 marks\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Video of Lecture 2 Sept. 16\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Video of Tutorial 1 Section DDDB\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Lecture 3 slides part 1 from Rosen, pp. 1-32\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432452","pageName":"COMP 232 DD 2202","sectionName":"20 September - 26 September"}],[{"fileName":"Lecture 3 slides part 2 from Rosen, pp. 41-57\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432099","pageName":"COMP 232 DD 2202","sectionName":"20 September - 26 September"}],[{"fileName":"Video of Lecture 3 Sept. 23\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2432581","pageName":"COMP 232 DD 2202","sectionName":"20 September - 26 September"}],[{"fileName":"Video of Tutorial 2 Section DDDD\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2444105","pageName":"COMP 232 DD 2202","sectionName":"20 September - 26 September"}]]}
+
+Sun Nov 22 2020 10:46:45 GMT-0500 (Eastern Standard Time):
+{"added_files":[[{"fileName":"Video of lecture 1 Sept 9 2020\nFolder","link":"https://moodle.concordia.ca/moodle/mod/folder/view.php?id=2399090","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}],[{"fileName":"Doedel lecture notes\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2399813","pageName":"COMP 232 DD 2202","sectionName":"6 September - 12 September"}],[{"fileName":"Assignment 1","link":"https://moodle.concordia.ca/moodle/mod/assign/view.php?id=2415096","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Assignment 1 solution\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2448917","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"A1 marks\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2497736","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Video of Lecture 2 Sept. 16\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2429768","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Video of Tutorial 1 Section DDDB\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2437620","pageName":"COMP 232 DD 2202","sectionName":"13 September - 19 September"}],[{"fileName":"Lecture 3 slides part 1 from Rosen, pp. 1-32\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432452","pageName":"COMP 232 DD 2202","sectionName":"20 September - 26 September"}],[{"fileName":"Lecture 3 slides part 2 from Rosen, pp. 41-57\nFile","link":"https://moodle.concordia.ca/moodle/mod/resource/view.php?id=2432099","pageName":"COMP 232 DD 2202","sectionName":"20 September - 26 September"}],[{"fileName":"Video of Lecture 3 Sept. 23\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2432581","pageName":"COMP 232 DD 2202","sectionName":"20 September - 26 September"}],[{"fileName":"Video of Tutorial 2 Section DDDD\nURL","link":"https://moodle.concordia.ca/moodle/mod/url/view.php?id=2444105","pageName":"COMP 232 DD 2202","sectionName":"20 September - 26 September"}]],"deleted_files":[]}
+
