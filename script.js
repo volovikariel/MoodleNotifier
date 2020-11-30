@@ -9,8 +9,8 @@ const { app, Menu, MenuItem, Tray }  = require('electron');
 const VIEWPORT = {width: 1920, height: 1080};
 
 (async () => {
-    const browser = await puppeteer.launch({headless: false});
-    //const browser = await puppeteer.launch();
+    //const browser = await puppeteer.launch({headless: false});
+    const browser = await puppeteer.launch();
     const pages = await browser.pages(); // Get the initial pages loaded [a single blank one]
     const page = pages[0];
     await page.setViewport(VIEWPORT)
@@ -54,6 +54,7 @@ const VIEWPORT = {width: 1920, height: 1080};
 
     for(let i = 0; i < coursePages.length; i++) {
         pages[i] || pages.push(await browser.newPage());
+        pages[i].setDefaultNavigationTimeout(0); 
         await pages[i].goto(coursePages[i]);
         await pages[i].waitForSelector('body');
         await pages[i].waitForTimeout(500);
@@ -104,7 +105,8 @@ const VIEWPORT = {width: 1920, height: 1080};
 
     async function refreshPages(pages) {
         pages.forEach(async (page) => {
-            await page.reload({waitUntil: ["networkidle2", "domcontentloaded"]})
+            await page.reload()
+            //await page.reload({waitUntil: ["networkidle2", "domcontentloaded"]})
             await page.waitForSelector('body');
         })
     }
@@ -116,7 +118,7 @@ const VIEWPORT = {width: 1920, height: 1080};
                     fileName: el.querySelector('span.instancename').innerText,
                     link: el.href,
                     pageName: el.closest('div#page').querySelector('header .page-header-headings').innerText,
-                    sectionName: el.closest('div[class=content]').querySelector('h3').innerText
+                    sectionName: el.closest('div[class=content]').querySelector('h3').innerText,
                 }));
             });
             return files;
@@ -160,6 +162,11 @@ const VIEWPORT = {width: 1920, height: 1080};
     function printData(arrData) {
         arrData.forEach(data => {
             if(data.added_files.length != 0 || data.deleted_files.length != 0) {
+                // Filter out unwanted
+                let temp = menu.items.filter((item) => { return item.label != 'No changes recorded!' && item.label != 'Clear all notifications.' });
+                menu = new Menu();
+                menu.items = [...temp];
+
                 let addedFilesMessage = '';
                 let deletedFilesMessage = '';
                 if(data.added_files.length != 0) {
@@ -172,7 +179,7 @@ const VIEWPORT = {width: 1920, height: 1080};
                             temp += el.fileName + '\n';
                             temp += el.link + '\n\n\n';
                             addedFilesMessage += temp;
-                            menu.append(new MenuItem({ label: `Date: ${new Date().toLocaleDateString()} ${new Date().toLocaleDateString()}\nAdded:${temp}\n`, async click() {
+                            menu.append(new MenuItem({ label: `Date: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}\nAdded:${temp}\n`, async click() {
                                 const { shell } = require('electron');
                                 await shell.openExternal(el.link);
                             }}));
@@ -189,7 +196,7 @@ const VIEWPORT = {width: 1920, height: 1080};
                             temp += el.fileName + '\n';
                             temp += el.link + '\n\n\n';
                             deletedFilesMessage += temp;
-                            menu.append(new MenuItem({ label: `Date: ${new Date().toLocaleDateString()} ${new Date().toLocaleDateString()}\nDeleted:${temp}\n`, async click() {
+                            menu.append(new MenuItem({ label: `Date: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}\nDeleted:${temp}\n`, async click() {
                                 const { shell } = require('electron');
                                 await shell.openExternal(el.link);
                             }}));
@@ -203,8 +210,9 @@ const VIEWPORT = {width: 1920, height: 1080};
                     wait: true
                 });
 
-                menu.append(new MenuItem({ label: 'Clear all notifications.\n NOTE: \nYou can still view the changes in your data.txt file!', click() {
+                menu.append(new MenuItem({ label: 'Clear all notifications.', click() {
                     menu = new Menu();
+                    menu.append(new MenuItem({ label: 'No changes recorded!' }))
                     tray.setContextMenu(menu);
                 }}))
 
@@ -213,6 +221,12 @@ const VIEWPORT = {width: 1920, height: 1080};
                 logChanges(data);
             }
         })
+        // If it only contains the loading up MenuItem, swap it out for 'No changes recorded!'
+        if(menu.items[0].label === 'Loading up!') {
+            menu = new Menu();
+            menu.append(new MenuItem({ label: 'No changes recorded!' }))
+            tray.setContextMenu(menu);
+        }
     }
 
     function logChanges(data) {
@@ -227,10 +241,11 @@ let tray = null;
 let menu = new Menu();
 app.whenReady().then(() => {
     tray = new Tray('./aww.png');
-    tray.setToolTip('Tooltip');
+    menu.append(new MenuItem({ label: 'Loading up!' }));
     tray.setContextMenu(menu);
-    console.log('ready');
 })
+
+// TODO: Make it so the user can enter their user and pass. How do I store it, plain text???
 
 // Detailed fetchData [ Pages[ Sections(s1, s2, [links] ) ] ]
 //let data = await Promise.all(pages.map(async (page) => {
@@ -265,3 +280,5 @@ app.whenReady().then(() => {
 //        fileName: fileName
 //    });
 //}
+//
+
