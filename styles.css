@@ -1,0 +1,62 @@
+html, body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: #23272A;
+  color: #f4e1d2;
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+#container {
+  display: flex;
+  flex-flow: column;
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+
+file-card {
+  margin: 0;
+  padding: 10px;
+  background-color: #23272A;
+  border: 1px double #29303b;
+  box-shadow: 3px 3px black;
+}
+
+file-card button {
+  border-radius: 9px;
+}
+
+details > .textDiv {
+  padding: 5px;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+header {
+  font-size: large;
+  user-select: none;
+}
+
+.textDiv {
+  padding: 10px;
+}
+
+#signup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+#signupForm {
+  background-color: #4e4f61;
+}
