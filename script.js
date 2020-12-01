@@ -1,6 +1,7 @@
-let {USERNAME, PASSWORD} = require('dotenv').config().parsed;
+let { USERNAME, PASSWORD } = require('dotenv').config().parsed;
 const puppeteer = require('puppeteer');
 const MYCONCORDIA_URL = 'https://myconcordia.ca';
+const NOTIFICATION_FILE = 'notifications.txt';
 const fs = require('fs');
 //const notifier = require('node-notifier');
 const { app, Tray, ipcMain, BrowserWindow, Menu, MenuItem }  = require('electron');
@@ -14,8 +15,8 @@ function main() {
     // If the .env file is not set up properly, exit the method.
     if(USERNAME == undefined || PASSWORD == undefined) return;
     (async () => {
-        browser = await puppeteer.launch({headless: false});
-        //browser = await puppeteer.launch();
+        //browser = await puppeteer.launch({headless: false});
+        browser = await puppeteer.launch();
         const pages = await browser.pages(); // Get the initial pages loaded [a single blank one]
         const page = pages[0];
         await page.setViewport(VIEWPORT)
@@ -71,7 +72,7 @@ function main() {
         }
         catch (err) {
             if(err instanceof Error) {
-                alert('Error loading course pages! Please restart~')
+                window.webContents.send('alert', 'Error loading course pages! Please restart~')
             }
         }
 
@@ -218,6 +219,7 @@ function main() {
                     }
 
                     window.webContents.send("display-data", displayData)
+                    saveState(displayData)
                     // TODO: Change icon to show notification?
 
                     logChanges(data);
@@ -246,10 +248,13 @@ app.on("ready", () => {
     window.webContents.once('dom-ready', () => {
         // If there isn't a username or a password
         if(USERNAME == undefined || PASSWORD == undefined) {
-            console.log('hello')
             // Makes it visible
             window.webContents.send('toggleHidden')
             toggleWindow()
+        }
+        // If the last state was "empty notifications", don't bother calling display-data
+        if(numOfLinesInFile(NOTIFICATION_FILE) > 0) {
+            window.webContents.send("display-data", JSON.parse(getLastState()))
         }
     })
 
@@ -257,8 +262,14 @@ app.on("ready", () => {
         label: 'Undo',
         accelerator: 'CommandOrControl+Z',
         click: () => { 
-            //TODO: Handle UNDO here
-
+            // Delete the last state and go back
+            //console.log("BEOFRE:" + getLastState())
+            deleteLastState()
+            //console.log("AFTER:" + getLastState())
+            // Go back to last state
+            if(numOfLinesInFile(NOTIFICATION_FILE) > 0) {
+                window.webContents.send("display-data", JSON.parse(getLastState()))
+            }
         }
     }))
 
@@ -298,6 +309,8 @@ function createWindow() {
   })
   window.loadURL(`file://${path.join(__dirname, './index.html')}`)
 
+    window.webContents.toggleDevTools()
+
   window.on("blur", () => {
     window.hide()
   })
@@ -319,7 +332,7 @@ ipcMain.on("setLoginInfo", (event, args) => {
     if(args.username === '' || args.password === '') return;
     USERNAME = args.username
     PASSWORD = args.password
-    fs.writeFile(".env", `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
+    fs.writeFileSync(".env", `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
         if(err) {
             console.error(err)
         }
@@ -334,3 +347,57 @@ ipcMain.on("setLoginInfo", (event, args) => {
         }
     })
 });
+
+ipcMain.on("saveState", (event, state) => {
+    saveState(state)
+})
+
+const NEWLINE_REGEX = /\r\n|\r|\n/g;
+function saveState(state) {
+    // Append to end of file if we haven't reached the 5 notification limit
+    if(numOfLinesInFile(NOTIFICATION_FILE) < 5) {
+        fs.appendFileSync(NOTIFICATION_FILE, `${state}`, (err) => {
+            if(err) console.error(err);
+        })
+    }
+    // Remove the first line and append the latest notification instead if we've reached the 5 notification limit
+    else {
+        let updatedFile = fs.readFileSync(NOTIFICATION_FILE).toString().split(NEWLINE_REGEX)
+        updateFile = updatedFile.shift()
+        if(updatedFile[updatedFile.length - 1] === '') {
+            updatedFile.pop()
+        }
+        updatedFile = `${updatedFile.join("\n")}${state}`
+        // If the state was empty [no notifications], add an extra new line character
+        if(state === '\n') {
+            updatedFile += '\n'
+        }
+        fs.writeFileSync(NOTIFICATION_FILE, updatedFile, (err) => {
+            if(err) console.error(err);
+        })
+    }
+}
+
+function numOfLinesInFile(fileName) {
+    const data = fs.readFileSync(path.join(__dirname, fileName)).toString().split(NEWLINE_REGEX)
+    return (data.length - 1)
+}
+
+function getLastState() {
+    let stateFileArray = fs.readFileSync(path.join(__dirname, NOTIFICATION_FILE)).toString().split(NEWLINE_REGEX)
+    stateFileArray.pop()
+    if(stateFileArray.length > 0) {
+        return stateFileArray[stateFileArray.length - 1]
+    }
+    else {
+        return []
+    }
+}
+
+function deleteLastState() {
+    const stateFile = fs.readFileSync(path.join(__dirname, NOTIFICATION_FILE)).toString().split(NEWLINE_REGEX)
+    stateFile.splice(-1)
+    fs.writeFileSync(NOTIFICATION_FILE, stateFile.join("\n"), (err) => {
+        if(err) console.error(err)
+    })
+}

@@ -31,6 +31,12 @@ function renderedFile(file, index) {
 }
 
 function displayData(data) {
+  try {
+    data = JSON.parse(data)
+  }
+  catch(err) {
+    // Is not a JSON object
+  }
   let html = data.map((file, index) => renderedFile(file, index)).join('');
   document.querySelector('#container').innerHTML = html;
 }
@@ -39,6 +45,12 @@ document.addEventListener('click', (event) => {
   if(event.target.matches('.dismissBtn')) {
     notifications.splice(event.target.closest('file-card').id, 1)
     displayData(notifications)
+    if(notifications.length == 0) {
+      ipcRenderer.send('saveState', '\n');
+    }
+    else {
+      ipcRenderer.send('saveState', JSON.stringify(notifications));
+    }
   }
   if(event.target.matches('.loginBtn')) {
     let username = event.target.parentNode.querySelector('.username').value
@@ -47,7 +59,7 @@ document.addEventListener('click', (event) => {
   }
 
   if(event.target.matches('#changeUser')) {
-    toggleHidden()
+    toggleDisplayVisibility()
   }
 
 })
@@ -55,14 +67,18 @@ document.addEventListener('click', (event) => {
 ipcRenderer.on('toggleHidden', (args) => {
   document.querySelector('.username').value = '';
   document.querySelector('.password').value = '';
-  toggleHidden()
+  toggleDisplayVisibility()
 });
 
-function toggleHidden() {
-  if(document.querySelector('#signupForm').style.visibility == 'hidden') {
-    document.querySelector('#signupForm').style.visibility = 'visible'
+function toggleDisplayVisibility() {
+  if(document.querySelector('#signupForm').style.display == 'none') {
+    document.querySelector('#signupForm').style.display = 'block'
   }
   else {
-    document.querySelector('#signupForm').style.visibility = 'hidden'
+    document.querySelector('#signupForm').style.display = 'none'
   }
 }
+
+ipcRenderer.on('alert', (event, args) => {
+  alert(args);
+});
