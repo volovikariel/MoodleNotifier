@@ -4,15 +4,22 @@
   "description": "",
   "main": "script.js",
   "dependencies": {
+    "auto-launch": "^5.0.5",
     "dotenv": "^8.2.0",
     "electron": "^11.0.2",
     "node-fetch": "^2.6.1",
     "node-notifier": "^8.0.0",
     "puppeteer": "^5.4.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "prettier": "^2.2.1"
+  },
   "scripts": {
-    "start": "electron ./script.js"
+    "start": "electron ./script.js",
+    "dev": "electron ./script.js --dev"
   },
   "keywords": [],
   "author": "",

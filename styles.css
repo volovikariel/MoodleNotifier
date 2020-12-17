@@ -8,10 +8,29 @@ html, body {
   color: #f4e1d2;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden; /* Disable horizontal scrollbar */
 }
 
-::-webkit-scrollbar {
-  display: none;
+/* Everthing Scrollbar */
+::-webkit-scrollbar
+{
+  width: 12px;
+}
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-track-piece
+{
+  border-radius: 10px;
+  background-color: #23272A;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  background-color: white;
+}
+
+::-webkit-scrollbar-button, ::-webkit-resizer {
+  display: hidden;
 }
 
 #container {

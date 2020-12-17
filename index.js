@@ -2,9 +2,13 @@ const { ipcRenderer } = require("electron");
 
 let notifications = []
 
-ipcRenderer.on('display-data', (event, data) => {
-  // Set up initial notifications before any dismissals
-  notifications = notifications.concat(data)
+ipcRenderer.on('display-data', (event, args) => {
+  if(args.append === true) {
+    notifications = notifications.concat(args.notifications)
+  }
+  else {
+    notifications = args.notifications
+  }
   displayData(notifications)
 });
 
@@ -20,8 +24,8 @@ function renderedFile(file, index) {
             </header>
           </summary>
           <div class="textDiv">
-          Date added: ${file.date}</br>
-          <a href="#" onclick="const { shell } = require('electron'); shell.openExternal('${file.link}')">${file.fileName}</a>
+          Notification added at: ${file.date}</br>
+          <a href="#" onclick="const { shell } = require('electron'); shell.openExternal('${file.link}')">${(file.change === 'Added') ? file.fileName : ''}</a>
           </div>
         </details>
         <div class="buttonDiv">
@@ -31,13 +35,16 @@ function renderedFile(file, index) {
 }
 
 function displayData(data) {
-  try {
-    data = JSON.parse(data)
+  // Change tray icon based on data length
+  if(data.length > 0) {
+    ipcRenderer.send('setTrayIcon', 'notificationIcon')
   }
-  catch(err) {
-    // Is not a JSON object
+  else {
+    ipcRenderer.send('setTrayIcon', 'default')
   }
+
   let html = data.map((file, index) => renderedFile(file, index)).join('');
+
   document.querySelector('#container').innerHTML = html;
 }
 
@@ -45,12 +52,7 @@ document.addEventListener('click', (event) => {
   if(event.target.matches('.dismissBtn')) {
     notifications.splice(event.target.closest('file-card').id, 1)
     displayData(notifications)
-    if(notifications.length == 0) {
-      ipcRenderer.send('saveState', '\n');
-    }
-    else {
-      ipcRenderer.send('saveState', JSON.stringify(notifications));
-    }
+    ipcRenderer.send('saveState', notifications);
   }
   if(event.target.matches('.loginBtn')) {
     let username = event.target.parentNode.querySelector('.username').value
@@ -62,6 +64,9 @@ document.addEventListener('click', (event) => {
     toggleDisplayVisibility()
   }
 
+  if(event.target.matches('#wantLoadAtStartup')) {
+    ipcRenderer.send('setStartAtLogin', document.querySelector('#wantLoadAtStartup').checked)
+  }
 })
 
 ipcRenderer.on('toggleHidden', (args) => {
