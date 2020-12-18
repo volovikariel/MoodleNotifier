@@ -1,6 +1,8 @@
 const { ipcRenderer } = require("electron");
 let notifications = []
 
+alert(__dirname)
+
 ipcRenderer.on('display-data', (event, args) => {
   if(args.append === true) {
     notifications = notifications.concat(args.notifications)
