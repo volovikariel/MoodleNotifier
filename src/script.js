@@ -19,11 +19,10 @@ let RATIO_WINDOW_TO_SCREEN = 1/3;
 const MYCONCORDIA_URL = 'https://myconcordia.ca';
 const FRONTEND_HTML_FILEPATH =  path.join(__dirname, '../Frontend/index.html');
 const NOTIFICATIONLOG_FILEPATH =  path.join(__dirname, './files/notifications.txt');
+const DATALOG_FILEPATH =  path.join(__dirname, './files/data.txt');
 const CURRENT_FILES_FILEPATH =  path.join(__dirname, './files/currentFiles.txt');
-//const TRAYICON_DEFAULT_FILEPATH = '../Frontend/aww.png';
-//const TRAYICON_NOTIFICATION_FILEPATH = '../../../Pictures/bunny_with_hat.jpg';
-const TRAYICON_DEFAULT_FILEPATH = './aww.png';
-const TRAYICON_NOTIFICATION_FILEPATH = './aww.png'
+const TRAYICON_DEFAULT_FILEPATH = path.join(__dirname, '../Frontend/aww.png');
+const TRAYICON_NOTIFICATION_FILEPATH = path.join(__dirname, '../../../Pictures/bunny_with_hat.jpg');
 // Limit of states that the user can go back
 const NOTIFICATION_LIMIT = 10;
 
@@ -282,7 +281,7 @@ function main() {
         }
 
         function logChanges(data) {
-            fs.appendFile('data.txt', `${new Date()}:\n${JSON.stringify(data)}\n\n`, (err) => {
+            fs.appendFile(DATALOG_FILEPATH, `${new Date()}:\n${JSON.stringify(data)}\n\n`, (err) => {
                 if(err) console.error(err);
             });
         }
@@ -426,11 +425,10 @@ function saveState(state) {
         let updatedFile = fs.readFileSync(NOTIFICATIONLOG_FILEPATH)
             .toString()
             .split('\n')
-        console.log(updatedFile)
         if(updatedFile[updatedFile.length - 1] === '') {
             updatedFile.splice(updatedFile.length - 1, 1)
         }
-        updatedFile = updatedFile.shift()
+        updatedFile.shift()
         updatedFile = `${updatedFile.join('\n')}\n${JSON.stringify(state)}`
 
         fs.writeFileSync(NOTIFICATIONLOG_FILEPATH, updatedFile, (err) => {
@@ -486,7 +484,6 @@ function getFirstState() {
 }
 
 ipcMain.on('setTrayIcon', (event, args) => {
-    console.log(`TrayiconDEFAULT: ${TRAYICON_DEFAULT_FILEPATH}, TrayiconNOTIF: ${TRAYICON_NOTIFICATION_FILEPATH}`)
     if(args === 'default') {
         tray.setImage(TRAYICON_DEFAULT_FILEPATH)
     }
