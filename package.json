@@ -1,20 +1,88 @@
 {
-  "name": "Moodle_Notifier",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./src/script.js",
-  "dependencies": {
-    "auto-launch": "^5.0.5",
-    "dotenv": "^8.2.0",
-    "node-fetch": "^2.6.1",
-    "node-notifier": "^8.0.0",
-    "puppeteer": "^5.4.1"
-  },
-  "devDependencies": {
-    "electron": "^11.1.0"
-  },
-  "scripts": {
-    "default": "electron ./src/script.js",
-    "dev": "electron ./src/script.js --dev"
-  }
+    "name": "moodle-notifier",
+    "author": {
+        "name": "Pshychoz Path",
+        "email": "volovikariel@gmail.com",
+        "url": "https://github.com/volovikariel"
+    },
+    "email": "volovikariel@gmail.com",
+    "version": "0.1.0",
+    "description": "Program attempts to facilitate interacting with moodle, by allowing the user to receive notifications of file uploads and removals.",
+    "main": "./src/script.js",
+    "dependencies": {
+        "auto-launch": "^5.0.5",
+        "dotenv": "^8.2.0",
+        "node-fetch": "^2.6.1",
+        "node-notifier": "^8.0.1",
+        "puppeteer": "^5.5.0"
+    },
+    "devDependencies": {
+        "electron": "^11.1.0",
+        "electron-builder": "^22.9.1"
+    },
+    "scripts": {
+        "default": "npm install && electron ./src/script.js",
+        "dev": "npm install && electron ./src/script.js --dev",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
+    },
+    "build": {
+        "appId": "fun.electron.moodlenotifier",
+        "productName": "moodle-notifier",
+        "extraFiles": [
+            {
+                "from": "src",
+                "to": "src"
+            },
+            {
+                "from": "Frontend",
+                "to": "Frontend"
+            },
+            {
+                "from": ".env",
+                "to": ".env"
+            },
+            {
+                "from": "package.json",
+                "to": "package.json",
+                "filter": "**/*"
+            }
+        ],
+        "directories": {
+            "output": "release",
+            "buildResources": "dist"
+        },
+        "dmg": {
+            "contents": [
+                {
+                    "x": 130,
+                    "y": 220
+                },
+                {
+                    "x": 410,
+                    "y": 220,
+                    "type": "link",
+                    "path": "/Applications"
+                }
+            ]
+        },
+        "win": {
+            "target": [
+                "nsis",
+                "msi"
+            ]
+        },
+        "linux": {
+            "target": [
+                "deb",
+                "rpm",
+                "snap",
+                "AppImage"
+            ],
+            "category": "Development"
+        },
+        "mac": {
+            "category": "public.app-category.utilities"
+        }
+    }
 }

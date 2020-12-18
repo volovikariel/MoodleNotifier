@@ -22,7 +22,7 @@ const NOTIFICATIONLOG_FILEPATH =  path.join(__dirname, './files/notifications.tx
 const DATALOG_FILEPATH =  path.join(__dirname, './files/data.txt');
 const CURRENT_FILES_FILEPATH =  path.join(__dirname, './files/currentFiles.txt');
 const TRAYICON_DEFAULT_FILEPATH = path.join(__dirname, '../Frontend/aww.png');
-const TRAYICON_NOTIFICATION_FILEPATH = path.join(__dirname, '../../../Pictures/bunny_with_hat.jpg');
+const TRAYICON_NOTIFICATION_FILEPATH = path.join(__dirname, '../Frontend/bunny_with_hat.jpg');
 // Limit of states that the user can go back
 const NOTIFICATION_LIMIT = 10;
 
@@ -42,7 +42,7 @@ let browser = undefined;
 
 function main() {
     // If the .env file is not yet set up - exit this function
-    if(USERNAME == undefined || PASSWORD == undefined) return;
+    if(USERNAME === undefined || PASSWORD === undefined) return;
     (async () => {
         if(process.dev) {
             browser = await puppeteer.launch({ headless: false });
@@ -300,7 +300,7 @@ app.on("ready", () => {
     createWindow()
     window.webContents.once('dom-ready', () => {
         // If there isn't a username or a password
-        if(USERNAME == undefined || PASSWORD == undefined) {
+        if(USERNAME === undefined || PASSWORD === undefined) {
             // Makes it visible
             window.webContents.send('toggleHidden')
             toggleWindow()
@@ -382,16 +382,16 @@ function showWindow() {
     window.focus()
 }
 
-ipcMain.on("log", (event, args) => {
+ipcMain.on('log', (event, args) => {
     console.info("FROM RENDERER: " + args);
 });
 
-ipcMain.on("setLoginInfo", (event, args) => {
-    // If it's an empty input, ignore it
-    if(args.username === '' || args.password === '') return;
-    USERNAME = args.username
-    PASSWORD = args.password
-    fs.writeFileSync(".env", `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
+ipcMain.on('setLoginInfo', (event, args) => {
+    USERNAME = args.USERNAME
+    PASSWORD = args.PASSWORD
+    // Now that we have USERNAME and PASSWORD, launch main
+    main()
+    fs.writeFileSync('.env', `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
         if(err) {
             console.error(err)
         }
@@ -402,7 +402,6 @@ ipcMain.on("setLoginInfo", (event, args) => {
             if(browser) {
                 browser.close() 
             }
-            main()
         }
     })
 });

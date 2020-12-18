@@ -1,5 +1,4 @@
 const { ipcRenderer } = require("electron");
-
 let notifications = []
 
 ipcRenderer.on('display-data', (event, args) => {
@@ -55,9 +54,16 @@ document.addEventListener('click', (event) => {
     ipcRenderer.send('saveState', notifications);
   }
   if(event.target.matches('.loginBtn')) {
-    let username = event.target.parentNode.querySelector('.username').value
-    let password = event.target.parentNode.querySelector('.password').value
-    ipcRenderer.send("setLoginInfo", {username: username, password: password})
+    let username = document.querySelector('.username').value
+    let password = document.querySelector('.password').value
+    if(username === '' || password === '') {
+      ipcRenderer.send('log', 'Empty username/password')
+      return;
+    }
+    toggleDisplayVisibility();
+    document.querySelector('.username').value = ''
+    document.querySelector('.password').value = ''
+    ipcRenderer.send("setLoginInfo", { USERNAME: username, PASSWORD: password })
   }
 
   if(event.target.matches('#changeUser')) {
