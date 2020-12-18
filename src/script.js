@@ -17,10 +17,13 @@ let VIEWPORT = { width: 1920, height: 1080 }
 let RATIO_WINDOW_TO_SCREEN = 1/3;
 // File constants
 const MYCONCORDIA_URL = 'https://myconcordia.ca';
-const NOTIFICATIONLOG_FILEPATH = 'notifications.txt';
-const CURRENT_FILES_FILEPATH = 'currentFiles.txt';
+const FRONTEND_HTML_FILEPATH =  path.join(__dirname, '../Frontend/index.html');
+const NOTIFICATIONLOG_FILEPATH =  path.join(__dirname, './files/notifications.txt');
+const CURRENT_FILES_FILEPATH =  path.join(__dirname, './files/currentFiles.txt');
+//const TRAYICON_DEFAULT_FILEPATH = '../Frontend/aww.png';
+//const TRAYICON_NOTIFICATION_FILEPATH = '../../../Pictures/bunny_with_hat.jpg';
 const TRAYICON_DEFAULT_FILEPATH = './aww.png';
-const TRAYICON_NOTIFICATION_FILEPATH = '../../Pictures/bunny_with_hat.jpg';
+const TRAYICON_NOTIFICATION_FILEPATH = './aww.png'
 // Limit of states that the user can go back
 const NOTIFICATION_LIMIT = 10;
 
@@ -326,19 +329,19 @@ app.on("ready", () => {
 })
 
 function createTray() {
-  tray = new Tray(TRAYICON_DEFAULT_FILEPATH)
-  tray.on('right-click', showWindow)
-  tray.on('double-click', showWindow)
-  tray.on('click', showWindow);
+    tray = new Tray(TRAYICON_DEFAULT_FILEPATH)
+    tray.on('right-click', showWindow)
+    tray.on('double-click', showWindow)
+    tray.on('click', showWindow);
 }
 
 function toggleWindow() {
-  if(window.isVisible()) {
-    window.hide()
-  }
-  else {
-    showWindow()
-  }
+    if(window.isVisible()) {
+        window.hide()
+    }
+    else {
+        showWindow()
+    }
 }
 
 function createWindow() {
@@ -357,7 +360,7 @@ function createWindow() {
             nodeIntegration: true
         }
     })
-    window.loadURL(`file://${path.join(__dirname, './index.html')}`)
+    window.loadURL(`file://${FRONTEND_HTML_FILEPATH}`)
 
     if(process.dev) {
         window.webContents.toggleDevTools()
@@ -423,10 +426,11 @@ function saveState(state) {
         let updatedFile = fs.readFileSync(NOTIFICATIONLOG_FILEPATH)
             .toString()
             .split('\n')
+        console.log(updatedFile)
         if(updatedFile[updatedFile.length - 1] === '') {
             updatedFile.splice(updatedFile.length - 1, 1)
         }
-        updateFile = updatedFile.shift()
+        updatedFile = updatedFile.shift()
         updatedFile = `${updatedFile.join('\n')}\n${JSON.stringify(state)}`
 
         fs.writeFileSync(NOTIFICATIONLOG_FILEPATH, updatedFile, (err) => {
@@ -482,6 +486,7 @@ function getFirstState() {
 }
 
 ipcMain.on('setTrayIcon', (event, args) => {
+    console.log(`TrayiconDEFAULT: ${TRAYICON_DEFAULT_FILEPATH}, TrayiconNOTIF: ${TRAYICON_NOTIFICATION_FILEPATH}`)
     if(args === 'default') {
         tray.setImage(TRAYICON_DEFAULT_FILEPATH)
     }

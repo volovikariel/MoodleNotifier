@@ -2,26 +2,63 @@
   "name": "Moodle_Notifier",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "./src/script.js",
   "dependencies": {
     "auto-launch": "^5.0.5",
     "dotenv": "^8.2.0",
-    "electron": "^11.0.2",
+    "electron-squirrel-startup": "^1.0.0",
     "node-fetch": "^2.6.1",
     "node-notifier": "^8.0.0",
     "puppeteer": "^5.4.1"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron": "^11.1.0",
+    "electron-prebuilt-compile": "8.2.0",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.3.0",
     "prettier": "^2.2.1"
   },
   "scripts": {
-    "start": "electron ./script.js",
-    "dev": "electron ./script.js --dev"
+    "start": "electron-forge start",
+    "default": "electron ./src/script.js",
+    "dev": "electron ./src/script.js --dev",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "Moodle_Notifier"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
 }
