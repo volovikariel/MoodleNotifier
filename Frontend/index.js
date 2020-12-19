@@ -12,6 +12,7 @@ ipcRenderer.on('display-data', (event, args) => {
 });
 
 function renderedFile(file, index) {
+  ipcRenderer.send('log', file.change)
   return `
     <file-card id="${index}">
         <details>
@@ -24,7 +25,7 @@ function renderedFile(file, index) {
           </summary>
           <div class="textDiv">
           Notification added at: ${file.date}</br>
-          <a href="#" onclick="const { shell } = require('electron'); shell.openExternal('${file.link}')">${(file.change === 'Added') ? file.fileName : ''}</a>
+          <a href="#" onclick="const { shell } = require('electron'); shell.openExternal('${file.link}')">${(file.change === 'ADDED') ? file.fileName : ''}</a>
           </div>
         </details>
         <div class="buttonDiv">
