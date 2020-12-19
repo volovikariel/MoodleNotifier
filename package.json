@@ -1,88 +1,124 @@
 {
-    "name": "moodle-notifier",
-    "author": {
-        "name": "Pshychoz Path",
-        "email": "volovikariel@gmail.com",
-        "url": "https://github.com/volovikariel"
-    },
+  "name": "moodle-notifier",
+  "author": {
+    "name": "Pshychoz Path",
     "email": "volovikariel@gmail.com",
-    "version": "0.1.0",
-    "description": "Program attempts to facilitate interacting with moodle, by allowing the user to receive notifications of file uploads and removals.",
-    "main": "./src/script.js",
-    "dependencies": {
-        "auto-launch": "^5.0.5",
-        "dotenv": "^8.2.0",
-        "node-fetch": "^2.6.1",
-        "node-notifier": "^8.0.1",
-        "puppeteer": "^5.5.0"
-    },
-    "devDependencies": {
-        "electron": "^11.1.0",
-        "electron-builder": "^22.9.1"
-    },
-    "scripts": {
-        "default": "npm install && electron ./src/script.js",
-        "dev": "npm install && electron ./src/script.js --dev",
-        "pack": "electron-builder --dir",
-        "dist": "electron-builder"
-    },
-    "build": {
-        "appId": "fun.electron.moodlenotifier",
-        "productName": "moodle-notifier",
-        "extraFiles": [
+    "url": "https://github.com/volovikariel"
+  },
+  "email": "volovikariel@gmail.com",
+  "version": "0.1.0",
+  "description": "Utility progrma which provides notifications for a moodle account.",
+  "main": "./src/script.js",
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "dotenv": "^8.2.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "node-fetch": "^2.6.1",
+    "node-notifier": "^8.0.1",
+    "puppeteer": "^5.5.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron": "^11.1.0"
+  },
+  "scripts": {
+    "default": "npm install && electron ./src/script.js",
+    "dev": "npm install && electron ./src/script.js --dev",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "config": {
+    "forge": {
+      "name": "moodle-notifier-forge",
+      "packagerConfig": {
+        "build": {
+          "appId": "fun.electron.moodlenotifier",
+          "productName": "moodle-notifier",
+          "files": [
+            "./src/files/**"
+          ],
+          "extraFiles": [
             {
-                "from": "src",
-                "to": "src"
+              "from": "src",
+              "to": "src"
             },
             {
-                "from": "Frontend",
-                "to": "Frontend"
+              "from": "Frontend",
+              "to": "Frontend"
             },
             {
-                "from": ".env",
-                "to": ".env"
+              "from": ".env",
+              "to": ".env"
             },
             {
-                "from": "package.json",
-                "to": "package.json",
-                "filter": "**/*"
+              "from": "package.json",
+              "to": "package.json",
+              "filter": "**/*"
             }
-        ],
-        "directories": {
+          ],
+          "directories": {
             "output": "release",
             "buildResources": "dist"
-        },
-        "dmg": {
+          },
+          "dmg": {
             "contents": [
-                {
-                    "x": 130,
-                    "y": 220
-                },
-                {
-                    "x": 410,
-                    "y": 220,
-                    "type": "link",
-                    "path": "/Applications"
-                }
+              {
+                "x": 130,
+                "y": 220
+              },
+              {
+                "x": 410,
+                "y": 220,
+                "type": "link",
+                "path": "/Applications"
+              }
             ]
-        },
-        "win": {
+          },
+          "win": {
             "target": [
-                "nsis",
-                "msi"
+              "nsis",
+              "msi"
             ]
-        },
-        "linux": {
+          },
+          "linux": {
             "target": [
-                "deb",
-                "rpm",
-                "snap",
-                "AppImage"
+              "deb",
+              "rpm",
+              "snap",
+              "AppImage"
             ],
             "category": "Development"
-        },
-        "mac": {
+          },
+          "mac": {
             "category": "public.app-category.utilities"
+          }
         }
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "moodle_notifier"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        }
+      ]
     }
+  }
 }

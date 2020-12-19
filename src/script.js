@@ -1,5 +1,6 @@
+const path = require('path')
 // Username and password for concordia loaded from a .env file
-let { USERNAME, PASSWORD } = require('dotenv').config().parsed;
+let { USERNAME, PASSWORD } = require('dotenv').config({ path: path.resolve(__dirname, '../.env') }).parsed;
 // Puppeteer to load and interact with a browser
 const puppeteer = require('puppeteer');
 // Interact with files on your system
@@ -7,7 +8,6 @@ const fs = require('fs');
 // Native crossplatform notifications
 //const notifier = require('node-notifier');
 const { app, Tray, ipcMain, BrowserWindow, Menu, MenuItem, screen }  = require('electron');
-const path = require('path')
 // Handle automatic startup (crossplatform)
 const AutoLaunch = require('auto-launch')
 
@@ -17,12 +17,13 @@ let VIEWPORT = { width: 1920, height: 1080 }
 let RATIO_WINDOW_TO_SCREEN = 1/3;
 // File constants
 const MYCONCORDIA_URL = 'https://myconcordia.ca';
-const FRONTEND_HTML_FILEPATH =  path.join(__dirname, '../Frontend/index.html');
-const NOTIFICATIONLOG_FILEPATH =  path.join(__dirname, './files/notifications.txt');
-const DATALOG_FILEPATH =  path.join(__dirname, './files/data.txt');
-const CURRENT_FILES_FILEPATH =  path.join(__dirname, './files/currentFiles.txt');
-const TRAYICON_DEFAULT_FILEPATH = path.join(__dirname, '../Frontend/aww.png');
-const TRAYICON_NOTIFICATION_FILEPATH = path.join(__dirname, '../Frontend/bunny_with_hat.jpg');
+const FRONTEND_HTML_FILEPATH =  path.resolve(__dirname, '../Frontend/index.html');
+const NOTIFICATIONLOG_FILEPATH =  path.resolve(__dirname, './files/notifications.txt');
+const DATALOG_FILEPATH =  path.resolve(__dirname, './files/data.txt');
+const CURRENT_FILES_FILEPATH =  path.resolve(__dirname, './files/currentFiles.txt');
+const TRAYICON_DEFAULT_FILEPATH = path.resolve(__dirname, '../Frontend/aww.png');
+const TRAYICON_NOTIFICATION_FILEPATH = path.resolve(__dirname, '../Frontend/bunny_with_hat.jpg');
+
 // Limit of states that the user can go back
 const NOTIFICATION_LIMIT = 10;
 
@@ -167,7 +168,7 @@ function main() {
 
         function readDataInFile() {
             try {
-                let data = fs.readFileSync(CURRENT_FILES_FILEPATH, "utf8");
+                let data = fs.readFileSync(CURRENT_FILES_FILEPATH);
                 return JSON.parse(data);
             } 
             catch (err) {
@@ -391,7 +392,7 @@ ipcMain.on('setLoginInfo', (event, args) => {
     PASSWORD = args.PASSWORD
     // Now that we have USERNAME and PASSWORD, launch main
     main()
-    fs.writeFileSync('.env', `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
+    fs.writeFile('.env', `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
         if(err) {
             console.error(err)
         }
