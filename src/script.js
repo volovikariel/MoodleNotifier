@@ -109,6 +109,8 @@ function main() {
             if(err instanceof Error) {
                 // TODO: Make it automatically fix itself
                 window.webContents.send('alert', 'Error loading course pages! Please restart~')
+                main();
+                return;
             }
         }
 
