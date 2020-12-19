@@ -330,6 +330,12 @@ app.on("ready", () => {
 
 function createTray() {
     tray = new Tray(TRAYICON_DEFAULT_FILEPATH)
+    const contextMenu = Menu.buildFromTemplate([
+        { label: 'Exit', click: () => {
+            app.quit();
+        }}
+    ])
+    tray.setContextMenu(contextMenu)
     tray.on('right-click', showWindow)
     tray.on('double-click', showWindow)
     tray.on('click', showWindow);
