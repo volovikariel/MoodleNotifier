@@ -12,7 +12,6 @@ ipcRenderer.on('display-data', (event, args) => {
 });
 
 function renderedFile(file, index) {
-  ipcRenderer.send('log', file.change)
   return `
     <file-card id="${index}">
         <details>

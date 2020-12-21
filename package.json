@@ -1,13 +1,13 @@
 {
   "name": "moodle-notifier",
   "author": {
-    "name": "Pshychoz Path",
+    "name": "Ariel Volovik",
     "email": "volovikariel@gmail.com",
     "url": "https://github.com/volovikariel"
   },
   "email": "volovikariel@gmail.com",
-  "version": "0.1.0",
-  "description": "Utility progrma which provides notifications for a moodle account.",
+  "version": "0.1.1",
+  "description": "Utility app which provides notifications for a moodle account.",
   "main": "./src/script.js",
   "dependencies": {
     "auto-launch": "^5.0.5",
@@ -28,11 +28,9 @@
   "scripts": {
     "default": "npm install && electron ./src/script.js",
     "dev": "npm install && electron ./src/script.js --dev",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make --platform=win32 --target=squirrel"
   },
   "config": {
     "forge": {

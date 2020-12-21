@@ -1,6 +1,3 @@
-const path = require('path')
-// Username and password for concordia loaded from a .env file
-let { USERNAME, PASSWORD } = require('dotenv').config({ path: path.resolve(__dirname, '../.env') }).parsed;
 // Puppeteer to load and interact with a browser
 const puppeteer = require('puppeteer');
 // Interact with files on your system
@@ -10,12 +7,12 @@ const fs = require('fs');
 const { app, Tray, ipcMain, BrowserWindow, Menu, MenuItem, screen }  = require('electron');
 // Handle automatic startup (crossplatform)
 const AutoLaunch = require('auto-launch')
-
+const path = require('path')
 // Default VIEWPORT before electron loads up [it gets changes to fit the screen size later on]
 let VIEWPORT = { width: 1920, height: 1080 }
 // The width and height of the window are going to be 1/3 the size of the viewport
-let RATIO_WINDOW_TO_SCREEN = 1/3;
-// File constants
+const RATIO_WINDOW_TO_SCREEN = 1/3;
+//  CONSTANTS
 const MYCONCORDIA_URL = 'https://myconcordia.ca';
 const FRONTEND_HTML_FILEPATH =  path.resolve(__dirname, '../Frontend/index.html');
 const NOTIFICATIONLOG_FILEPATH =  path.resolve(__dirname, './files/notifications.txt');
@@ -23,9 +20,15 @@ const DATALOG_FILEPATH =  path.resolve(__dirname, './files/data.txt');
 const CURRENT_FILES_FILEPATH =  path.resolve(__dirname, './files/currentFiles.txt');
 const TRAYICON_DEFAULT_FILEPATH = path.resolve(__dirname, '../Frontend/aww.png');
 const TRAYICON_NOTIFICATION_FILEPATH = path.resolve(__dirname, '../Frontend/bunny_with_hat.jpg');
+const ENV_FILEPATH = path.resolve(__dirname, '../.env');
+// Username and password for concordia loaded from a .env file
+let { USERNAME, PASSWORD } = require('dotenv').config({ path: ENV_FILEPATH }).parsed;
 
 // Limit of states that the user can go back
 const NOTIFICATION_LIMIT = 10;
+
+// Makes a desktop icon on Windows
+if(require('electron-squirrel-startup')) return app.quit();
 
 for(let arg of process.argv) {
     if(arg.substring(0, 2) == '--') {
@@ -43,7 +46,7 @@ let browser = undefined;
 
 function main() {
     // If the .env file is not yet set up - exit this function
-    if(USERNAME === undefined || PASSWORD === undefined) return;
+    if(USERNAME === '' || PASSWORD === '') return;
     (async () => {
         if(process.dev) {
             browser = await puppeteer.launch({ headless: false });
@@ -109,8 +112,6 @@ function main() {
             if(err instanceof Error) {
                 // TODO: Make it automatically fix itself
                 window.webContents.send('alert', 'Error loading course pages! Please restart~')
-                main();
-                return;
             }
         }
 
@@ -303,7 +304,7 @@ app.on("ready", () => {
     createWindow()
     window.webContents.once('dom-ready', () => {
         // If there isn't a username or a password
-        if(USERNAME === undefined || PASSWORD === undefined) {
+        if(USERNAME === '' || PASSWORD === '') {
             // Makes it visible
             window.webContents.send('toggleHidden')
             toggleWindow()
@@ -395,8 +396,7 @@ ipcMain.on('setLoginInfo', (event, args) => {
     USERNAME = args.USERNAME
     PASSWORD = args.PASSWORD
     // Now that we have USERNAME and PASSWORD, launch main
-    main()
-    fs.writeFile('.env', `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
+    fs.writeFile(ENV_FILEPATH, `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
         if(err) {
             console.error(err)
         }
@@ -409,6 +409,7 @@ ipcMain.on('setLoginInfo', (event, args) => {
             }
         }
     })
+    main()
 });
 
 ipcMain.on('saveState', (event, state) => {
