@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 // Native crossplatform notifications
 //const notifier = require('node-notifier');
-const { app, Tray, ipcMain, BrowserWindow, Menu, MenuItem, screen }  = require('electron');
+const { app, Tray, ipcMain, BrowserWindow, Menu, MenuItem, screen, globalShortcut }  = require('electron');
 // Handle automatic startup (crossplatform)
 const AutoLaunch = require('auto-launch')
 const path = require('path')
@@ -49,10 +49,10 @@ function main() {
     if(USERNAME === '' || PASSWORD === '') return;
     (async () => {
         if(process.dev) {
+            // Browser visible for easier debugging
             browser = await puppeteer.launch({ headless: false });
         }
         else {
-            // Browser visible for easier debugging
             browser = await puppeteer.launch();
         }
         // Create a pages array, initially of size 1 [the default loaded one that comes with the browser]
@@ -83,8 +83,8 @@ function main() {
         catch(err) {
             // Invalid login, show login form
             if(err instanceof Error) {
-                window.webContents.send('toggleHidden')
-                showWindow()
+                window.webContents.send('setLoginFormVisibility', { visible: true })
+                window.show()
                 return;
             }
         }
@@ -305,9 +305,8 @@ app.on("ready", () => {
     window.webContents.once('dom-ready', () => {
         // If there isn't a username or a password
         if(USERNAME === '' || PASSWORD === '') {
-            // Makes it visible
-            window.webContents.send('toggleHidden')
-            toggleWindow()
+            window.webContents.send('setLoginFormVisibility', { visible: true })
+            window.show()
         }
         // If the last state was "empty notifications", don't bother calling display-data
         if(numOfLinesInFile(NOTIFICATIONLOG_FILEPATH) > 0) {
@@ -315,18 +314,20 @@ app.on("ready", () => {
         }
     })
 
-    menu.append(new MenuItem({
-        label: 'Undo',
-        accelerator: 'CommandOrControl+Z',
-        click: () => { 
-            // Delete the last state and go back
-            deleteLastState()
-            // Go back to last state
-            if(numOfLinesInFile(NOTIFICATIONLOG_FILEPATH) > 0) {
-                window.webContents.send('display-data', { notifications: JSON.parse(getLastState()), append: false })
+    menu.append(new MenuItem(
+        {
+            label: 'Undo',
+            accelerator: 'CommandOrControl+Z',
+            click: () => { 
+                // Delete the last state and go back
+                deleteLastState()
+                // Go back to last state
+                if(numOfLinesInFile(NOTIFICATIONLOG_FILEPATH) > 0) {
+                    window.webContents.send('display-data', { notifications: JSON.parse(getLastState()), append: false })
+                }
             }
         }
-    }))
+    ))
 
     Menu.setApplicationMenu(menu)
 })
@@ -334,19 +335,14 @@ app.on("ready", () => {
 function createTray() {
     tray = new Tray(TRAYICON_DEFAULT_FILEPATH)
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'Notifications', click: showWindow },
+        { label: 'Notifications', click: () => 
+            {
+                window.show()
+            }
+        },
         { label: 'Exit', click: () => { app.quit(); }}
     ])
     tray.setContextMenu(contextMenu)
-}
-
-function toggleWindow() {
-    if(window.isVisible()) {
-        window.hide()
-    }
-    else {
-        showWindow()
-    }
 }
 
 function createWindow() {
@@ -360,8 +356,8 @@ function createWindow() {
         autoHideMenuBar: true,
         fullscreenable: false,
         resizable: false,
+        alwaysOnTop: true,
         webPreferences: {
-            backgroundThrottling: false,
             nodeIntegration: true
         }
     })
@@ -371,21 +367,14 @@ function createWindow() {
         window.webContents.toggleDevTools()
     }
 
-    window.on("blur", () => {
-        window.hide()
+    globalShortcut.register('CommandOrControl+Alt+H', () => {
+        if(window.isVisible()) {
+            window.hide()
+        }
+        else {
+            window.show()
+        }
     })
-}
-
-function showWindow() {
-    /**
-     * Set the position to be the bottom right - to do this, make it be a 'window' away in both height and width from the bottom right corner.
-     * We do 1 - RATIO_WINDOW_TO_SCREEN to get the % width and height given the VIEWPORT's size. We floor it because window.setPosition requires integers
-     **/
-    // TODO: For MacOS and Windows, can maybe use tray.getBounds() https://github.com/electron/electron/blob/master/docs/api/tray.md#traygetbounds-macos-windows
-    const position = { x: Math.floor(VIEWPORT.width * (1 - RATIO_WINDOW_TO_SCREEN)), y: Math.floor(VIEWPORT.height * (1 - RATIO_WINDOW_TO_SCREEN)) };
-    window.setPosition(position.x, position.y, true)
-    window.show()
-    window.focus()
 }
 
 ipcMain.on('log', (event, args) => {
@@ -403,7 +392,7 @@ ipcMain.on('setLoginInfo', (event, args) => {
         else {
             // Done logging in, hide the window
             window.hide()
-            window.webContents.send('toggleHidden')
+            window.webContents.send('setLoginFormVisibility', { visible: false })
             if(browser) {
                 browser.close() 
             }

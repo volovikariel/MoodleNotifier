@@ -57,17 +57,22 @@ document.addEventListener('click', (event) => {
     let username = document.querySelector('.username').value
     let password = document.querySelector('.password').value
     if(username === '' || password === '') {
-      ipcRenderer.send('log', 'Empty username/password')
+      alert('Empty username or password, please re-enter valid ones')
       return;
     }
-    toggleDisplayVisibility();
+    setLoginFormVisibility(false);
     document.querySelector('.username').value = ''
     document.querySelector('.password').value = ''
-    ipcRenderer.send("setLoginInfo", { USERNAME: username, PASSWORD: password })
+    ipcRenderer.send('setLoginInfo', { USERNAME: username, PASSWORD: password })
   }
 
   if(event.target.matches('#changeUser')) {
-    toggleDisplayVisibility()
+    if(document.querySelector('#loginForm').style.display === 'block') {
+      setLoginFormVisibility(false)
+    }
+    else {
+      setLoginFormVisibility(true)
+    }
   }
 
   if(event.target.matches('#wantLoadAtStartup')) {
@@ -75,18 +80,18 @@ document.addEventListener('click', (event) => {
   }
 })
 
-ipcRenderer.on('toggleHidden', (args) => {
+ipcRenderer.on('setLoginFormVisibility', (event, args) => {
   document.querySelector('.username').value = '';
   document.querySelector('.password').value = '';
-  toggleDisplayVisibility()
+  setLoginFormVisibility(args.visible)
 });
 
-function toggleDisplayVisibility() {
-  if(document.querySelector('#signupForm').style.display == 'none') {
-    document.querySelector('#signupForm').style.display = 'block'
+function setLoginFormVisibility(visible) {
+  if(visible === true) {
+    document.querySelector('#loginForm').style.display = 'block'
   }
   else {
-    document.querySelector('#signupForm').style.display = 'none'
+    document.querySelector('#loginForm').style.display = 'none'
   }
 }
 
