@@ -39,7 +39,7 @@ function displayData(data) {
     ipcRenderer.send('setTrayIcon', 'notificationIcon')
   }
   else {
-    ipcRenderer.send('setTrayIcon', 'default')
+    ipcRenderer.send('setTrayIcon', 'defaultIcon')
   }
 
   let html = data.map((file, index) => renderedFile(file, index)).join('');
