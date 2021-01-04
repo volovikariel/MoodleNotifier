@@ -2,7 +2,7 @@
  * This is a utility class with functions for interacting with files.
  */
 
-const Constants = require('./constants');
+const Constants = require('./Constants');
 const fs = require('fs')
 
 module.exports = {

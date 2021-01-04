@@ -30,7 +30,8 @@
     "dev": "npm install && electron ./src/script.js --dev",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make --target=deb,squirrel,zip"
+    "make-linux": "electron-forge make --platform=linux --target=deb,zip",
+    "make-window": "electron-forge make --platform=win32 --target=squirrel,zip"
   },
   "config": {
     "forge": {
@@ -115,7 +116,9 @@
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin"
+            "darwin",
+            "linux",
+            "win32"
           ]
         },
         {

@@ -11,7 +11,7 @@ const { app, Tray, ipcMain, BrowserWindow, Menu, MenuItem, screen, globalShortcu
 const AutoLaunch = require('auto-launch')
 // Default VIEWPORT before electron loads up [it gets changes to fit the screen size later on]
 let VIEWPORT = { width: 1920, height: 1080 }
-const Constants = require('./util/constants')
+const Constants = require('./util/Constants')
 // Username and password for concordia loaded from a .env file
 let { USERNAME, PASSWORD } = require('dotenv').config({ path: Constants.ENV_FILEPATH }).parsed;
 
