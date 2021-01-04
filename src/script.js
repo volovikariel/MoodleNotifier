@@ -2,32 +2,20 @@
 const puppeteer = require('puppeteer');
 // Interact with files on your system
 const fs = require('fs');
+// Utility functions
+const FileUtil = require('./util/FileFunctions');
 // Native crossplatform notifications
 //const notifier = require('node-notifier');
 const { app, Tray, ipcMain, BrowserWindow, Menu, MenuItem, screen, globalShortcut }  = require('electron');
 // Handle automatic startup (crossplatform)
 const AutoLaunch = require('auto-launch')
-const path = require('path')
 // Default VIEWPORT before electron loads up [it gets changes to fit the screen size later on]
 let VIEWPORT = { width: 1920, height: 1080 }
-// The width and height of the window are going to be 1/3 the size of the viewport
-const RATIO_WINDOW_TO_SCREEN = 1/3;
-//  CONSTANTS
-const MYCONCORDIA_URL = 'https://myconcordia.ca';
-const FRONTEND_HTML_FILEPATH =  path.resolve(__dirname, '../Frontend/index.html');
-const NOTIFICATIONLOG_FILEPATH =  path.resolve(__dirname, './files/notifications.txt');
-const DATALOG_FILEPATH =  path.resolve(__dirname, './files/data.txt');
-const CURRENT_FILES_FILEPATH =  path.resolve(__dirname, './files/currentFiles.txt');
-const TRAYICON_DEFAULT_FILEPATH = path.resolve(__dirname, '../Frontend/aww.png');
-const TRAYICON_NOTIFICATION_FILEPATH = path.resolve(__dirname, '../Frontend/bunny_with_hat.jpg');
-const ENV_FILEPATH = path.resolve(__dirname, '../.env');
+const Constants = require('./util/constants')
 // Username and password for concordia loaded from a .env file
-let { USERNAME, PASSWORD } = require('dotenv').config({ path: ENV_FILEPATH }).parsed;
+let { USERNAME, PASSWORD } = require('dotenv').config({ path: Constants.ENV_FILEPATH }).parsed;
 
-// Limit of states that the user can go back
-const NOTIFICATION_LIMIT = 10;
-
-// Makes a desktop icon on Windows
+// Makes a desktop icon on Windows [TODO: Check if that's really what it does]
 if(require('electron-squirrel-startup')) return app.quit();
 
 for(let arg of process.argv) {
@@ -59,7 +47,7 @@ function main() {
         const pages = await browser.pages(); 
         const page = pages[0];
         await page.setViewport(VIEWPORT)
-        await page.goto(MYCONCORDIA_URL);
+        await page.goto('https://myconcordia.ca');
 
         const USERNAME_SELECTOR = 'input[id=userid]'
         const PASSWORD_SELECTOR = 'input[id=pwd]'
@@ -159,44 +147,25 @@ function main() {
 
         async function fetchCompareRefresh() {
             let newFiles = await fetchFiles();
-            let currentFiles = readDataInFile();
-            if(currentFiles == undefined) {
-                saveDataInFile(newFiles);
+            let currentFiles = FileUtil.readDataInFile();
+            if(currentFiles === undefined) {
+                FileUtil.saveDataInFile(newFiles);
                 return;
             }
             printData(compareData(currentFiles, newFiles)); 
-            saveDataInFile(newFiles);
+            FileUtil.saveDataInFile(newFiles);
             await refreshPages(pages);
         }
 
-        function readDataInFile() {
-            try {
-                let data = fs.readFileSync(CURRENT_FILES_FILEPATH);
-                return JSON.parse(data);
-            } 
-            catch (err) {
-                // File does not exist
-                if(err.code === "ENOENT") {
-                    console.error(`FILE '${CURRENT_FILES_FILEPATH}' NOT FOUND`);
-                    return undefined;
-                }
-                console.error(`Some other error occured when trying to read ${CURRENT_FILES_FILEPATH}`);
-            }
-        }
-
-        function saveDataInFile(data) {
-            fs.writeFileSync(CURRENT_FILES_FILEPATH, `${JSON.stringify(data)}\n\n`);
-        }
-
         async function refreshPages(pages) {
-            pages.forEach(async (page) => {
-                await page.reload()
+            pages.forEach(async page => {
+                await page.reload();
                 await page.waitForSelector('body', { waitUntil: 'domcontentloaded'});
             })
         }
 
         async function fetchFiles() {
-            let data = await Promise.all(pages.map(async (page) => {
+            let data = await Promise.all(pages.map(async page => {
                 let files = await page.evaluate(() => {
                     return [...document.querySelectorAll(`a.aalink[href]`)].map(el => ({
                         fileName: el.querySelector('span.instancename').innerText,
@@ -277,18 +246,13 @@ function main() {
                     }
 
                     window.webContents.send('display-data', { notifications: displayData, append: true })
-                    saveState(displayData)
+                    FileUtil.saveState(displayData)
 
-                    logChanges(data);
+                    FileUtil.logFileChanges(data);
                 }
             })
         }
 
-        function logChanges(data) {
-            fs.appendFile(DATALOG_FILEPATH, `${new Date()}:\n${JSON.stringify(data)}\n\n`, (err) => {
-                if(err) console.error(err);
-            });
-        }
     })()
 }
 
@@ -309,8 +273,8 @@ app.on("ready", () => {
             window.show()
         }
         // If the last state was "empty notifications", don't bother calling display-data
-        if(numOfLinesInFile(NOTIFICATIONLOG_FILEPATH) > 0) {
-            window.webContents.send('display-data', { notifications: JSON.parse(getLastState()), append: true })
+        if(FileUtil.numOfLinesInFile(Constants.NOTIFICATIONLOG_FILEPATH) > 0) {
+            window.webContents.send('display-data', { notifications: JSON.parse(FileUtil.getLastState()), append: true })
         }
     })
 
@@ -320,10 +284,10 @@ app.on("ready", () => {
             accelerator: 'CommandOrControl+Z',
             click: () => { 
                 // Delete the last state and go back
-                deleteLastState()
+                FileUtil.deleteLastState()
                 // Go back to last state
-                if(numOfLinesInFile(NOTIFICATIONLOG_FILEPATH) > 0) {
-                    window.webContents.send('display-data', { notifications: JSON.parse(getLastState()), append: false })
+                if(FileUtil.numOfLinesInFile(Constants.NOTIFICATIONLOG_FILEPATH) > 0) {
+                    window.webContents.send('display-data', { notifications: JSON.parse(FileUtil.getLastState()), append: false })
                 }
             }
         }
@@ -333,7 +297,7 @@ app.on("ready", () => {
 })
 
 function createTray() {
-    tray = new Tray(TRAYICON_DEFAULT_FILEPATH)
+    tray = new Tray(Constants.TRAYICON_DEFAULT_FILEPATH)
     const contextMenu = Menu.buildFromTemplate([
         { label: 'Notifications', click: () => 
             {
@@ -349,8 +313,8 @@ function createWindow() {
     // Get width and height of the user's viewport
     VIEWPORT = { width: screen.getPrimaryDisplay().size.width, height: screen.getPrimaryDisplay().size.height }
     window = new BrowserWindow({
-        width: VIEWPORT.width * RATIO_WINDOW_TO_SCREEN,
-        height: VIEWPORT.height * RATIO_WINDOW_TO_SCREEN,
+        width: VIEWPORT.width * Constants.RATIO_WINDOW_TO_SCREEN,
+        height: VIEWPORT.height * Constants.RATIO_WINDOW_TO_SCREEN,
         show: false,
         frame: false,
         autoHideMenuBar: true,
@@ -361,13 +325,13 @@ function createWindow() {
             nodeIntegration: true
         }
     })
-    window.loadURL(`file://${FRONTEND_HTML_FILEPATH}`)
+    window.loadURL(`file://${Constants.FRONTEND_HTML_FILEPATH}`)
 
     if(process.dev) {
         window.webContents.toggleDevTools()
     }
 
-    globalShortcut.register('CommandOrControl+Alt+H', () => {
+    globalShortcut.register('CommandOrControl+Alt+W', () => {
         if(window.isVisible()) {
             window.hide()
         }
@@ -377,15 +341,29 @@ function createWindow() {
     })
 }
 
-ipcMain.on('log', (event, args) => {
-    console.info("FROM RENDERER: " + args);
-});
+ipcMain.on('setTrayIcon', (event, args) => {
+    if(args === 'defaultIcon') {
+        tray.setImage(Constants.TRAYICON_DEFAULT_FILEPATH)
+    }
+    else if(args === 'notificationIcon') {
+        tray.setImage(Constants.TRAYICON_NOTIFICATION_FILEPATH)
+    }
+})
+
+ipcMain.on('setStartAtLogin', (event, args) => {
+    if(args === true) {
+        autoLaunching.enable()
+    }
+    else {
+        autoLaunching.disable()
+    }
+})
 
 ipcMain.on('setLoginInfo', (event, args) => {
     USERNAME = args.USERNAME
     PASSWORD = args.PASSWORD
     // Now that we have USERNAME and PASSWORD, launch main
-    fs.writeFile(ENV_FILEPATH, `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
+    fs.writeFile(Constants.ENV_FILEPATH, `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
         if(err) {
             console.error(err)
         }
@@ -402,95 +380,9 @@ ipcMain.on('setLoginInfo', (event, args) => {
 });
 
 ipcMain.on('saveState', (event, state) => {
-    saveState(state)
+    FileUtil.saveState(state)
 })
 
-function saveState(state) {
-    let numLines = numOfLinesInFile(NOTIFICATIONLOG_FILEPATH)
-    // Append to end of file if we haven't reached the NOTIFICATION_LIMIT
-    if(numLines < NOTIFICATION_LIMIT) {
-        // If the file is just an empty line, don't add a \n
-        fs.appendFileSync(NOTIFICATIONLOG_FILEPATH, `${(numLines === 0 && getFirstState() === '') ? '' : '\n'}${JSON.stringify(state)}`, (err) => {
-            if(err) console.error(err);
-        })
-    }
-    // Remove the first line and append the latest notification instead if we've reached the NOTIFICATION_LIMIT
-    else if(numLines >= NOTIFICATION_LIMIT){
-        let updatedFile = fs.readFileSync(NOTIFICATIONLOG_FILEPATH)
-            .toString()
-            .split('\n')
-        if(updatedFile[updatedFile.length - 1] === '') {
-            updatedFile.splice(updatedFile.length - 1, 1)
-        }
-        updatedFile.shift()
-        updatedFile = `${updatedFile.join('\n')}\n${JSON.stringify(state)}`
-
-        fs.writeFileSync(NOTIFICATIONLOG_FILEPATH, updatedFile, (err) => {
-            if(err) console.error(err);
-        })
-    }
-}
-
-function numOfLinesInFile(fileName) {
-    const stateFileArray = fs.readFileSync(fileName)
-        .toString()
-        .split('\n')
-    if(stateFileArray[stateFileArray.length - 1] === '') {
-        stateFileArray.splice(stateFileArray.length - 1, 1)
-    }
-    return stateFileArray.length
-}
-
-function getLastState() {
-    let stateFileArray = fs.readFileSync(NOTIFICATIONLOG_FILEPATH)
-        .toString()
-        .split('\n')
-    if(stateFileArray[stateFileArray.length - 1] === '') {
-        stateFileArray.splice(stateFileArray.length - 1, 1)
-    }
-    if(stateFileArray.length > 0) {
-        return stateFileArray[stateFileArray.length - 1]
-    }
-    else {
-        return []
-    }
-}
-
-function deleteLastState() {
-    const stateFileArray = fs.readFileSync(NOTIFICATIONLOG_FILEPATH)
-        .toString()
-        .split('\n')
-    stateFileArray.splice(stateFileArray.length - 1, 1)
-    // If you have no more previous states saved, do nothing
-    if(stateFileArray.length === 0) {
-        return;
-    }
-    fs.writeFileSync(NOTIFICATIONLOG_FILEPATH, stateFileArray.join('\n'), (err) => {
-        if(err) console.error(err)
-    })
-}
-
-function getFirstState() {
-    const stateFileArray = fs.readFileSync(NOTIFICATIONLOG_FILEPATH)
-        .toString()
-        .split('\n')
-    return stateFileArray[0]
-}
-
-ipcMain.on('setTrayIcon', (event, args) => {
-    if(args === 'default') {
-        tray.setImage(TRAYICON_DEFAULT_FILEPATH)
-    }
-    else if(args === 'notificationIcon') {
-        tray.setImage(TRAYICON_NOTIFICATION_FILEPATH)
-    }
-})
-
-ipcMain.on('setStartAtLogin', (event, args) => {
-    if(args == true) {
-        autoLaunching.enable()
-    }
-    else {
-        autoLaunching.disable()
-    }
-})
+ipcMain.on('log', (event, args) => {
+    console.info("FROM RENDERER: " + args);
+});

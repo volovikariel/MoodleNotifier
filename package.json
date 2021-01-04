@@ -30,7 +30,7 @@
     "dev": "npm install && electron ./src/script.js --dev",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make --platform=win32 --target=squirrel"
+    "make": "electron-forge make --target=deb,squirrel,zip"
   },
   "config": {
     "forge": {
@@ -40,7 +40,8 @@
           "appId": "fun.electron.moodlenotifier",
           "productName": "moodle-notifier",
           "files": [
-            "./src/files/**"
+            "./src/files/**",
+            "./src/util/**"
           ],
           "extraFiles": [
             {
@@ -58,6 +59,11 @@
             {
               "from": "package.json",
               "to": "package.json",
+              "filter": "**/*"
+            },
+            {
+              "from": "src/util",
+              "to": "src/util",
               "filter": "**/*"
             }
           ],
@@ -103,7 +109,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "moodle_notifier"
+            "name": "moodle-notifier"
           }
         },
         {
@@ -114,7 +120,9 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "maintainer": "Ariel Volovik"
+          }
         }
       ]
     }
