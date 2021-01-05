@@ -23,12 +23,12 @@ function renderedFile(file, index) {
             </header>
           </summary>
           <div class="textDiv">
-          Notification added at: ${file.date}</br>
-          <a href="#" onclick="const { shell } = require('electron'); shell.openExternal('${file.link}')">${(file.change === 'ADDED') ? file.fileName : ''}</a>
+            Notification added at: ${file.date}</br>
+            <a href="#" onclick="const { shell } = require('electron'); shell.openExternal('${file.link}')">${(file.change === 'ADDED') ? file.fileName : ''}</a>
           </div>
         </details>
         <div class="buttonDiv">
-          <button class="dismissBtn">Dismiss</button>
+          <button class="dismissBtns">Dismiss</button>
         </div>
       </file-card>`
 }
@@ -48,7 +48,7 @@ function displayData(data) {
 }
 
 document.addEventListener('click', (event) => {
-  if(event.target.matches('.dismissBtn')) {
+  if(event.target.matches('.dismissBtns')) {
     notifications.splice(event.target.closest('file-card').id, 1)
     displayData(notifications)
     ipcRenderer.send('saveState', notifications);
@@ -66,7 +66,7 @@ document.addEventListener('click', (event) => {
     ipcRenderer.send('setLoginInfo', { USERNAME: username, PASSWORD: password })
   }
 
-  if(event.target.matches('#changeUser')) {
+  if(event.target.matches('#changeUserBtn')) {
     if(document.querySelector('#loginForm').style.display === 'block') {
       setLoginFormVisibility(false)
     }
@@ -77,6 +77,15 @@ document.addEventListener('click', (event) => {
 
   if(event.target.matches('#wantLoadAtStartup')) {
     ipcRenderer.send('setStartAtLogin', document.querySelector('#wantLoadAtStartup').checked)
+  }
+
+  if(event.target.matches('#removeAllNotificationsBtn')) {
+    // Prevent the spamming of the 'removeAllNotifications' button leading to just a bunch of `[]`
+    if(notifications.length > 0) {
+      notifications = [];
+      displayData(notifications);
+      ipcRenderer.send('saveState', notifications);
+    }
   }
 })
 

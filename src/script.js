@@ -159,7 +159,7 @@ function main() {
 
         async function refreshPages(pages) {
             pages.forEach(async page => {
-                await page.reload();
+                await page.reload({ waitUntil: 'domcontentloaded' });
                 await page.waitForSelector('body', { waitUntil: 'domcontentloaded'});
             })
         }

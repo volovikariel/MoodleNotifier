@@ -80,6 +80,14 @@ header {
   background-color: #4e4f61;
 }
 
+/* Make the hyperlinks white */
 a {
   color: white;
+}
+
+/* Make the removeAllNotifications button be at the bottom right */
+#removeAllNotificationsBtn {
+  position: fixed;
+  right: 0;
+  bottom: 0;
 }
