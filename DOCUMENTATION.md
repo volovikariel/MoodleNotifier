@@ -1,4 +1,4 @@
-# How the program works (in theory)
+# :question: How the program works (in theory :laughing:)
 1. Access the moodle website in a headless browser
     1. Login to MyConcordia by accessing the USERNAME and PASSWORD variables in .env
     2. Fetch the course links for moodle hidden in the HTML of MyConcordia's home page
@@ -10,7 +10,7 @@
         - If it's the same, do nothing
         - If it's different, find the differences and send the array of differences to the renderer process
         - The renderer process displays it
-# Structure
+# :file_folder: Structure
 ```
 ├── Frontend
 │   ├── aww.png
