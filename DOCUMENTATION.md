@@ -1,4 +1,4 @@
-# :question: How the program works (in theory :laughing:)
+# How the program works (in theory :eyes:)
 1. Access the moodle website in a headless browser
     1. Login to MyConcordia by accessing the USERNAME and PASSWORD variables in .env
     2. Fetch the course links for moodle hidden in the HTML of MyConcordia's home page
