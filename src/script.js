@@ -147,13 +147,13 @@ function main() {
 
         async function fetchCompareRefresh() {
             let newFiles = await fetchFiles();
-            let currentFiles = FileUtil.readDataInFile();
+            let currentFiles = FileUtil.fileToJSON(Constants.CURRENT_FILES_FILEPATH);
             if(currentFiles === undefined) {
-                FileUtil.saveDataInFile(newFiles);
+                FileUtil.overwriteFile(Constants.CURRENT_FILES_FILEPATH, newFiles);
                 return;
             }
             printData(compareData(currentFiles, newFiles)); 
-            FileUtil.saveDataInFile(newFiles);
+            FileUtil.overwriteFile(Constants.CURRENT_FILES_FILEPATH, newFiles);
             await refreshPages(pages);
         }
 
@@ -167,7 +167,7 @@ function main() {
         async function fetchFiles() {
             let data = await Promise.all(pages.map(async page => {
                 let files = await page.evaluate(() => {
-                    return [...document.querySelectorAll(`a.aalink[href]`)].map(el => ({
+                    return [...document.querySelectorAll('a.aalink[href]')].map(el => ({
                         fileName: el.querySelector('span.instancename').innerText,
                         link: el.href,
                         pageName: el.closest('div#page').querySelector('header .page-header-headings').innerText,
@@ -246,9 +246,9 @@ function main() {
                     }
 
                     window.webContents.send('display-data', { notifications: displayData, append: true })
-                    FileUtil.saveState(displayData)
+                    FileUtil.saveNotificationState(displayData)
 
-                    FileUtil.logFileChanges(data);
+                    FileUtil.appendFile(Constants.DATALOG_FILEPATH, data);
                 }
             })
         }
@@ -263,7 +263,7 @@ main()
 let tray = null;
 let window = null;
 const menu = new Menu()
-app.on("ready", () => {
+app.on('ready', () => {
     createTray()
     createWindow()
     window.webContents.once('dom-ready', () => {
@@ -272,9 +272,9 @@ app.on("ready", () => {
             window.webContents.send('setLoginFormVisibility', { visible: true })
             window.show()
         }
-        // If the last state was "empty notifications", don't bother calling display-data
+        // If the last state was 'empty notifications', don't bother calling display-data
         if(FileUtil.numOfLinesInFile(Constants.NOTIFICATIONLOG_FILEPATH) > 0) {
-            window.webContents.send('display-data', { notifications: JSON.parse(FileUtil.getLastState()), append: true })
+            window.webContents.send('display-data', { notifications: JSON.parse(FileUtil.getLastLine(Constants.NOTIFICATIONLOG_FILEPATH)), append: true })
         }
     })
 
@@ -284,10 +284,10 @@ app.on("ready", () => {
             accelerator: 'CommandOrControl+Z',
             click: () => { 
                 // Delete the last state and go back
-                FileUtil.deleteLastState()
+                FileUtil.deleteLastLine(Constants.NOTIFICATIONLOG_FILEPATH)
                 // Go back to last state
                 if(FileUtil.numOfLinesInFile(Constants.NOTIFICATIONLOG_FILEPATH) > 0) {
-                    window.webContents.send('display-data', { notifications: JSON.parse(FileUtil.getLastState()), append: false })
+                    window.webContents.send('display-data', { notifications: JSON.parse(FileUtil.getLastLine(Constants.NOTIFICATIONLOG_FILEPATH)), append: false })
                 }
             }
         }
@@ -371,6 +371,7 @@ ipcMain.on('setLoginInfo', (event, args) => {
             // Done logging in, hide the window
             window.hide()
             window.webContents.send('setLoginFormVisibility', { visible: false })
+            // If a browser was previously open - close it, the main function will create a new one
             if(browser) {
                 browser.close() 
             }
@@ -380,9 +381,9 @@ ipcMain.on('setLoginInfo', (event, args) => {
 });
 
 ipcMain.on('saveState', (event, state) => {
-    FileUtil.saveState(state)
+    FileUtil.saveNotificationState(state)
 })
 
 ipcMain.on('log', (event, args) => {
-    console.info("FROM RENDERER: " + args);
+    console.info(`FROM RENDERER: ${args}`);
 });
