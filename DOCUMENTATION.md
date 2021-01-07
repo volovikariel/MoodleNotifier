@@ -70,3 +70,11 @@ For instance, for Linux - these files could be in `~/.config/moodle-notifier/`
     - currentFiles.txt which is used to compare the previous files and the current one, even between program shutdowns
     - data.txt which contains a list of the 'states' of currentFiles.txt where one comparison had a difference with the next. That is to say, if I refresh the page and it's the same, nothing gets added to data.txt, but if a file was removed or added, the new state will be appended to data.txt. This is in case you want to see the history of changes.
     - notifications.txt contains the list of notifications displayed. It is used to allow the user to press 'CTRL+Z' to go back to a previous state, and it gets modified when the user modifies the list, for instance, by dismissing a notification. There is a notification limit which essentially limits the amount of notifications that the user wants stored for 'CTRL+Z' functionality
+
+### Uninstalling
+
+####### Debian/Ubuntu:
+`$ sudo apt-get remove moodle-notifier`
+
+###### Windows:
+Control panel -> Programs and features -> Add/Remove programs -> Find moodle-notifier and click uninstall
