@@ -59,7 +59,7 @@ platformSpecificPath/Electron/
     - FileFunctions.js contains all the functions which relate to file reading and writing. This code can be reused elsewhere if need be.
 
 ### Logs and .env
-These files are located in an OS dependant path + Electron/
+These files are located in an OS dependant path + moodle-notifier/
 The OS dependant path are:
 - `%APPDATA%` on Windows
 - `$XDG_CONFIG_HOME` or `~/.config` on Linux
