@@ -69,7 +69,7 @@ The OS dependant path are:
 - `$XDG_CONFIG_HOME` or `~/.config` on Linux
 - `~/Library/Application Support` on macOS
 
-For instance, for Linux - these files could be in `~/.config/Electron/`
+For instance, for Linux - these files could be in `~/.config/moodle-notifier/`
 
     - currentFiles.txt which is used to compare the previous files and the current one, even between program shutdowns
     - data.txt which contains a list of the 'states' of currentFiles.txt where one comparison had a difference with the next. That is to say, if I refresh the page and it's the same, nothing gets added to data.txt, but if a file was removed or added, the new state will be appended to data.txt. This is in case you want to see the history of changes.
