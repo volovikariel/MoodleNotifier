@@ -100,7 +100,6 @@ module.exports = {
             fs.writeFileSync(Constants.CURRENT_FILES_FILEPATH, '', { flag: 'wx' });
         } catch (err) {
             // Means the file already exists
-            throw err;
         }
     }
 }
