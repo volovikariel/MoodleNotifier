@@ -3,7 +3,7 @@
  */
 
 const Constants = require('./Constants');
-const fs = require('fs')
+const fs = require('fs');
 
 module.exports = {
     // Returns the contents of a file as an array - filled line by line.
@@ -90,5 +90,17 @@ module.exports = {
         fs.appendFile(filePath, `${new Date()}:\n${JSON.stringify(data)}\n\n`, (err) => {
             if(err) console.error(err);
         });
+    },
+    // Creates the files if they don't exist
+    createFiles() {
+        try {
+            fs.writeFileSync(Constants.ENV_FILEPATH, `USERNAME=''\nPASSWORD=''`, { flag: 'wx' });
+            fs.writeFileSync(Constants.NOTIFICATIONLOG_FILEPATH, '', { flag: 'wx' });
+            fs.writeFileSync(Constants.DATALOG_FILEPATH, '', { flag: 'wx' });
+            fs.writeFileSync(Constants.CURRENT_FILES_FILEPATH, '', { flag: 'wx' });
+        } catch (err) {
+            // Means the file already exists
+            throw err;
+        }
     }
 }

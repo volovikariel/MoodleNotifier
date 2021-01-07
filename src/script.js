@@ -2,6 +2,7 @@
 const puppeteer = require('puppeteer');
 // Interact with files on your system
 const fs = require('fs');
+const path = require('path');
 // Utility functions
 const FileUtil = require('./util/FileFunctions');
 // Native crossplatform notifications
@@ -12,7 +13,10 @@ const AutoLaunch = require('auto-launch')
 // Default VIEWPORT before electron loads up [it gets changes to fit the screen size later on]
 let VIEWPORT = { width: 1920, height: 1080 }
 const Constants = require('./util/Constants')
-// Username and password for concordia loaded from a .env file
+
+// Create the files [Constants.CURRENT_FILES_FILEPATH, Constants.ENV_FILEPATH, etc.] if they do not exist 
+FileUtil.createFiles();
+
 let { USERNAME, PASSWORD } = require('dotenv').config({ path: Constants.ENV_FILEPATH }).parsed;
 
 // Makes a desktop icon on Windows [TODO: Check if that's really what it does]
@@ -26,7 +30,7 @@ for(let arg of process.argv) {
 
 // Automatically launch the app, default set to false
 let autoLaunching = new AutoLaunch({
-    name: 'Moodle Notifier'
+    name: 'moodle-notifier'
 })
 
 // Define browser globally so as to not have it be garbage collected
@@ -36,13 +40,17 @@ function main() {
     // If the .env file is not yet set up - exit this function
     if(USERNAME === '' || PASSWORD === '') return;
     (async () => {
-        if(process.dev) {
-            // Browser visible for easier debugging
-            browser = await puppeteer.launch({ headless: false });
-        }
-        else {
-            browser = await puppeteer.launch();
-        }
+        // Make sure they have the correct revision of the browser (supposed to be bundled but may break)
+        // If they don't - puppeteer won't work
+        const browserFetcher = puppeteer.createBrowserFetcher();
+        const revisionInfo = await browserFetcher.download('818858');
+        browser = await puppeteer.launch({
+            headless: (process.dev) ? false : true, // Browser visible for easier debugging
+            devtools: (process.dev) ? true : false, // Automatically open Dev-Tools on each tab
+            product: 'chrome',
+            dumpio: (process.dev) ? true : false, // Log puppeteer in console
+            executablePath: revisionInfo.executablePath
+        });
         // Create a pages array, initially of size 1 [the default loaded one that comes with the browser]
         const pages = await browser.pages(); 
         const page = pages[0];
@@ -320,7 +328,7 @@ function createWindow() {
         autoHideMenuBar: true,
         fullscreenable: false,
         resizable: false,
-        alwaysOnTop: true,
+        alwaysOnTop: false,
         webPreferences: {
             nodeIntegration: true
         }

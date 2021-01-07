@@ -15,7 +15,8 @@
     "electron-squirrel-startup": "^1.0.0",
     "node-fetch": "^2.6.1",
     "node-notifier": "^8.0.1",
-    "puppeteer": "^5.5.0"
+    "puppeteer": "^5.5.0",
+    "electron": "^11.1.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
@@ -23,15 +24,15 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "^11.1.0"
+    "electron": "^11.1.1"
   },
   "scripts": {
     "default": "npm install && electron ./src/script.js",
     "dev": "npm install && electron ./src/script.js --dev",
-    "start": "electron-forge start",
+    "start": "npm install && electron-forge start",
     "package": "electron-forge package",
-    "make-linux": "electron-forge make --platform=linux --target=deb,zip",
-    "make-window": "electron-forge make --platform=win32 --target=squirrel,zip"
+    "make-linux": "electron-forge make --platform=linux --target=deb",
+    "make-window": "electron-forge make --platform=win32 --target=squirrel"
   },
   "config": {
     "forge": {
@@ -41,7 +42,6 @@
           "appId": "fun.electron.moodlenotifier",
           "productName": "moodle-notifier",
           "files": [
-            "./src/files/**",
             "./src/util/**"
           ],
           "extraFiles": [
@@ -52,10 +52,6 @@
             {
               "from": "Frontend",
               "to": "Frontend"
-            },
-            {
-              "from": ".env",
-              "to": ".env"
             },
             {
               "from": "package.json",

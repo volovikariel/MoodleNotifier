@@ -12,6 +12,7 @@
         - The renderer process displays it
 # :file_folder: Structure
 ```
+Root folder
 ├── Frontend
 │   ├── aww.png
 │   ├── bunny_with_hat.jpg
@@ -19,20 +20,22 @@
 │   ├── index.js
 │   └── styles.css
 ├── src
-│   ├── files
-│   │   ├── currentFiles.txt
-│   │   ├── data.txt
-│   │   └── notifications.txt
 │   ├── util
 │   │   ├── Constants.js
 │   │   └── FileFunctions.js
 │   └── script.js
 ├── DOCUMENTATION.md
-├── .env
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
 └── README.md
+
+
+platformSpecificPath/Electron/
+├── currentFiles.txt
+├── data.txt
+├── .env
+└── notifications.txt
 ```
 ### Miscellaneous files
 - .git keeps track of the repository
@@ -58,3 +61,16 @@
 - util/ contains utility files to avoid redundancy:
     - Constants.js which is just a bunch of constants used throughout the program
     - FileFunctions.js contains all the functions which relate to file reading and writing. This code can be reused elsewhere if need be.
+
+### Logs and .env
+These files are located in an OS dependant path + Electron/
+The OS dependant path are:
+- `%APPDATA%` on Windows
+- `$XDG_CONFIG_HOME` or `~/.config` on Linux
+- `~/Library/Application Support` on macOS
+
+For instance, for Linux - these files could be in `~/.config/Electron/`
+
+    - currentFiles.txt which is used to compare the previous files and the current one, even between program shutdowns
+    - data.txt which contains a list of the 'states' of currentFiles.txt where one comparison had a difference with the next. That is to say, if I refresh the page and it's the same, nothing gets added to data.txt, but if a file was removed or added, the new state will be appended to data.txt. This is in case you want to see the history of changes.
+    - notifications.txt contains the list of notifications displayed. It is used to allow the user to press 'CTRL+Z' to go back to a previous state, and it gets modified when the user modifies the list, for instance, by dismissing a notification. There is a notification limit which essentially limits the amount of notifications that the user wants stored for 'CTRL+Z' functionality
