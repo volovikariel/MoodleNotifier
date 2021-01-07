@@ -13,19 +13,12 @@ Run the `.exe` file and it should now be accessible system wide [runnable by cli
 
 ###### Linux (Ubuntu/Debian)
 Type `$ sudo dpkg -i path/to/file.deb` in the CLI and it should be accessible system wide.
-You can run it by typing in `moodle-notifier` in the CLI or in a  window switcher like `dmenu` or `rofi`. 
+You can run it by typing in `moodle-notifier` in the CLI or in a  window switcher like `dmenu` or `rofi`.
 
 ###### :warning:	MacOS (very unstable - no one with a Mac to test it :cry:)
 
 ### :exclamation: Note :exclamation:
 Toggle the window's visibility by pressing `Control+Alt+w` or `Command+Alt+w`
-
-If you want to run the application with `node` - make a `.env` file in the `root` folder (the one containing `package.json` and the `README.md`) with this in it:
-```
-USERNAME=''
-PASSWORD=''
-```
-You can alternatively put your MyConcordia username and password here
 
 # Contributing
 Create `Issues` if there are features you want added or you notice some bugs.
@@ -37,7 +30,7 @@ Any help is appreciated :heart:
 # Plans
 **Version Milestone**|**Change**|**Status**</br>:x: or :construction: or :heavy_check_mark:
 ---|---|---
-v0.2.0 | Write out the documentation | :x:
+v0.2.0 | Write out the documentation | :heavy_check_mark:
 v0.2.5 | Have a separate tab in the program which allows the user to store links (for Zoom and such) | :x:
 v??? | Have TODO lists built into the program | :x:
 v??? | Automatic Github draft release when `$electron-forge make-[version]` is ran | :x:
