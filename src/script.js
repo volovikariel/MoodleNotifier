@@ -182,7 +182,7 @@ function main() {
             pages.forEach(async page => {
                 try {
                     await page.reload({ waitUntil: 'domcontentloaded' });
-                    await page.waitForSelector('body #page-header', { waitUntil: 'domcontentloaded'});
+                    await page.waitForSelector('#page-header', { waitUntil: 'domcontentloaded'});
                 } catch(err) {
                     // If it's not a TimeoutError, display the error and restart the login process
                     if(err.name !== 'TimeoutError') {
@@ -196,6 +196,16 @@ function main() {
 
         async function fetchFiles() {
             let data = await Promise.all(pages.map(async page => {
+                try {
+                    await page.waitForSelector('#page-header');
+                } catch(err) {
+                    // If it's not a TimeoutError, display the error and restart the login process
+                    if(err.name !== 'TimeoutError') {
+                        window.webContents.send('alert', 'ERROR: ' + err);
+                    }
+                    main();
+                    return;
+                }
                 let files = await page.evaluate(() => {
                     return [...document.querySelectorAll('a.aalink[href]')].map(el => ({
                         fileName: el.querySelector('span.instancename').innerText,
