@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 // Interact with files on your system
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 // Utility functions
 const FileUtil = require('./util/FileFunctions');
 // Native crossplatform notifications
@@ -77,12 +78,17 @@ function main() {
             await page.waitForSelector(ACCESS_MOODLE_SELECTOR);
         }
         catch(err) {
-            // Invalid login, show login form
-            if(err instanceof Error) {
+            // This can happen if you try to log in in while browser is open, thus closing it and then trying to access elements that do not exist because the target (browser) is closed.
+            // If this is the case - call the main function again and return
+            if(err === 'Protocol error (Runtime.callFunctionOn): Target closed.') {
+                main();
+            }
+            else if(err === 'TimeoutError'){
+                // Invalid login, show login form
                 window.webContents.send('setLoginFormVisibility', { visible: true })
                 window.show()
-                return;
             }
+            return;
         }
         // Getting link for moodle
         const PATH_TO_MOODLE_COURSES = await page.evaluate((ACCESS_MOODLE_SELECTOR) => {
@@ -93,11 +99,9 @@ function main() {
         }, ACCESS_MOODLE_SELECTOR)
         await page.goto(PATH_TO_MOODLE_COURSES)
 
-
+        await page.waitForSelector('li a[href]')
         let COURSE_PAGES = await page.evaluate(() => {
-            let pages = [...document.querySelectorAll('li a[href]')].map((element) => {
-                return element.href;
-            });
+            let pages = [...document.querySelectorAll('li a[href]')].map(element => element.href);
             return pages;
         });
 
@@ -107,7 +111,8 @@ function main() {
         catch (err) {
             if(err instanceof Error) {
                 // TODO: Make it automatically fix itself
-                window.webContents.send('alert', 'Error loading course pages! Please restart~')
+                // It can happen if you 'log in' while being already logged in ><
+                //window.webContents.send('alert', 'Error loading course pages! Please restart~')
             }
         }
 
@@ -168,7 +173,7 @@ function main() {
         async function refreshPages(pages) {
             pages.forEach(async page => {
                 await page.reload({ waitUntil: 'domcontentloaded' });
-                await page.waitForSelector('body', { waitUntil: 'domcontentloaded'});
+                await page.waitForSelector('body #page-header', { waitUntil: 'domcontentloaded'});
             })
         }
 
@@ -328,12 +333,16 @@ function createWindow() {
         autoHideMenuBar: true,
         fullscreenable: false,
         resizable: false,
-        alwaysOnTop: false,
         webPreferences: {
             nodeIntegration: true
         }
     })
-    window.loadURL(`file://${Constants.FRONTEND_HTML_FILEPATH}`)
+
+    window.loadURL(url.format({
+        pathname: Constants.FRONTEND_HTML_FILEPATH,
+        protocol: 'file:',
+        slashes: true
+    }))
 
     if(process.dev) {
         window.webContents.toggleDevTools()
@@ -368,23 +377,23 @@ ipcMain.on('setStartAtLogin', (event, args) => {
 })
 
 ipcMain.on('setLoginInfo', (event, args) => {
-    USERNAME = args.USERNAME
-    PASSWORD = args.PASSWORD
-    // Now that we have USERNAME and PASSWORD, launch main
+    USERNAME = args.USERNAME;
+    PASSWORD = args.PASSWORD;
+
+    // Done logging in, hide the window
+    window.hide();
+    window.webContents.send('setLoginFormVisibility', { visible: false });
+    // If a browser was previously open - close it, the main function will create a new one
+    if(browser) {
+        browser.close();
+    }
+
     fs.writeFile(Constants.ENV_FILEPATH, `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
         if(err) {
             console.error(err)
         }
-        else {
-            // Done logging in, hide the window
-            window.hide()
-            window.webContents.send('setLoginFormVisibility', { visible: false })
-            // If a browser was previously open - close it, the main function will create a new one
-            if(browser) {
-                browser.close() 
-            }
-        }
     })
+    // Now that we have USERNAME and PASSWORD, launch main
     main()
 });
 
