@@ -73,7 +73,7 @@ For instance, for Linux - these files could be in `~/.config/moodle-notifier/`
 
 ### Uninstalling
 
-####### Debian/Ubuntu:
+###### Debian/Ubuntu:
 `$ sudo apt-get remove moodle-notifier`
 
 ###### Windows:
