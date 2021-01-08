@@ -104,6 +104,21 @@ function setLoginFormVisibility(visible) {
   }
 }
 
+ipcRenderer.on('setLoggedInAs', (event, args) => {
+  if(args.USERNAME) {
+    document.querySelector('#loggedInAs').innerText = `Logged in as ${args.USERNAME}`;
+  }
+  // Just a message
+  else if(args.MESSAGE) {
+    document.querySelector('#loggedInAs').innerText = args.MESSAGE;
+  }
+});
+
 ipcRenderer.on('alert', (event, args) => {
   alert(args);
 });
+
+ipcRenderer.on('setStartAtLoginIsEnabled', (event, args) => {
+  document.querySelector('#wantLoadAtStartup').checked = args.isEnabled;
+});
+

@@ -34,6 +34,7 @@ let autoLaunching = new AutoLaunch({
     name: 'moodle-notifier'
 })
 
+
 // Define browser globally so as to not have it be garbage collected
 let browser = undefined;
 
@@ -72,24 +73,31 @@ function main() {
             document.querySelector(SUBMIT_SELECTOR).click();
         }, SUBMIT_SELECTOR);
 
-        // Access moodle now that you're logged in
+        // Attempt to access moodle - if you are correctly logged in, the wait for selector will go through
+        // If it times out and results in an error, it means the login was incorrect
+        // TODO: Just check for redirection instead so we don't have to wait for timeout
         const ACCESS_MOODLE_SELECTOR = 'div[id=CU_MOODLEINFODISP_Data] script:not([id]):not([src])';
         try {
-            await page.waitForSelector(ACCESS_MOODLE_SELECTOR);
+            await page.waitForSelector(ACCESS_MOODLE_SELECTOR, { timeout: 10000 });
         }
         catch(err) {
             // This can happen if you try to log in in while browser is open, thus closing it and then trying to access elements that do not exist because the target (browser) is closed.
             // If this is the case - call the main function again and return
-            if(err === 'Protocol error (Runtime.callFunctionOn): Target closed.') {
+            if(err.message === 'Protocol error (Runtime.callFunctionOn): Target closed.') {
                 main();
             }
-            else if(err === 'TimeoutError'){
-                // Invalid login, show login form
+            else if(err.name === 'TimeoutError'){
+                // Invalid login, show login form and set it to 'not logged in'
                 window.webContents.send('setLoginFormVisibility', { visible: true })
                 window.show()
             }
+
+            // If there was an error, the user is most definitely not logged in
+            window.webContents.send('setLoggedInAs', { MESSAGE: 'Not logged in' })
             return;
         }
+        // If we got to this point, it  means we are successfully logged in!
+        window.webContents.send('setLoggedInAs', { USERNAME: USERNAME });
         // Getting link for moodle
         const PATH_TO_MOODLE_COURSES = await page.evaluate((ACCESS_MOODLE_SELECTOR) => {
             let MOODLE_LINK_REGEX = new RegExp(/https:\/\/moodle.concordia.ca\/moodle\/course_gadget_portal.php?[^"]*/);
@@ -282,6 +290,7 @@ app.on('ready', () => {
     window.webContents.once('dom-ready', () => {
         // If there isn't a username or a password
         if(USERNAME === '' || PASSWORD === '') {
+            window.webContents.send('setLoggedInAs', { MESSAGE: 'Not logged in' });
             window.webContents.send('setLoginFormVisibility', { visible: true })
             window.show()
         }
@@ -289,6 +298,14 @@ app.on('ready', () => {
         if(FileUtil.numOfLinesInFile(Constants.NOTIFICATIONLOG_FILEPATH) > 0) {
             window.webContents.send('display-data', { notifications: JSON.parse(FileUtil.getLastLine(Constants.NOTIFICATIONLOG_FILEPATH)), append: true })
         }
+
+        // If the user already has the autolaunch set to true - check the checkmark
+        autoLaunching.isEnabled()
+        .then((isEnabled) => {
+            window.webContents.send('setStartAtLoginIsEnabled', { isEnabled: isEnabled });
+        }).catch((err) => {
+            console.error(err)
+        })
     })
 
     menu.append(new MenuItem(
@@ -393,6 +410,8 @@ ipcMain.on('setLoginInfo', (event, args) => {
             console.error(err)
         }
     })
+    // We need to re-check whether it's a valid USERNAME and PASSWORD so set 'not logged in' for now
+    window.webContents.send('setLoggedInAs', { MESSAGE: 'Logging in' });
     // Now that we have USERNAME and PASSWORD, launch main
     main()
 });
