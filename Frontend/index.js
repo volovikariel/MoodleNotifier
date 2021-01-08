@@ -72,6 +72,7 @@ document.addEventListener('click', (event) => {
     }
     else {
       setLoginFormVisibility(true)
+      document.querySelector('.username').focus();
     }
   }
 

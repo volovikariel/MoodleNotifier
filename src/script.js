@@ -180,8 +180,17 @@ function main() {
 
         async function refreshPages(pages) {
             pages.forEach(async page => {
-                await page.reload({ waitUntil: 'domcontentloaded' });
-                await page.waitForSelector('body #page-header', { waitUntil: 'domcontentloaded'});
+                try {
+                    await page.reload({ waitUntil: 'domcontentloaded' });
+                    await page.waitForSelector('body #page-header', { waitUntil: 'domcontentloaded'});
+                } catch(err) {
+                    // If it's not a TimeoutError, display the error and restart the login process
+                    if(err.name !== 'TimeoutError') {
+                        window.webContents.send('alert', 'ERROR: ' + err);
+                    }
+                    main();
+                    return;
+                }
             })
         }
 
