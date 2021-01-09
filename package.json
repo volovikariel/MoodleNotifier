@@ -23,6 +23,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/publisher-github": "^6.0.0-beta.54",
     "electron": "^11.1.1"
   },
   "scripts": {
@@ -31,7 +32,8 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make-linux": "electron-forge make --platform=linux --target=deb",
-    "make-window": "electron-forge make --platform=win32 --target=squirrel"
+    "make-window": "electron-forge make --platform=win32 --target=squirrel",
+    "publish": "GITHUB_TOKEN=$(grep GITHUB_TOKEN .env | cut -d '=' -f2) electron-forge publish --auth-token=$GITHUB_TOKEN"
   },
   "config": {
     "forge": {
@@ -58,17 +60,19 @@
           }
         }
       ],
-      "publishers": [{
-        "name": "@electron-forge/publisher-github",
-        "config": {
-          "repository": {
-            "owner": "volovikariel",
-            "name": "moodle-notifier"
-          },
-          "prerelease": true,
-          "draft": true
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "volovikariel",
+              "name": "moodle-notifier"
+            },
+            "prerelease": true,
+            "draft": true
+          }
         }
-      }]
+      ]
     }
   }
 }
