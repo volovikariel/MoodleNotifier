@@ -72,7 +72,6 @@ document.addEventListener('click', (event) => {
     }
     else {
       setLoginFormVisibility(true)
-      document.querySelector('.username').focus();
     }
   }
 
@@ -99,6 +98,7 @@ ipcRenderer.on('setLoginFormVisibility', (event, args) => {
 function setLoginFormVisibility(visible) {
   if(visible === true) {
     document.querySelector('#loginForm').style.display = 'block'
+    document.querySelector('.username').focus();
   }
   else {
     document.querySelector('#loginForm').style.display = 'none'

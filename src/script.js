@@ -87,9 +87,9 @@ function main() {
                 main();
             }
             else if(err.name === 'TimeoutError'){
-                // Invalid login, show login form and set it to 'not logged in'
-                window.webContents.send('setLoginFormVisibility', { visible: true })
+                // Invalid login, show login form
                 window.show()
+                window.webContents.send('setLoginFormVisibility', { visible: true })
             }
 
             // If there was an error, the user is most definitely not logged in
@@ -309,9 +309,9 @@ app.on('ready', () => {
     window.webContents.once('dom-ready', () => {
         // If there isn't a username or a password
         if(USERNAME === '' || PASSWORD === '') {
+            window.show()
             window.webContents.send('setLoggedInAs', { MESSAGE: 'Not logged in' });
             window.webContents.send('setLoginFormVisibility', { visible: true })
-            window.show()
         }
         // If the last state was 'empty notifications', don't bother calling display-data
         if(FileUtil.numOfLinesInFile(Constants.NOTIFICATIONLOG_FILEPATH) > 0) {
