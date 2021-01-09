@@ -83,15 +83,14 @@ function main() {
         catch(err) {
             // This can happen if you try to log in in while browser is open, thus closing it and then trying to access elements that do not exist because the target (browser) is closed.
             // If this is the case - call the main function again and return
-            if(err.message === 'Protocol error (Runtime.callFunctionOn): Target closed.') {
-                main();
+            if(err === 'Protocol error (Runtime.callFunctionOn): Target closed.') {
+                // Tried to access a page that was already closed - ignore
             }
             else if(err.name === 'TimeoutError'){
                 // Invalid login, show login form
                 window.show()
                 window.webContents.send('setLoginFormVisibility', { visible: true })
             }
-
             // If there was an error, the user is most definitely not logged in
             window.webContents.send('setLoggedInAs', { MESSAGE: 'Not logged in' })
             return;
@@ -137,8 +136,7 @@ function main() {
                       request.continue()
                   }
                 })
-                // Increase timeout limit to 60'000ms from the 30'000ms default
-                await pages[i].goto(coursePages[i], {timeout: 60000, waitUntil: 'domcontentloaded'});
+                await pages[i].goto(coursePages[i], {waitUntil: 'domcontentloaded'});
                 await pages[i].setViewport(VIEWPORT);
             }
         }
@@ -184,11 +182,19 @@ function main() {
                     await page.reload({ waitUntil: 'domcontentloaded' });
                     await page.waitForSelector('#page-header', { waitUntil: 'domcontentloaded'});
                 } catch(err) {
+                    await loadPages(pages, coursePages);
                     // If it's not a TimeoutError, display the error and restart the login process
                     if(err.name !== 'TimeoutError') {
-                        window.webContents.send('alert', 'ERROR: ' + err);
+                        if(err.message === 'Protocol error (Page.reload): Session closed. Most likely the page has been closed.') {
+                            // Tried to reload a page that was already closed - ignore
+                        }
+                        else if(err.message === 'Navigation failed because browser has disconnected!') {
+                            // Tried to navigate while the browser was closed
+                        }
+                        else {
+                            console.error(err);
+                        }
                     }
-                    main();
                     return;
                 }
             })
@@ -199,11 +205,16 @@ function main() {
                 try {
                     await page.waitForSelector('#page-header');
                 } catch(err) {
+                    await loadPages(pages, coursePages);
                     // If it's not a TimeoutError, display the error and restart the login process
                     if(err.name !== 'TimeoutError') {
-                        window.webContents.send('alert', 'ERROR: ' + err);
+                        if(err.message === 'Protocol error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.') {
+                            // Tried to access a page that was already closed - ignore
+                        }
+                        else {
+                            console.error(err);
+                        }
                     }
-                    main();
                     return;
                 }
                 let files = await page.evaluate(() => {
@@ -225,9 +236,14 @@ function main() {
             return { addition_urls: additions, deletion_urls: deleletions};
         }
 
-        function compareData(currentFilesPages, newFilePages) {
+        async function compareData(currentFilesPages, newFilePages) {
             let response = [];
-            for(let i = 0; i < pages.length; i++) {
+            for(let i = 0; i < currentFilesPages.length; i++) {
+                if(!currentFilesPages[i] || !newFilePages[i]) {
+                    // Not sure how this happens...
+                    await loadPages(pages, coursePages);
+                    return;
+                };
                 let currentLinks = currentFilesPages[i].map(file => file.link);
                 let newLinks = newFilePages[i].map(file => file.link);
                 let { addition_urls, deletion_urls } = getArrayDifference(currentLinks, newLinks);
@@ -254,6 +270,10 @@ function main() {
 
         function printData(arrData) {
             let displayData = []
+            if(!arrData) {
+                // Means that we returned from the place where we don't know how it happens so we just ignore it and return
+                return;
+            }
             arrData.forEach(data => {
                 if(data.added_files.length != 0 || data.deleted_files.length != 0) {
                     if(data.added_files.length != 0) {
@@ -417,12 +437,8 @@ ipcMain.on('setLoginInfo', (event, args) => {
     PASSWORD = args.PASSWORD;
 
     // Done logging in, hide the window
-    window.hide();
     window.webContents.send('setLoginFormVisibility', { visible: false });
-    // If a browser was previously open - close it, the main function will create a new one
-    if(browser) {
-        browser.close();
-    }
+    window.hide();
 
     fs.writeFile(Constants.ENV_FILEPATH, `USERNAME='${USERNAME}'\nPASSWORD='${PASSWORD}'`, (err) => {
         if(err) {
@@ -432,6 +448,7 @@ ipcMain.on('setLoginInfo', (event, args) => {
     // We need to re-check whether it's a valid USERNAME and PASSWORD so set 'not logged in' for now
     window.webContents.send('setLoggedInAs', { MESSAGE: 'Logging in' });
     // Now that we have USERNAME and PASSWORD, launch main
+    if(browser) browser.close();
     main()
 });
 

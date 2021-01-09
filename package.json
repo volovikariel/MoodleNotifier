@@ -27,8 +27,8 @@
     "electron": "^11.1.1"
   },
   "scripts": {
-    "default": "npm install && electron ./src/script.js",
-    "dev": "npm install && electron ./src/script.js --dev",
+    "default": "electron ./src/script.js",
+    "dev": "electron ./src/script.js --dev",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make-linux": "electron-forge make --platform=linux --target=deb",
