@@ -6,7 +6,7 @@
     "url": "https://github.com/volovikariel"
   },
   "email": "volovikariel@gmail.com",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "Utility app which provides notifications for a moodle account.",
   "main": "./src/script.js",
   "dependencies": {
@@ -38,67 +38,10 @@
       "name": "moodle-notifier-forge",
       "packagerConfig": {
         "build": {
-          "appId": "fun.electron.moodlenotifier",
-          "productName": "moodle-notifier",
-          "files": [
-            "./src/util/**"
+          "ignore": [
+            ".env"
           ],
-          "extraFiles": [
-            {
-              "from": "src",
-              "to": "src"
-            },
-            {
-              "from": "Frontend",
-              "to": "Frontend"
-            },
-            {
-              "from": "package.json",
-              "to": "package.json",
-              "filter": "**/*"
-            },
-            {
-              "from": "src/util",
-              "to": "src/util",
-              "filter": "**/*"
-            }
-          ],
-          "directories": {
-            "output": "release",
-            "buildResources": "dist"
-          },
-          "dmg": {
-            "contents": [
-              {
-                "x": 130,
-                "y": 220
-              },
-              {
-                "x": 410,
-                "y": 220,
-                "type": "link",
-                "path": "/Applications"
-              }
-            ]
-          },
-          "win": {
-            "target": [
-              "nsis",
-              "msi"
-            ]
-          },
-          "linux": {
-            "target": [
-              "deb",
-              "rpm",
-              "snap",
-              "AppImage"
-            ],
-            "category": "Development"
-          },
-          "mac": {
-            "category": "public.app-category.utilities"
-          }
+          "icon": "icon"
         }
       },
       "makers": [
@@ -109,20 +52,23 @@
           }
         },
         {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin",
-            "linux",
-            "win32"
-          ]
-        },
-        {
           "name": "@electron-forge/maker-deb",
           "config": {
             "maintainer": "Ariel Volovik"
           }
         }
-      ]
+      ],
+      "publishers": [{
+        "name": "@electron-forge/publisher-github",
+        "config": {
+          "repository": {
+            "owner": "volovikariel",
+            "name": "moodle-notifier"
+          },
+          "prerelease": true,
+          "draft": true
+        }
+      }]
     }
   }
 }
