@@ -37,6 +37,7 @@ let autoLaunching = new AutoLaunch({
 
 // Define browser globally so as to not have it be garbage collected
 let browser = undefined;
+let COURSE_PAGES = undefined;
 
 function main() {
     // If the .env file is not yet set up - exit this function
@@ -107,7 +108,7 @@ function main() {
         await page.goto(PATH_TO_MOODLE_COURSES)
 
         await page.waitForSelector('li a[href]')
-        let COURSE_PAGES = await page.evaluate(() => {
+        COURSE_PAGES = await page.evaluate(() => {
             let pages = [...document.querySelectorAll('li a[href]')].map(element => element.href);
             return pages;
         });
@@ -127,7 +128,13 @@ function main() {
             for(let i = 0; i < coursePages.length; i++) {
                 pages[i] || pages.push(await browser.newPage());
                 // Don't need to download the images, stylesheets or media
-                await pages[i].setRequestInterception(true)
+                try {
+                    await pages[i].setRequestInterception(true)
+                }
+                catch (err) {
+                    // Already set to true I support
+                    console.error(err);
+                }
                 pages[i].on('request', (request) => {
                   if (request.resourceType() === 'image' || request.resourceType() === 'stylesheet' || request.resourceType() === 'media') {
                       request.abort()
@@ -171,7 +178,7 @@ function main() {
                 FileUtil.overwriteFile(Constants.CURRENT_FILES_FILEPATH, newFiles);
                 return;
             }
-            printData(compareData(currentFiles, newFiles)); 
+            printData(await compareData(currentFiles, newFiles)); 
             FileUtil.overwriteFile(Constants.CURRENT_FILES_FILEPATH, newFiles);
             await refreshPages(pages);
         }
@@ -182,7 +189,7 @@ function main() {
                     await page.reload({ waitUntil: 'domcontentloaded' });
                     await page.waitForSelector('#page-header', { waitUntil: 'domcontentloaded'});
                 } catch(err) {
-                    await loadPages(pages, coursePages);
+                    await loadPages(pages, COURSE_PAGES);
                     // If it's not a TimeoutError, display the error and restart the login process
                     if(err.name !== 'TimeoutError') {
                         if(err.message === 'Protocol error (Page.reload): Session closed. Most likely the page has been closed.') {
@@ -205,7 +212,7 @@ function main() {
                 try {
                     await page.waitForSelector('#page-header');
                 } catch(err) {
-                    await loadPages(pages, coursePages);
+                    await loadPages(pages, COURSE_PAGES);
                     // If it's not a TimeoutError, display the error and restart the login process
                     if(err.name !== 'TimeoutError') {
                         if(err.message === 'Protocol error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.') {
@@ -241,7 +248,7 @@ function main() {
             for(let i = 0; i < currentFilesPages.length; i++) {
                 if(!currentFilesPages[i] || !newFilePages[i]) {
                     // Not sure how this happens...
-                    await loadPages(pages, coursePages);
+                    await loadPages(pages, COURSE_PAGES);
                     return;
                 };
                 let currentLinks = currentFilesPages[i].map(file => file.link);
