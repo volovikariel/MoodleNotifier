@@ -17,6 +17,13 @@ You can run it by typing in `moodle-notifier` in the CLI or in a  window switche
 
 ###### :warning:	MacOS (very unstable - no one with a Mac to test it :cry:)
 
+###### Running it with NodeJS
+1. Install [NodeJS](https://nodejs.org/en/download/)
+2. Clone the repository
+3. Navigate to the repository (you know you're in the right place when you're in a folder with a `package.json`)
+4. Run `$ npm install`
+5. Run `$ npm run default` to experience what it would be like to run the `.exe` or `.deb` version **or** run `$ npm run dev` to see the browser windows opening magically!
+
 ### :exclamation: Note :exclamation:
 Toggle the window's visibility by pressing `Control+Alt+w` or `Command+Alt+w`
 
