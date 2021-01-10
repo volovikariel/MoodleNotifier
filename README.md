@@ -27,6 +27,9 @@ You can run it by typing in `moodle-notifier` in the CLI or in a  window switche
 ### :exclamation: Note :exclamation:
 Toggle the window's visibility by pressing `Control+Alt+w` or `Command+Alt+w`
 
+### Watch it in action
+https://www.youtube.com/watch?v=wOIraghe9bw (Apologies for the low volume)
+
 # Contributing
 Create `Issues` if there are features you want added or you notice some bugs.
 
