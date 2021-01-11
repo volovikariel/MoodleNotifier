@@ -5,7 +5,7 @@ Application that sits cozily in your tray, checking for new document uploads/del
 ### :question:	How to install it :question:	
 1. Go to [releases](https://github.com/volovikariel/Moodle_Notifier/releases/)
 2. Select the latest release available for your operating system
-3. Download and install the file (filetype specific instructions are written in `releases`)
+3. Download and install the file
 
 ### :question: How to run it :question:
 ###### Windows
