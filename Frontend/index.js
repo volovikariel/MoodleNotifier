@@ -1,4 +1,6 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer } = require('electron');
+const { dialog } = require('electron').remote;
+const fs = require('fs');
 let notifications = []
 
 ipcRenderer.on('display-data', (event, args) => {
@@ -87,6 +89,18 @@ document.addEventListener('click', (event) => {
       ipcRenderer.send('saveState', notifications);
     }
   }
+
+  if(event.target.matches('#audioNotificationSoundBtn')) {
+    let audioFilePath = dialog.showOpenDialogSync({
+      properties: ['openFile'],
+      filters: [{ name: 'audio file', extensions: ['wav', 'mp3', 'mp4']}]
+    })
+    // If it wasn't cancelled - set the path to this new one
+    if(audioFilePath) {
+      ipcRenderer.send('set-audio-filepath', { audioFilePath: audioFilePath });
+      playNotificationAudio(audioFilePath[0]);
+    }
+  }
 })
 
 ipcRenderer.on('setLoginFormVisibility', (event, args) => {
@@ -123,3 +137,41 @@ ipcRenderer.on('setStartAtLoginIsEnabled', (event, args) => {
   document.querySelector('#wantLoadAtStartup').checked = args.isEnabled;
 });
 
+ipcRenderer.on('play-notification-audio', (event, args) => {
+  let configJSON = args.json;
+  // If the audioFilePath is set AND the path is correct, use it
+  if(fs.existsSync(configJSON.audioFilePath)) {
+    playNotificationAudio(configJSON.audioFilePath)
+  }
+  else {
+    playNotificationAudio()
+  }
+});
+
+function playNotificationAudio(filePath) {
+  let audio = document.querySelector('audio');
+  // If there's a filepath in the config, load it
+  if(filePath) {
+    document.querySelector('#audioNotificationSource').src = filePath;
+  }
+  else {
+    ipcRenderer.invoke('get-constants').then(Constants => {
+      filePath = Constants.DEFAULT_NOTIFICATION_SOUND_FILEPATH;
+    });
+  }
+
+  if(fs.existsSync(filePath)) {
+    // If it exists, set the colour back to normal
+    document.querySelector('#audioNotificationSoundBtn').style.backgroundColor = 'white';
+    // Load the new source and play it
+    audio.load();
+    // 1 === 100%
+    // TODO: Make it configurable as well
+    audio.volume = 0.05;
+    audio.play();
+  }
+  // If the path doesn't exist (that is to say, if either the custom one or the default one was removed) - play nothing and change the colour to show that there's an error
+  else {
+    document.querySelector('#audioNotificationSoundBtn').style.backgroundColor = 'red';
+  }
+}

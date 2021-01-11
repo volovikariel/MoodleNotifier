@@ -84,7 +84,14 @@ module.exports = {
         }
     },
     overwriteFile(filePath, data) {
-        fs.writeFileSync(filePath, JSON.stringify(data));
+        try {
+            // It's already stringified
+            JSON.parse(data);
+            fs.writeFileSync(filePath, data);
+        }
+        catch(err) {
+            fs.writeFileSync(filePath, JSON.stringify(data));
+        }
     },
     appendFile(filePath, data) {
         fs.appendFile(filePath, `${new Date()}:\n${JSON.stringify(data)}\n\n`, (err) => {
@@ -93,13 +100,16 @@ module.exports = {
     },
     // Creates the files if they don't exist
     createFiles() {
-        try {
-            fs.writeFileSync(Constants.ENV_FILEPATH, `USERNAME=''\nPASSWORD=''`, { flag: 'wx' });
-            fs.writeFileSync(Constants.NOTIFICATIONLOG_FILEPATH, '', { flag: 'wx' });
-            fs.writeFileSync(Constants.DATALOG_FILEPATH, '', { flag: 'wx' });
-            fs.writeFileSync(Constants.CURRENT_FILES_FILEPATH, '', { flag: 'wx' });
-        } catch (err) {
-            // Means the file already exists
+        // Because we write to these files, we want to make sure they don't already exist
+        if(!fs.existsSync(Constants.ENV_FILEPATH)){
+            fs.writeFileSync(Constants.ENV_FILEPATH, `USERNAME=''\nPASSWORD=''`, { flag: 'w' });
         }
+        if(!fs.existsSync(Constants.CONFIGURATION_FILEPATH)) {
+            fs.writeFileSync(Constants.CONFIGURATION_FILEPATH, '{}', { flag: 'w' });
+        }
+        // Set mode to append - if it does exist, it'll simply leave it be
+        fs.writeFileSync(Constants.NOTIFICATIONLOG_FILEPATH, '', { flag: 'a' });
+        fs.writeFileSync(Constants.DATALOG_FILEPATH, '', { flag: 'a' });
+        fs.writeFileSync(Constants.CURRENT_FILES_FILEPATH, '', { flag: 'a' });
     }
 }

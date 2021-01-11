@@ -28,12 +28,14 @@ Root folder
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
+├── defaultNotificationSound.mp3
 └── README.md
 
 
 platformSpecificPath/Electron/
 ├── currentFiles.txt
 ├── data.txt
+├── configuration.txt
 ├── .env
 └── notifications.txt
 ```
@@ -45,6 +47,7 @@ platformSpecificPath/Electron/
 - package.json holds metadata for the program - if you want to run the program you need it. It holds the commands like `npm run default` and `npm run make-linux` - all the make configuration and dependencies are also stored here
 - node_modules/ are the external modules/libraries that the program requires to run - these modules can be installed with `npm install` when in the presence of the package.json
 - package-lock.json frankly don't know what this is for...
+- defaultNotificationSound.mp3 is the default notification sound
 
 ### Frontend files
 - index.js contains the renderer process' logic 
@@ -70,6 +73,7 @@ For instance, for Linux - these files could be in `~/.config/moodle-notifier/`
     - currentFiles.txt which is used to compare the previous files and the current one, even between program shutdowns
     - data.txt which contains a list of the 'states' of currentFiles.txt where one comparison had a difference with the next. That is to say, if I refresh the page and it's the same, nothing gets added to data.txt, but if a file was removed or added, the new state will be appended to data.txt. This is in case you want to see the history of changes.
     - notifications.txt contains the list of notifications displayed. It is used to allow the user to press 'CTRL+Z' to go back to a previous state, and it gets modified when the user modifies the list, for instance, by dismissing a notification. There is a notification limit which essentially limits the amount of notifications that the user wants stored for 'CTRL+Z' functionality
+    - configuration.txt is the configuration file for this entire program. In essence it's a JSON containing key value pairs, such as 'audioFilePath:"path/to/audio/file.mp3". It exists so that you can make modifications and they will stick between shutdowns.
 
 ### Uninstalling
 

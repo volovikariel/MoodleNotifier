@@ -34,7 +34,6 @@ let autoLaunching = new AutoLaunch({
     name: 'moodle-notifier'
 })
 
-
 // Define browser globally so as to not have it be garbage collected
 let browser = undefined;
 let COURSE_PAGES = undefined;
@@ -126,24 +125,20 @@ function main() {
 
         async function loadPages(pages, coursePages){
             for(let i = 0; i < coursePages.length; i++) {
-                pages[i] || pages.push(await browser.newPage());
-                // Don't need to download the images, stylesheets or media
-                try {
+                // if it's the first page [i === 0] change it as well
+                if(!pages[i] || i === 0) {
+                    pages.push(await browser.newPage());
                     await pages[i].setRequestInterception(true)
+                    pages[i].on('request', (request) => {
+                      if (request.resourceType() === 'image' || request.resourceType() === 'stylesheet' || request.resourceType() === 'media') {
+                          request.abort()
+                      }
+                      else {
+                          request.continue()
+                      }
+                    })
                 }
-                catch (err) {
-                    // Already set to true I support
-                    console.error(err);
-                }
-                pages[i].on('request', (request) => {
-                  if (request.resourceType() === 'image' || request.resourceType() === 'stylesheet' || request.resourceType() === 'media') {
-                      request.abort()
-                  }
-                  else {
-                      request.continue()
-                  }
-                })
-                await pages[i].goto(coursePages[i], {waitUntil: 'domcontentloaded'});
+                await pages[i].goto(coursePages[i], { waitUntil: 'domcontentloaded' });
                 await pages[i].setViewport(VIEWPORT);
             }
         }
@@ -314,7 +309,7 @@ function main() {
 
                     window.webContents.send('display-data', { notifications: displayData, append: true })
                     FileUtil.saveNotificationState(displayData)
-
+                    window.webContents.send('play-notification-audio', { json: FileUtil.fileToJSON(Constants.CONFIGURATION_FILEPATH) });
                     FileUtil.appendFile(Constants.DATALOG_FILEPATH, data);
                 }
             })
@@ -334,6 +329,7 @@ app.on('ready', () => {
     createTray()
     createWindow()
     window.webContents.once('dom-ready', () => {
+        window.webContents.send('play-notification-audio', { json: FileUtil.fileToJSON(Constants.CONFIGURATION_FILEPATH) });
         // If there isn't a username or a password
         if(USERNAME === '' || PASSWORD === '') {
             window.show()
@@ -397,7 +393,8 @@ function createWindow() {
         fullscreenable: false,
         resizable: false,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            enableRemoteModule: true
         }
     })
 
@@ -457,7 +454,7 @@ ipcMain.on('setLoginInfo', (event, args) => {
     // Now that we have USERNAME and PASSWORD, launch main
     if(browser) browser.close();
     main()
-});
+})
 
 ipcMain.on('saveState', (event, state) => {
     FileUtil.saveNotificationState(state)
@@ -465,4 +462,15 @@ ipcMain.on('saveState', (event, state) => {
 
 ipcMain.on('log', (event, args) => {
     console.info(`FROM RENDERER: ${args}`);
+})
+
+ipcMain.on('set-audio-filepath', (event, args) => {
+    let configJSON = FileUtil.fileToJSON(Constants.CONFIGURATION_FILEPATH);
+    // Args seem to return arrays, so just take the element from it
+    configJSON.audioFilePath = args.audioFilePath[0];
+    FileUtil.overwriteFile(Constants.CONFIGURATION_FILEPATH, JSON.stringify(configJSON));
+})
+
+ipcMain.handle('get-constants', (event, args) => {
+    return Object.assign(Constants);
 });
