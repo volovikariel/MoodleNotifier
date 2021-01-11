@@ -153,38 +153,41 @@ ipcRenderer.on('play-notification-audio', (event, args) => {
 });
 
 function playNotificationAudio(configJSON) {
-  let filePath = configJSON.audioNotificationFilePath;
-  let volume = configJSON.audioNotificationVolume;
+  let filePath;
+  let volume;
+  if(configJSON) {
+    filePath = configJSON.audioNotificationFilePath;
+    volume = configJSON.audioNotificationVolume;
+  }
 
   let audioNotificationSource = document.querySelector('#audioNotificationSource');
   let audioNotificationSoundBtn = document.querySelector('#audioNotificationSoundBtn');
   let audioNotificationSlider = document.querySelector('#audioNotificationSlider');
   let audio = document.querySelector('audio');
 
-  // If there's a preset filepath in the Configuration file - load it, else - load the default
-  if(filePath) {
-    audioNotificationSource.src = filePath;
-  }
-  else {
-    ipcRenderer.invoke('get-constants').then(Constants => {
+  // invoke is asyncrhonous, so we have to run all the code inside of it to avoid `filePath` staying undefined
+  ipcRenderer.invoke('get-constants')
+    .then(Constants => {
+    // If there's a preset filepath in the Configuration file - load it, else - load the default
+    if(!filePath) {
       filePath = Constants.DEFAULT_NOTIFICATION_SOUND_FILEPATH;
-    });
-  }
+    }
+    audioNotificationSource.src = filePath;
 
-
-  // If the filepath is valid, play the audio as a preview to the user
-  if(fs.existsSync(filePath)) {
-    // If it exists, set the colour back to normal
-    audioNotificationSoundBtn.style.backgroundColor = 'white';
-    // Need to load the new audio file
-    audio.load();
-    audio.volume = volume || 0.05;
-    audioNotificationSlider.value = volume || 0.05;
-    audio.play();
-  }
-  else {
-    audioNotificationSoundBtn.style.backgroundColor = 'red';
-  }
+    // If the filepath is valid, play the audio as a preview to the user
+    if(fs.existsSync(filePath)) {
+      // If it exists, set the colour back to normal
+      audioNotificationSoundBtn.style.backgroundColor = 'white';
+      // Need to load the new audio file
+      audio.load();
+      audio.volume = volume || 0.05;
+      audioNotificationSlider.value = volume || 0.05;
+      audio.play();
+    }
+    else {
+      audioNotificationSoundBtn.style.backgroundColor = 'red';
+    }
+  });
 }
 
 ipcRenderer.on('get-new-configuration', (event, args) => {

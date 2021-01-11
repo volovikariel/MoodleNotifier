@@ -6,7 +6,7 @@
     "url": "https://github.com/volovikariel"
   },
   "email": "volovikariel@gmail.com",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "Utility app which provides notifications for a moodle account.",
   "main": "./src/script.js",
   "dependencies": {
