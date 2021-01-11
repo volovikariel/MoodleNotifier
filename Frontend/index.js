@@ -3,6 +3,11 @@ const { dialog } = require('electron').remote;
 const fs = require('fs');
 let notifications = []
 
+
+document.querySelector('#audioNotificationSlider').addEventListener('input', () => {
+  document.querySelector('audio').volume = document.querySelector('#audioNotificationSlider').value;
+})
+
 ipcRenderer.on('display-data', (event, args) => {
   if(args.append === true) {
     notifications = notifications.concat(args.notifications)
@@ -91,14 +96,13 @@ document.addEventListener('click', (event) => {
   }
 
   if(event.target.matches('#audioNotificationSoundBtn')) {
-    let audioFilePath = dialog.showOpenDialogSync({
+    let audioNotificationFilePath = dialog.showOpenDialogSync({
       properties: ['openFile'],
       filters: [{ name: 'audio file', extensions: ['wav', 'mp3', 'mp4']}]
     })
     // If it wasn't cancelled - set the path to this new one
-    if(audioFilePath) {
-      ipcRenderer.send('set-audio-filepath', { audioFilePath: audioFilePath });
-      playNotificationAudio(audioFilePath[0]);
+    if(audioNotificationFilePath) {
+      playNotificationAudio({ audioNotificationFilePath: audioNotificationFilePath[0], audioNotificationVolume: document.querySelector('#audioNotificationSlider').value });
     }
   }
 })
@@ -140,19 +144,26 @@ ipcRenderer.on('setStartAtLoginIsEnabled', (event, args) => {
 ipcRenderer.on('play-notification-audio', (event, args) => {
   let configJSON = args.json;
   // If the audioFilePath is set AND the path is correct, use it
-  if(fs.existsSync(configJSON.audioFilePath)) {
-    playNotificationAudio(configJSON.audioFilePath)
+  if(fs.existsSync(configJSON.audioNotificationFilePath)) {
+    playNotificationAudio(configJSON)
   }
   else {
     playNotificationAudio()
   }
 });
 
-function playNotificationAudio(filePath) {
+function playNotificationAudio(configJSON) {
+  let filePath = configJSON.audioNotificationFilePath;
+  let volume = configJSON.audioNotificationVolume;
+
+  let audioNotificationSource = document.querySelector('#audioNotificationSource');
+  let audioNotificationSoundBtn = document.querySelector('#audioNotificationSoundBtn');
+  let audioNotificationSlider = document.querySelector('#audioNotificationSlider');
   let audio = document.querySelector('audio');
-  // If there's a filepath in the config, load it
+
+  // If there's a preset filepath in the Configuration file - load it, else - load the default
   if(filePath) {
-    document.querySelector('#audioNotificationSource').src = filePath;
+    audioNotificationSource.src = filePath;
   }
   else {
     ipcRenderer.invoke('get-constants').then(Constants => {
@@ -160,18 +171,29 @@ function playNotificationAudio(filePath) {
     });
   }
 
+
+  // If the filepath is valid, play the audio as a preview to the user
   if(fs.existsSync(filePath)) {
     // If it exists, set the colour back to normal
-    document.querySelector('#audioNotificationSoundBtn').style.backgroundColor = 'white';
-    // Load the new source and play it
+    audioNotificationSoundBtn.style.backgroundColor = 'white';
+    // Need to load the new audio file
     audio.load();
-    // 1 === 100%
-    // TODO: Make it configurable as well
-    audio.volume = 0.05;
+    audio.volume = volume || 0.05;
+    audioNotificationSlider.value = volume || 0.05;
     audio.play();
   }
-  // If the path doesn't exist (that is to say, if either the custom one or the default one was removed) - play nothing and change the colour to show that there's an error
   else {
-    document.querySelector('#audioNotificationSoundBtn').style.backgroundColor = 'red';
+    audioNotificationSoundBtn.style.backgroundColor = 'red';
   }
 }
+
+ipcRenderer.on('get-new-configuration', (event, args) => {
+  // It's prefixed with file:// so ignore those 7 letters (0,1,...,6) and start directly at 7
+  let audioNotificationFilePath = decodeURI(document.querySelector('#audioNotificationSource').src.substring(7));
+  let audioNotificationVolume = document.querySelector('#audioNotificationSlider').value;
+
+  let object = {};
+  object.audioNotificationFilePath = audioNotificationFilePath;
+  object.audioNotificationVolume = audioNotificationVolume;
+  ipcRenderer.send('set-new-configuration', JSON.stringify(object));
+});

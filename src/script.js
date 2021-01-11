@@ -56,6 +56,8 @@ function main() {
         // Create a pages array, initially of size 1 [the default loaded one that comes with the browser]
         const pages = await browser.pages(); 
         const page = pages[0];
+        // Setting the first page to have request interception because later on, we only add it to *new* pages, we want to make sure this one has it too
+        await setPageRequestInterception(page, true)
         await page.setViewport(VIEWPORT)
         await page.goto('https://myconcordia.ca');
 
@@ -125,18 +127,10 @@ function main() {
 
         async function loadPages(pages, coursePages){
             for(let i = 0; i < coursePages.length; i++) {
-                // if it's the first page [i === 0] change it as well
-                if(!pages[i] || i === 0) {
+                // If the page doesn't exist [that is to say, it doesn't yet have any request interception, add it
+                if(!pages[i]) {
                     pages.push(await browser.newPage());
-                    await pages[i].setRequestInterception(true)
-                    pages[i].on('request', (request) => {
-                      if (request.resourceType() === 'image' || request.resourceType() === 'stylesheet' || request.resourceType() === 'media') {
-                          request.abort()
-                      }
-                      else {
-                          request.continue()
-                      }
-                    })
+                    await setPageRequestInterception(pages[i], true)
                 }
                 await pages[i].goto(coursePages[i], { waitUntil: 'domcontentloaded' });
                 await pages[i].setViewport(VIEWPORT);
@@ -329,7 +323,6 @@ app.on('ready', () => {
     createTray()
     createWindow()
     window.webContents.once('dom-ready', () => {
-        window.webContents.send('play-notification-audio', { json: FileUtil.fileToJSON(Constants.CONFIGURATION_FILEPATH) });
         // If there isn't a username or a password
         if(USERNAME === '' || PASSWORD === '') {
             window.show()
@@ -369,14 +362,10 @@ app.on('ready', () => {
 })
 
 function createTray() {
-    tray = new Tray(Constants.TRAYICON_DEFAULT_FILEPATH)
+    tray = new Tray(Constants.TRAYICON_DEFAULT_FILEPATH);
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'Notifications', click: () => 
-            {
-                window.show()
-            }
-        },
-        { label: 'Exit', click: () => { app.quit(); }}
+        { label: 'Notifications', click: () => window.show() },
+        { label: 'Exit', click: () => { app.quit() }}
     ])
     tray.setContextMenu(contextMenu)
 }
@@ -418,6 +407,21 @@ function createWindow() {
     })
 }
 
+// Setting the page request interception, can intercept any request
+async function setPageRequestInterception(page, value) {
+    await page.setRequestInterception(value)
+    page.on('request', (request) => {
+        // Intercepting unecessary resources for headless browsers
+        if (request.resourceType() === 'image' || request.resourceType() === 'stylesheet' || request.resourceType() === 'media') {
+            request.abort()
+        }
+        else {
+            request.continue()
+        }
+    })
+}
+
+
 ipcMain.on('setTrayIcon', (event, args) => {
     if(args === 'defaultIcon') {
         tray.setImage(Constants.TRAYICON_DEFAULT_FILEPATH)
@@ -425,7 +429,7 @@ ipcMain.on('setTrayIcon', (event, args) => {
     else if(args === 'notificationIcon') {
         tray.setImage(Constants.TRAYICON_NOTIFICATION_FILEPATH)
     }
-})
+});
 
 ipcMain.on('setStartAtLogin', (event, args) => {
     if(args === true) {
@@ -434,7 +438,7 @@ ipcMain.on('setStartAtLogin', (event, args) => {
     else {
         autoLaunching.disable()
     }
-})
+});
 
 ipcMain.on('setLoginInfo', (event, args) => {
     USERNAME = args.USERNAME;
@@ -454,23 +458,32 @@ ipcMain.on('setLoginInfo', (event, args) => {
     // Now that we have USERNAME and PASSWORD, launch main
     if(browser) browser.close();
     main()
-})
+});
 
 ipcMain.on('saveState', (event, state) => {
     FileUtil.saveNotificationState(state)
-})
+});
 
 ipcMain.on('log', (event, args) => {
     console.info(`FROM RENDERER: ${args}`);
-})
-
-ipcMain.on('set-audio-filepath', (event, args) => {
-    let configJSON = FileUtil.fileToJSON(Constants.CONFIGURATION_FILEPATH);
-    // Args seem to return arrays, so just take the element from it
-    configJSON.audioFilePath = args.audioFilePath[0];
-    FileUtil.overwriteFile(Constants.CONFIGURATION_FILEPATH, JSON.stringify(configJSON));
-})
+});
 
 ipcMain.handle('get-constants', (event, args) => {
     return Object.assign(Constants);
+});
+
+// Do something right before quitting by setting a shouldQuit to false
+// If it ends up being true - then event.preventDefault() will *not* go off, and it will exit
+let shouldQuit = false;
+app.on('before-quit', (event, exitCode) => {
+    if(!shouldQuit) {
+        event.preventDefault();
+        window.webContents.send('get-new-configuration');
+    }
+});
+
+ipcMain.on('set-new-configuration', (event, args) => {
+    FileUtil.overwriteFile(Constants.CONFIGURATION_FILEPATH, args);
+    shouldQuit = true;
+    app.quit();
 });
