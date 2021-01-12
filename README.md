@@ -41,8 +41,9 @@ Any help is appreciated :heart:
 **Version Milestone**|**Change**|**Status**</br>:x: or :construction: or :heavy_check_mark:
 ---|---|---
 v0.2.0 | Write out the documentation | :heavy_check_mark:
-v0.2.5 | Have a separate tab in the program which allows the user to store links (for Zoom and such) | :x:
-v??? | Have TODO lists built into the program | :x:
-v??? | Automatic Github draft release when `$electron-forge make-[version]` is ran | :x:
-v??? | Automatic update detection on new Github release | :x:
+v???   | Have a configuration tab | :x:
+v???   | Have a separate tab in the program which allows the user to store links (for Zoom and such) | :x:
+v???   | Have TODO lists built into the program | :x:
+v???   | Automatic Github draft release when `$electron-forge make-[version]` is ran | :x:
+v???   | Automatic update detection on new Github release | :x:
 v1.0.0 | Fully working version written in Typescript | :x:
