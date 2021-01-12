@@ -6,7 +6,7 @@
     "url": "https://github.com/volovikariel"
   },
   "email": "volovikariel@gmail.com",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Utility app which provides notifications for a moodle account.",
   "main": "./src/script.js",
   "dependencies": {
@@ -29,50 +29,13 @@
   "scripts": {
     "default": "electron ./src/script.js",
     "dev": "electron ./src/script.js --dev",
-    "start": "electron-forge start",
+    "start": "electron-forge start --inspect-electron",
     "package": "electron-forge package",
     "make-linux": "electron-forge make --platform=linux --target=deb",
     "make-window": "electron-forge make --platform=win32 --target=squirrel",
     "publish": "GITHUB_TOKEN=$(grep GITHUB_TOKEN .env | cut -d '=' -f2) electron-forge publish --auth-token=$GITHUB_TOKEN"
   },
   "config": {
-    "forge": {
-      "name": "moodle-notifier-forge",
-      "packagerConfig": {
-        "build": {
-          "ignore": [
-            ".env"
-          ],
-          "icon": "icon"
-        }
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "moodle-notifier"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {
-            "maintainer": "Ariel Volovik"
-          }
-        }
-      ],
-      "publishers": [
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "volovikariel",
-              "name": "moodle-notifier"
-            },
-            "prerelease": true,
-            "draft": true
-          }
-        }
-      ]
-    }
+    "forge": "./forge.config.js"
   }
 }
