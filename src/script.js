@@ -137,19 +137,21 @@ function main() {
             }
         }
 
+        const ONE_MIN = 1000 * 60;
         // If the PC was asleep and just woke up, reload all of the pages, check every 30 seconds
         let lastTime = (new Date()).getTime()
-        const FIVE_MINUTES = 5 * 60 * 1000
+        const FIVE_MINUTES = 5 * ONE_MIN;
         setInterval(() => {
             let currentTime = (new Date()).getTime();
             if(currentTime > (lastTime + FIVE_MINUTES)) {
-                pages.forEach(async page => await page.reload())
-                console.info(`Was asleep for ${(lastTime - currentTime) / 1000} seconds`);
+                console.info(`Was asleep for ${(currentTime - lastTime) / ONE_MIN} minutes. Restarting`);
+                window.send('get-new-configuration', { shouldQuit: false });
+                app.relaunch();
+                app.exit();
             }
             lastTime = currentTime;
         }, 30 * 1000)
 
-        const ONE_MIN = 1000 * 60;
 
         // Run once without a delay and then run it every minute
         await fetchCompareRefresh();
@@ -253,11 +255,9 @@ function main() {
         }
         function getFileObject(arrFileURLs, arrPages) {
             let response = [];
-            arrFileURLs.forEach((fileUrl) => {
-                arrPages.forEach((page) => {
-                    let rep = page.filter((file) => {
-                        return file.link == fileUrl;
-                    })
+            arrFileURLs.forEach(fileUrl => {
+                arrPages.forEach(page => {
+                    let rep = page.filter(file => file.link == fileUrl)
                     if(rep.length != 0) response.push(rep);
                 });
             })
@@ -323,6 +323,7 @@ app.on('ready', () => {
     createTray()
     createWindow()
     window.webContents.once('dom-ready', () => {
+        window.webContents.send('play-notification-audio', { json: FileUtil.fileToJSON(Constants.CONFIGURATION_FILEPATH) });
         // If there isn't a username or a password
         if(USERNAME === '' || PASSWORD === '') {
             window.show()
@@ -393,9 +394,7 @@ function createWindow() {
         slashes: true
     }))
 
-    if(process.dev) {
-        window.webContents.toggleDevTools()
-    }
+    window.webContents.toggleDevTools()
 
     globalShortcut.register('CommandOrControl+Alt+W', () => {
         if(window.isVisible()) {
@@ -455,6 +454,7 @@ ipcMain.on('setLoginInfo', (event, args) => {
     })
     // We need to re-check whether it's a valid USERNAME and PASSWORD so set 'not logged in' for now
     window.webContents.send('setLoggedInAs', { MESSAGE: 'Logging in' });
+
     // Now that we have USERNAME and PASSWORD, launch main
     if(browser) browser.close();
     main()
@@ -475,15 +475,18 @@ ipcMain.handle('get-constants', (event, args) => {
 // Do something right before quitting by setting a shouldQuit to false
 // If it ends up being true - then event.preventDefault() will *not* go off, and it will exit
 let shouldQuit = false;
+
 app.on('before-quit', (event, exitCode) => {
     if(!shouldQuit) {
         event.preventDefault();
-        window.webContents.send('get-new-configuration');
+        window.webContents.send('get-new-configuration', { shouldQuit: true });
     }
 });
 
 ipcMain.on('set-new-configuration', (event, args) => {
-    FileUtil.overwriteFile(Constants.CONFIGURATION_FILEPATH, args);
-    shouldQuit = true;
-    app.quit();
+    FileUtil.overwriteFile(Constants.CONFIGURATION_FILEPATH, args.config);
+    if(args.shouldQuit) {
+        shouldQuit = true;
+        app.quit();
+    }
 });

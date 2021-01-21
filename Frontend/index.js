@@ -198,5 +198,5 @@ ipcRenderer.on('get-new-configuration', (event, args) => {
   let object = {};
   object.audioNotificationFilePath = audioNotificationFilePath;
   object.audioNotificationVolume = audioNotificationVolume;
-  ipcRenderer.send('set-new-configuration', JSON.stringify(object));
+  ipcRenderer.send('set-new-configuration', { config: JSON.stringify(object), shouldQuit: args.shouldQuit });
 });
