@@ -1,3 +1,6 @@
+# IMPORTANT
+University decided to add notifications for moodle! It's a bit bugged but at least it's there, retiring this project for now, job done :)
+
 # :stopwatch:	 moodle-notifier :stopwatch:
 ###### :construction:		Currently in Alpha :construction:	
 Application that sits cozily in your tray, checking for new document uploads/deletions on Moodle.
