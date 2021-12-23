@@ -1,5 +1,5 @@
 # IMPORTANT
-University decided to add notifications for moodle! It's a bit bugged but at least it's there, retiring this project for now, job done :)
+I'm back working on the project, rewriting it now that I have a bit more experience writing code and figuring out the architecture.
 
 # :stopwatch:	 moodle-notifier :stopwatch:
 ###### :construction:		Currently in Alpha :construction:	
