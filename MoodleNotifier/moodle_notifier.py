@@ -69,9 +69,9 @@ def get_session(credentials: Credentials) -> Session:
 
 def main() -> None:
     """Function which calls other functions"""
-    MOODLE_PAGE = "https://moodle.concordia.ca/moodle/"
+    MOODLE_PAGE      = "https://moodle.concordia.ca/moodle/"
     user_credentials = getEnvCredentials()
-    session = get_session(user_credentials)
+    session          = get_session(user_credentials)
 
     # Writing the Moodle page to test that we're properly logged in (TODO: remove when no longer needed)
     with open("MoodlePage.html", "wb") as f:
