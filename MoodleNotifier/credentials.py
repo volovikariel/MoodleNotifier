@@ -1,14 +1,13 @@
 import os
 
+from dataclasses import dataclass
 from dotenv import load_dotenv
 
-
+@dataclass
 class Credentials:
     """A student's Concordia login information"""
-    
-    def __init__(self, username: str, password: str) -> None:
-        self.username = username
-        self.password = password
+    username: str
+    password: str
 
 def getEnvVariable(key: str) -> str:
     """Returns the value corresponding to the given key and raises an exception if the key is not found"""
