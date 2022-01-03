@@ -9,7 +9,7 @@ from credentials import Credentials, getEnvCredentials
 
 MOODLE_LOGIN_PAGE = "https://moodle.concordia.ca/moodle/login/index.php"
 
-def get_session_with_iDP(response: Response, session: Session) -> Tuple[Response, Session]:
+def grant_session_iDP(response: Response, session: Session) -> Response:
     """Grants the current session an iDP by posting the SAMLResponse to a specific url"""
     soup         = BeautifulSoup(response.content, "lxml")
     # HTML contains a hidden form with a URL to POST to and the SAMLResponse value
@@ -17,32 +17,33 @@ def get_session_with_iDP(response: Response, session: Session) -> Tuple[Response
     SAMLResponse = soup.find("input").get("value")
     response     = session.post(url, {"SAMLResponse": SAMLResponse})
 
-    return response, session
+    return response
 
-def goto_login_page(response: Response, session: Session) -> Tuple[Response, Session]:
+def goto_login_page(response: Response, session: Session) -> Response:
     """We are going to the (Concordia) Netname login page"""
     # The "Click here to log in using your Netname" button's URL
     url      = BeautifulSoup(response.content, "lxml").select_one("a[href^='https://moodle.concordia.ca/moodle/auth/saml2/login.php']").get("href")
     response = session.get(url)
-    return response, session
+    
+    return response
 
-def session_login(response: Response, session: Session, credentials: Credentials) -> Tuple[Response, Session]:
+def login(response: Response, session: Session, credentials: Credentials) -> Response:
     """We are logging into the (Concorida) Netname login page with the given credentials"""
     # The form POST method's action contains the URL to post to when we have entered our login information
     url        = BeautifulSoup(response.content, "lxml").select_one("form[action^='https://fas.concordia.ca:443']").get("action")
     login_info = {"UserName": credentials.username,"Password": credentials.password}
-    response = session.post(url, login_info)
+    response   = session.post(url, login_info)
 
-    return response, session
+    return response
 
-def get_session_with_MDL_SSP_AuthToken(response: Response, session: Session) -> Tuple[Response, Session]:
-    """We are getting our our MDL_SSP_AuthToken cookie by simply posting to a specific URL with our SAMLResponse value"""
+def grant_session_MDL_SSP_AuthToken(response: Response, session: Session) -> Response:
+    """Grants the current session an MDL_SSP_AuthToken cookie by simply posting to a specific URL with our SAMLResponse value"""
     soup         = BeautifulSoup(response.content, "lxml")
     url          = soup.find("form").get("action")
     SAMLResponse = soup.find("input").get("value")
     response     = session.post(url, {"SAMLResponse": SAMLResponse})
 
-    return response, session
+    return response
 
 def get_session(credentials: Credentials) -> Session:
     """Returns a session whose cookies are fully set and ready to access Moodle"""
@@ -53,16 +54,16 @@ def get_session(credentials: Credentials) -> Session:
     response = session.get(MOODLE_LOGIN_PAGE)
     
     # HTML contains a hidden form with a URL to POST to and a SAMLResponse value
-    response, session = get_session_with_iDP(response, session)
+    response = grant_session_iDP(response, session)
 
     # We're still at the initial login page, but we now have an "iDP" which is necessary for SAML authentication
-    response, session = goto_login_page(response, session)
+    response = goto_login_page(response, session)
 
     # We now login to the page
-    response, session = session_login(response, session, credentials)
+    response = login(response, session, credentials)
 
     # We get ahold of the last necessary cookie before gaining full access to Moodle
-    response, session = get_session_with_MDL_SSP_AuthToken(response, session)
+    response = grant_session_MDL_SSP_AuthToken(response, session)
 
     return session
 
