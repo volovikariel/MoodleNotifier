@@ -9,7 +9,7 @@ from datetime import datetime
 # 3. Under "Signing in to Google" Select "App passwords".
 # 4. Select the app as "Mail" and the device as "Other (Custom name)" and name it (e.g: moodle_notifications).
 # 5. Copy the app password, it will be in a yellow box and looks like: "XXXX XXXX XXXX XXXX"
-def send_email(content: str, email_from: str, email_to: str, app_password: str):
+def send_email(content: str, email_from: str, email_to: str, app_password: str) -> None:
     """We send an email from email_from to email-to with the provided content through an SMTP server using GMAIL as the provider"""
 
     msg = EmailMessage()
