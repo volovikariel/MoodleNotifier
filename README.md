@@ -16,6 +16,9 @@ PASSWORD="CONCORDIA_PASSWORD_HERE"
 EMAIL="example@gmail.com"
 APP_PASSWORD="YOUR_GMAIL_APP_PASSWORD_HERE"
 EMAIL_RECIPIENTS='["example@gmail.com"]'
+DELAY_HOURS=0
+DELAY_MINUTES=5
+DELAY_SECONDS=0
 ```
 
 Put in your concordia username.
@@ -32,7 +35,9 @@ Put in your email app password.
 ```
 Put in the email(s) who you want to receive the notification emails.
 
-Try running the program by running `$ python3 moodle_notifier.py`
+Now put in the delay you'd like to have before a fetch happens. Note that very low times don't really make sense - more often isn't better here, it'll just spam the server. I recommend you set it to 10 minutes or so.
+
+You can now try running the program by running `$ python3 moodle_notifier.py`
 
 ## Running the program in the background
 ### If you're on linux
