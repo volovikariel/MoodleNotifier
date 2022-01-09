@@ -1,6 +1,6 @@
-To switch to this branch, run `$ git checkout v2` after running `$ git clone https://github.com/volovikariel/moodle-notifier.git`.
+Run `$ git clone -b v2 https://github.com/volovikariel/moodle-notifier.git` to clone this repo.
 
-Alternatively, you should be able to run `$ git clone -b v2 https://github.com/volovikariel/moodle-notifier.git` and not need to checkout.
+Alternatively, you should be able toswitch to this branch after cloning by running `$ git checkout v2` after running `$ git clone https://github.com/volovikariel/moodle-notifier.git`.
 
 Once you've cloned the repository, change directory into MoodleNotifier.
 
