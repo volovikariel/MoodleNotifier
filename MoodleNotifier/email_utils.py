@@ -20,13 +20,14 @@ class EmailContent:
                                 Retrieved from the <a href={self.course_link}>{self.course_name}</a> course page ({get_formatted_time()})
                             </header>
                           """
-        content_footer = f"""<footer>
-                                <hr>
+        separator = "<hr>"
+        content_footer = f"""
+                            <footer>
                                 This is an automated Moodle Notification.
                                 If you have any questions, message PshychozPath#4190 on Discord. 
                              </footer>
                           """
-        return content_header + self.content_body + content_footer
+        return content_header + separator + self.content_body + separator + content_footer
 
 
 @dataclass
