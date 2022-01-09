@@ -7,7 +7,7 @@ Once you've cloned the repository, change directory into MoodleNotifier.
 Then install all the dependencies by running 
 `$ python3 -m pip install requests bs4 python-dotenv lxml`.
 
-## Run py -3 instead of python3 on Windows
+*note*: Run py -3 instead of python3 on Windows
 
 *note*: I only tested the code by using version 3+ of python so I recommend you do the same. 
 
