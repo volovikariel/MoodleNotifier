@@ -24,6 +24,9 @@ class EmailCredentials:
 
 def getEnvVariable(key: str) -> str:
     """Returns the value corresponding to the given key and raises an exception if the key is not found"""
+    # Loading in the environment variables stored in the .env folder
+    load_dotenv(override=True)
+    print(os.environ, flush=True)
     if key not in os.environ:
         raise Exception(f"The key '{key}' is not present in the local environment variables")
     
@@ -31,16 +34,12 @@ def getEnvVariable(key: str) -> str:
 
 def getEnvNetnameCredentials() -> NetnameCredentials:
     """Returns the Credentials defined in the environment variables with keys 'USERNAME' and 'PASSWORD'"""
-    # Loading in the environment variables stored in the .env folder
-    load_dotenv()
     username = getEnvVariable("USERNAME")
     password = getEnvVariable("PASSWORD")
     return NetnameCredentials(username, password)
 
 def getEnvEmailCredentials() -> EmailCredentials:
     """Returns the Credentials defined in the environment variables with keys 'EMAIL' and 'APP_PASSWORD'"""
-    # Loading in the environment variables stored in the .env folder
-    load_dotenv()
     email        = getEnvVariable("EMAIL")
     app_password = getEnvVariable("APP_PASSWORD")
     return EmailCredentials(email, app_password)
