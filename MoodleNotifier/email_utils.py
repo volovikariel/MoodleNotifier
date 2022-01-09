@@ -21,6 +21,7 @@ class EmailContent:
                             </header>
                           """
         content_footer = f"""<footer>
+                                <hr>
                                 This is an automated Moodle Notification.
                                 If you have any questions, message PshychozPath#4190 on Discord. 
                              </footer>
