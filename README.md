@@ -4,7 +4,7 @@ USERNAME="concordia.ca\\..."
 PASSWORD="CONCORDIA_PASSWORD_HERE"
 EMAIL="example@gmail.com"
 APP_PASSWORD="YOUR_GMAIL_APP_PASSWORD_HERE"
-EMAIL_RECIPIENTS='["example@gmail.com", "optional_other_email@gmail.com"]'
+EMAIL_RECIPIENTS='["example@gmail.com"]'
 ```
 
 Put in your concordia username.
