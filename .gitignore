@@ -2,6 +2,6 @@
 .vim
 __pycache__
 *.html
-CourseSequencer/CourseSequences
+CourseSequencer/
 MoodleNotifier/Pickles
 nohup.out
