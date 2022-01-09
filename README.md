@@ -39,7 +39,7 @@ You can now try running the program by running `$ python3 moodle_notifier.py`
 You can run `$ nohup python3 moodle_notifier.py &` 
 and then close the terminal and it'll run in the background.
 
-If you ever want to kill the process you can do `$ps -e | grep python3` and then do `$ kill -9 id_returned`.
+If you ever want to kill the process you can do `$ ps -e | grep python3` and then do `$ kill -9 id_returned`.
 *note:* If you have several programs running on `python3`, then I'm not sure how further help you narrow it down. I use `python3.10` and I never have other processes using it, so perhaps do the same?
 
 ### If you're on MacOS
