@@ -1,13 +1,15 @@
-To switch to this branch, run `$ git checkout v2` after running `$ git clone https://github.com/volovikariel/moodle-notifier.git`.
+Run `$ git clone -b v2 https://github.com/volovikariel/moodle-notifier.git` to clone this repo.
 
-Alternatively, you should be able to run `$ git clone -b v2 https://github.com/volovikariel/moodle-notifier.git` and not need to checkout.
+Alternatively, you should be able toswitch to this branch after cloning by running `$ git checkout v2` after running `$ git clone https://github.com/volovikariel/moodle-notifier.git`.
 
 Once you've cloned the repository, change directory into MoodleNotifier.
 
 Then install all the dependencies by running 
 `$ python3 -m pip install requests bs4 python-dotenv lxml`.
 
-*note*: I only tested the code by using version 3+ of python so I recommend you do the same.
+*note*: Run py -3 instead of python3 on Windows
+
+*note*: I only tested the code by using version 3+ of python so I recommend you do the same. 
 
 Now try to run the program (this will generate you a `.env` file). Do this inside the `.env` file:
 
@@ -37,9 +39,13 @@ You can now try running the program by running `$ python3 moodle_notifier.py`
 You can run `$ nohup python3 moodle_notifier.py &` 
 and then close the terminal and it'll run in the background.
 
-If you ever want to kill the process you can do `$ps -e | grep python3` and then do `$ kill -9 id_returned`.
+If you ever want to kill the process you can do `$ ps -e | grep python3` and then do `$ kill -9 id_returned`.
 *note:* If you have several programs running on `python3`, then I'm not sure how further help you narrow it down. I use `python3.10` and I never have other processes using it, so perhaps do the same?
 
 ### If you're on MacOS
 You can run `$ screen` then run `$ python3 moodle_notifier.py` and then press cmnd+A and then press D - it should be running in the background now.
 If you ever want to kill the process - run `$ screen -x` to resume the screen in question and then type cmnd+Z (or cmnd+C or cmnd+D) to kill the python script.
+
+### If you're on Windows
+You can run `$ pythonw.exe moodle_notifier.py` in command prompt to run the process in the background.
+To kill the process, you can open the task manager and kill `pythonw.exe`.
