@@ -9,21 +9,14 @@ Then install all the dependencies by running
 
 *note*: I only tested the code by using version 3+ of python so I recommend you do the same.
 
-Paste this into a `.env` file which will lie in the same directory as your `.py` files.
-```
-USERNAME="concordia.ca\\..."
-PASSWORD="CONCORDIA_PASSWORD_HERE"
-EMAIL="example@gmail.com"
-APP_PASSWORD="YOUR_GMAIL_APP_PASSWORD_HERE"
-EMAIL_RECIPIENTS='["example@gmail.com"]'
-DELAY_HOURS=0
-DELAY_MINUTES=0
-DELAY_SECONDS=30
-```
+Now try to run the program (this will generate you a `.env` file). Do this inside the `.env` file:
 
 Put in your concordia username.
+
 Put in your concordia password.
+
 Put in your email (only works with GMAIL right now).
+
 Put in your email app password.
 ```
 # How to get an app password (link: https://support.google.com/mail/answer/185833?hl=en-GB)
