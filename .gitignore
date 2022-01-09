@@ -1,5 +1,4 @@
 .env
-.vim
 __pycache__
 *.html
 CourseSequencer/
