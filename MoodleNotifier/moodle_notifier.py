@@ -9,16 +9,17 @@ import requests
 from bs4 import BeautifulSoup
 from requests.models import Response
 from requests.sessions import Session
+from dotenv import load_dotenv
 
-from credentials import (NetnameCredentials, getEnvEmailCredentials,
-                         getEnvNetnameCredentials)
+from credentials import (NetnameCredentials, get_env_email_credentials,
+                         get_env_netname_credentials, get_env_variable)
 from email_utils import Email, EmailContent, getEnvEmailRecipients
-from utils import file_exists, get_formatted_time
+from utils import create_default_env_file, file_exists, get_formatted_time
 
 MOODLE_LOGIN_PAGE = "https://moodle.concordia.ca/moodle/login/index.php"
 
 def grant_session_iDP(response: Response, session: Session) -> Response:
-    """Grants the current session an iDP by posting the SAMLResponse to a specific url."""
+    """Grants the current session an iDP by posting the SAMLResponse to a specific url. Return the response page."""
     soup         = BeautifulSoup(response.content, "lxml")
     # HTML contains a hidden form with a URL to POST to and the SAMLResponse value
     url          = soup.find("form").get("action")
@@ -28,7 +29,7 @@ def grant_session_iDP(response: Response, session: Session) -> Response:
     return response
 
 def goto_login_page(response: Response, session: Session) -> Response:
-    """We are going to the (Concordia) Netname login page"""
+    """Go to the (Concordia) Netname login page. Return the response page."""
     # The "Click here to log in using your Netname" button's URL
     url      = BeautifulSoup(response.content, "lxml").select_one("a[href^='https://moodle.concordia.ca/moodle/auth/saml2/login.php']").get("href")
     response = session.get(url)
@@ -36,7 +37,7 @@ def goto_login_page(response: Response, session: Session) -> Response:
     return response
 
 def login(response: Response, session: Session, credentials: NetnameCredentials) -> Response:
-    """We are logging into the (Concorida) Netname login page with the given credentials"""
+    """Log into the (Concorida) Netname login page with the given credentials. Return the response page."""
     # The form POST method's action contains the URL to post to when we have entered our login information
     url        = BeautifulSoup(response.content, "lxml").select_one("form[action^='https://fas.concordia.ca:443']").get("action")
     login_info = {"UserName": credentials.username,"Password": credentials.password}
@@ -54,7 +55,7 @@ def grant_session_MDL_SSP_AuthToken(response: Response, session: Session) -> Res
     return response
 
 def get_session(credentials: NetnameCredentials) -> Session:
-    """Returns a session whose cookies are fully set and ready to access Moodle"""
+    """Returns a session whose cookies are fully set and ready to access Moodle."""
     # The session to be returned. This will store all of the cookies as we go along
     session  = requests.Session()
 
@@ -76,15 +77,13 @@ def get_session(credentials: NetnameCredentials) -> Session:
     return session
 
 def get_mainpage_content(session: Session) -> bytes:
+    """Returns the main moodle page content."""
     MOODLE_PAGE = "https://moodle.concordia.ca/moodle/"
     return session.get(MOODLE_PAGE).content
 
 def get_course_links(session: Session) -> List[str] or List[None]:
-    """Returns the course links present in the sidebar"""
+    """Returns the course links present in the sidebar."""
     moodle_page_content = get_mainpage_content(session)
-    if len(BeautifulSoup(moodle_page_content, "lxml").select(".list-group-item .ml-1")) == 0:
-        print(f"No links found: {moodle_page_content}", flush=True)
-
     return [el.parent.get("href") for el in BeautifulSoup(moodle_page_content, "lxml").select(".list-group-item .ml-1")]
 
 def guarantee_directory_existance(directory_path: str) -> None:
@@ -99,9 +98,7 @@ def create_course_file(course_name: str) -> None:
         pickle.dump(set(), course_file, protocol=pickle.HIGHEST_PROTOCOL)
 
 def is_pickle_file(course_filepath: str) -> bool:
-    """
-    Returns true if the file_path is a pickle file, or false if it doesn't.
-    """
+    """Returns true if the file_path is a pickle file, or false if it doesn't."""
     is_valid_pickle_file = True
     with open(course_filepath, "rb") as file:
         try:
@@ -118,9 +115,11 @@ def dump_post_ids(course_filepath: str, post_ids: set) -> None:
         pickle.dump(post_ids, file, protocol=pickle.HIGHEST_PROTOCOL)
 
 def get_post_html(soup: BeautifulSoup, post_id: str) -> str:
+    """Returns the HTML of a post given its post_id"""
     return str(soup.find(id=post_id))
 
 def get_post_contents(soup: BeautifulSoup, post_ids: Set[str]) -> Set[str]:
+    """Returns the set of HTML content given a set of post_ids"""
     return { get_post_html(soup, post_id) for post_id in post_ids }
 
 def is_logged_in(session: Session) -> bool:
@@ -139,14 +138,32 @@ def is_logged_in(session: Session) -> bool:
     else:
         raise Exception("Error while checking whether we are logged in. Investigate >.>")
 
+def minutes_to_seconds(minutes: int) -> int:
+    """Convert # minutes into # seconds and returns the # of seconds"""
+    return minutes * 60
+
+def hours_to_seconds(hours: int) -> int:
+    """Convert # hours into # seconds and returns the # of seconds"""
+    return hours * 60 * 60 
+
+def get_scheduler_delay() -> int:
+    """Get the scheduler delay from the given 'DELAY_HOURS', 'DELAY_MINUTES' and 'DELAY_SECONDS' present in the environment variables"""
+    num_hours   = int(get_env_variable("DELAY_HOURS"))
+    num_minutes = int(get_env_variable("DELAY_MINUTES"))
+    num_seconds = int(get_env_variable("DELAY_SECONDS"))
+    hours_in_seconds:   int = hours_to_seconds(num_hours)
+    minutes_in_seconds: int = minutes_to_seconds(num_minutes)
+    seconds:            int = num_seconds
+    return hours_in_seconds + minutes_in_seconds + seconds
+
 # TODO: Fetch & Notify = decouple somehow???
 def fetch_and_notify(session: Session, scheduler: scheduler) -> None:
     print(f"[{get_formatted_time()}] Fetching everything", flush=True)
     
     # Check if the user is properly logged in
     while not is_logged_in(session):
-        print(f"\n\nGetting a new session\n\n", flush=True)
-        session = get_session(getEnvNetnameCredentials())
+        print("Not logged in, attempting to get a new session", flush=True)
+        session = get_session(get_env_netname_credentials())
 
     # Fetch the course links
     course_links = get_course_links(session)
@@ -180,24 +197,25 @@ def fetch_and_notify(session: Session, scheduler: scheduler) -> None:
                 # Build the email body
                 if num_additions > 0:
                     email_content.content_body += "<h2>Added:</h2>\n"
-                    email_content.content_body += "\n".join(get_post_contents(course_page_soup, added_post_ids))
+                    email_content.content_body += "<hr>".join(get_post_contents(course_page_soup, added_post_ids))
                 if num_deletions > 0:  
                     email_content.content_body += "<h2>Deleted:</h2>\n"
-                    email_content.content_body += "\n".join(get_post_contents(course_page_soup, deleted_post_ids))
+                    email_content.content_body += "<hr>".join(get_post_contents(course_page_soup, deleted_post_ids))
                 
                 email_subject = f"[{course_name}] +{num_additions} -{num_deletions}"
                 # Send the email
-                Email(email_subject, email_content).send(getEnvEmailCredentials(), getEnvEmailRecipients())
+                Email(email_subject, email_content).send(get_env_email_credentials(), getEnvEmailRecipients())
         # Update the current state in the course_file
         dump_post_ids(course_filepath, current_post_ids)
 
-    scheduler.enter(5*60, 1, fetch_and_notify, (session, scheduler))
+    scheduler.enter(get_scheduler_delay(), 1, fetch_and_notify, (session, scheduler))
 
     print(f"[{get_formatted_time()}] Done fetching and rescheduling.", end="\n\n", flush=True)
  
 if __name__ == "__main__":
-    try: 
-        user_credentials = getEnvNetnameCredentials()
+    try:
+        create_default_env_file()
+        user_credentials = get_env_netname_credentials()
         session          = get_session(user_credentials)
         
         print(f"[{get_formatted_time()}] Starting scheduler", flush=True)
@@ -208,14 +226,6 @@ if __name__ == "__main__":
         print(f"Exception:\n{e}", flush=True)
 
 # Miscellaneous info
-# Default page
-# -------------
-# Course links = [el.parentElement.href for el in $$(".list-group-item .ml-1")]
-
-# Course page
-# -------------
-# Postings = $$("li[id^=module]")
-
 # Activities
 # https://docs.moodle.org/311/en/Activities
 # Resources
