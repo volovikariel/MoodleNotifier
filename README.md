@@ -20,6 +20,7 @@ Put in your email app password.
 Put in your email as a recipient and any of your friends who also want to be notified.
 
 Try running the program by calling python3 or above (type hints don't seem to work for other versions?) by calling 
+
 `$ python3 moodle_notifier.py`
 
 If you get error messages saying that you don't have some modules installed, put in
@@ -27,8 +28,17 @@ If you get error messages saying that you don't have some modules installed, put
 
 You'll have to do this a few times..sorry.
 
-If you're on linux you can run `$ nohup python3 moodle_notifier.py &` and then close the terminal and it'll run in the background.
-If you want to kill the process you can do `$ps -e | grep python3` and then do `$ kill -9 id_returned` - do note that if you get several things returned, I don't really know how to help you kill the right one - good luck~
+If you're on linux you can run 
+`$ nohup python3 moodle_notifier.py &` 
+and then close the terminal and it'll run in the background.
+If you want to kill the process you can do 
 
-If you're on MacOS you can run `$ screen` then run `$ python3 moodle_notifier.py` and then press ctrl+A and then press D - it should be running in the background now.
+`$ps -e | grep python3` and then do `$ kill -9 id_returned`
+- do note that if you get several things returned, I don't really know how to help you kill the right one - good luck~
+
+If you're on MacOS you can run 
+`$ screen`
+then run 
+`$ python3 moodle_notifier.py`
+and then press ctrl+A and then press D - it should be running in the background now.
 If you ever want to resume the screen and kill the process - run `$ screen -x` and press ctrl+D or whatever else to kill the python script.
