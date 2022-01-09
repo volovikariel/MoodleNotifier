@@ -225,6 +225,7 @@ if __name__ == "__main__":
         scheduler.run()
     except Exception as e:
         print(f"Exception:\n{e}", flush=True)
+        # TODO: Handle exception somehow ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
 
 # Miscellaneous info
 # Activities
