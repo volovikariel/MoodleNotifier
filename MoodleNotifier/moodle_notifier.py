@@ -214,7 +214,8 @@ def fetch_and_notify(session: Session, scheduler: scheduler) -> None:
  
 if __name__ == "__main__":
     try:
-        create_default_env_file()
+        if not file_exists(".env"):
+            create_default_env_file()
         user_credentials = get_env_netname_credentials()
         session          = get_session(user_credentials)
         
