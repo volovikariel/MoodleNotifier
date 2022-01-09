@@ -45,3 +45,7 @@ If you ever want to kill the process you can do `$ps -e | grep python3` and then
 ### If you're on MacOS
 You can run `$ screen` then run `$ python3 moodle_notifier.py` and then press cmnd+A and then press D - it should be running in the background now.
 If you ever want to kill the process - run `$ screen -x` to resume the screen in question and then type cmnd+Z (or cmnd+C or cmnd+D) to kill the python script.
+
+### If you're on Windows
+You can run `$ pythonw.exe moodle_notifier.py` in command prompt to run the process in the background.
+To kill the process, you can open the task manager and kill `pythonw.exe`.
