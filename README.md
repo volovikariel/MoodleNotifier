@@ -9,7 +9,7 @@ Then install all the dependencies by running
 
 *note*: I only tested the code by using version 3+ of python so I recommend you do the same.
 
-Paste this into a `.env`file which will lie in the same directory as your `.py` files.
+Paste this into a `.env` file which will lie in the same directory as your `.py` files.
 ```
 USERNAME="concordia.ca\\..."
 PASSWORD="CONCORDIA_PASSWORD_HERE"
