@@ -2,7 +2,6 @@
 import pathlib
 import pickle
 import sched
-import time
 from sched import scheduler
 from typing import List, Set
 
@@ -140,87 +139,71 @@ def is_logged_in(session: Session) -> bool:
     else:
         raise Exception("Error while checking whether we are logged in. Investigate >.>")
 
-# TODO: Fetch & Notify = separate functions
+# TODO: Fetch & Notify = decouple somehow???
 def fetch_and_notify(session: Session, scheduler: scheduler) -> None:
     print(f"[{get_formatted_time()}] Fetching everything", flush=True)
     
-    # If we're not logged in, as indicated by the footer, we create ourselves a new session
-    # TODO: Do this in another function before each fetch call
+    # Check if the user is properly logged in
     while not is_logged_in(session):
         print(f"\n\nGetting a new session\n\n", flush=True)
         session = get_session(getEnvNetnameCredentials())
 
+    # Fetch the course links
     course_links = get_course_links(session)
     print(f"Course links: {course_links}")
 
-    # Geting all activity postings
+    # Go through each course's page
     for course_link in course_links:
         course_page_soup = BeautifulSoup(session.get(course_link).content, "lxml")
         course_name      = course_page_soup.select_one(".page-context-header").text
         posts            = course_page_soup.select("li[id^=module]")
-        post_ids         = { post.get("id") for post in posts }
+        current_post_ids = { post.get("id") for post in posts }
         
+        # Create course_file for this specific course if it does not exist
         course_filepath = f"./Pickles/{course_name}"
         if not file_exists(course_filepath) or not is_pickle_file(course_filepath):
             create_course_file(course_name)
         
         email_content = EmailContent(course_link, course_name, "")
-        # We check if the file contents match the current state
         with open(course_filepath, "rb") as file: 
+            # Find the differences between the current course post state and the previous one
             previous_post_ids: set = pickle.load(file)
-            added_post_ids         = post_ids.difference(previous_post_ids)
-            deleted_post_ids       = previous_post_ids.difference(post_ids)
+            added_post_ids         = current_post_ids.difference(previous_post_ids)
+            deleted_post_ids       = previous_post_ids.difference(current_post_ids)
             
             num_additions     = len(added_post_ids)
             num_deletions     = len(deleted_post_ids)
             should_send_email = num_additions > 0 or num_deletions > 0
 
-            if num_additions > 0:
-                email_content.content_body += "<h2>Added:</h2>\n"
-                email_content.content_body += "\n".join(get_post_contents(course_page_soup, added_post_ids))
-            
-            if num_deletions > 0:
-                email_content.content_body += "<h2>Deleted:</h2>\n"
-                email_content.content_body += "\n".join(get_post_contents(course_page_soup, deleted_post_ids))
-
+            # Send an email if there are either post additions or post deletions 
             if should_send_email:
+                # Build the email body
+                if num_additions > 0:
+                    email_content.content_body += "<h2>Added:</h2>\n"
+                    email_content.content_body += "\n".join(get_post_contents(course_page_soup, added_post_ids))
+                if num_deletions > 0:  
+                    email_content.content_body += "<h2>Deleted:</h2>\n"
+                    email_content.content_body += "\n".join(get_post_contents(course_page_soup, deleted_post_ids))
+                
                 email_subject = f"[{course_name}] +{num_additions} -{num_deletions}"
-                # Notify
+                # Send the email
                 Email(email_subject, email_content).send(getEnvEmailCredentials(), getEnvEmailRecipients())
+        # Update the current state in the course_file
+        dump_post_ids(course_filepath, current_post_ids)
 
-        # We dump the current post_ids so that we can check if posts were added/removed in the future
-        dump_post_ids(course_filepath, post_ids)
-           
-    SECOND = 1
-    MINUTE = 60*SECOND
-    scheduler.enter(5*MINUTE, 1, fetch_and_notify, (session, scheduler))
+    scheduler.enter(5*60, 1, fetch_and_notify, (session, scheduler))
 
-    print(f"[{get_formatted_time()}] Done fetching and rescheduled", end="\n\n", flush=True)
-
-def main() -> None:
-    """Function which calls other functions"""
-    user_credentials = getEnvNetnameCredentials()
-    session          = get_session(user_credentials)
-    # Scheduler calls a function that does the following:
-        # while not logged in
-            # Try to log in
-        # Fetch the post_ids on each course
-        # if file not exist
-            # create file with empty {} as contents
-                # creates folder if needed
-        # Compare post_ids with existing file - pass the sets of new/deleted posts to a notify function which sends email or whatever other notification is set
-    
-    print(f"[{get_formatted_time()}] Starting scheduler", flush=True)
-    scheduler = sched.scheduler()
-    scheduler.enter(0, 1, fetch_and_notify, (session, scheduler))
-    scheduler.run()
-
-        
+    print(f"[{get_formatted_time()}] Done fetching and rescheduling.", end="\n\n", flush=True)
+ 
 if __name__ == "__main__":
-    try:
-        # main()
-
-        print(is_logged_in(None))
+    try: 
+        user_credentials = getEnvNetnameCredentials()
+        session          = get_session(user_credentials)
+        
+        print(f"[{get_formatted_time()}] Starting scheduler", flush=True)
+        scheduler = sched.scheduler()
+        scheduler.enter(0, 1, fetch_and_notify, (session, scheduler))
+        scheduler.run()
     except Exception as e:
         print(f"Exception:\n{e}", flush=True)
 
