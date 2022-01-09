@@ -5,7 +5,7 @@ from typing import List
 
 from dotenv import load_dotenv
 
-from credentials import EmailCredentials, getEnvVariable
+from credentials import EmailCredentials, get_env_variable
 from utils import get_formatted_time
 
 
@@ -53,4 +53,4 @@ def getEnvEmailRecipients() -> List[str]:
     """Returns environment variable called 'EMAIL_RECIPIENTS'"""
     load_dotenv()
     import json
-    return json.loads(getEnvVariable("EMAIL_RECIPIENTS"))
+    return json.loads(get_env_variable("EMAIL_RECIPIENTS"))
