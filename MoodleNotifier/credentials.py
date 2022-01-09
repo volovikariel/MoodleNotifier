@@ -22,24 +22,23 @@ class EmailCredentials:
     email: str
     app_password: str
 
-def getEnvVariable(key: str) -> str:
+def get_env_variable(key: str) -> str:
     """Returns the value corresponding to the given key and raises an exception if the key is not found"""
     # Loading in the environment variables stored in the .env folder
     load_dotenv(override=True)
-    print(os.environ, flush=True)
     if key not in os.environ:
         raise Exception(f"The key '{key}' is not present in the local environment variables")
     
     return os.environ.get(key)
 
-def getEnvNetnameCredentials() -> NetnameCredentials:
+def get_env_netname_credentials() -> NetnameCredentials:
     """Returns the Credentials defined in the environment variables with keys 'USERNAME' and 'PASSWORD'"""
-    username = getEnvVariable("USERNAME")
-    password = getEnvVariable("PASSWORD")
+    username = get_env_variable("USERNAME")
+    password = get_env_variable("PASSWORD")
     return NetnameCredentials(username, password)
 
-def getEnvEmailCredentials() -> EmailCredentials:
+def get_env_email_credentials() -> EmailCredentials:
     """Returns the Credentials defined in the environment variables with keys 'EMAIL' and 'APP_PASSWORD'"""
-    email        = getEnvVariable("EMAIL")
-    app_password = getEnvVariable("APP_PASSWORD")
+    email        = get_env_variable("EMAIL")
+    app_password = get_env_variable("APP_PASSWORD")
     return EmailCredentials(email, app_password)
