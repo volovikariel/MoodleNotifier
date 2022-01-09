@@ -3,12 +3,6 @@ Paste this into a `.env`file which will lie in the sam directory as your `.py` f
 USERNAME="concordia.ca\\..."
 PASSWORD="CONCORDIA_PASSWORD_HERE"
 EMAIL="example@gmail.com"
-# How to get an app password (link: https://support.google.com/mail/answer/185833?hl=en-GB)
-# 1. go to manage my google account (link: https://myaccount.google.com/security)
-# 2. Under "Signing in to Google" confirm that "2-Step Verification" is "On" for the account.
-# 3. Under "Signing in to Google" Select "App passwords".
-# 4. Select the app as "Mail" and the device as "Other (Custom name)" and name it (e.g: moodle_notifications).
-# 5. Copy the app password, it will be in a yellow box and looks like: "XXXX XXXX XXXX XXXX"
 APP_PASSWORD="YOUR_GMAIL_APP_PASSWORD_HERE"
 EMAIL_RECIPIENTS='["example@gmail.com", "optional_other_email@gmail.com"]'
 ```
@@ -17,6 +11,14 @@ Put in your concordia username.
 Put in your concordia password.
 Put in your email (only works with GMAIL right now).
 Put in your email app password.
+```
+# How to get an app password (link: https://support.google.com/mail/answer/185833?hl=en-GB)
+# 1. go to manage my google account (link: https://myaccount.google.com/security)
+# 2. Under "Signing in to Google" confirm that "2-Step Verification" is "On" for the account.
+# 3. Under "Signing in to Google" Select "App passwords".
+# 4. Select the app as "Mail" and the device as "Other (Custom name)" and name it (e.g: moodle_notifications).
+# 5. Copy the app password, it will be in a yellow box and looks like: "XXXX XXXX XXXX XXXX"
+```
 Put in your email as a recipient and any of your friends who also want to be notified.
 
 Try running the program by calling python3 or above (type hints don't seem to work for other versions?) by calling 
