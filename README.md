@@ -1,7 +1,7 @@
 # IMPORTANT
 I'm back working on the project, rewriting it now that I have a bit more experience writing code and figuring out the architecture. Hopefully less 💩 now.
 
-To run the updated code, follow the instructions on the `v2` branch. 
+## To run the updated more reliable and 95% faster code, follow the instructions on the `v2` branch. 
 
 # :stopwatch:	 moodle-notifier :stopwatch:
 ###### :construction:		Currently in Alpha :construction:	
