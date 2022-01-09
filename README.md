@@ -46,5 +46,5 @@ and then press ctrl+A and then press D - it should be running in the background 
 If you ever want to resume the screen and kill the process - run `$ screen -x` and press ctrl+D or whatever else to kill the python script.
 
 ```
-$ python3 -m pip install requests bs4 python-dotenv
+$ python3 -m pip install requests bs4 python-dotenv lxml
 ```
