@@ -1,4 +1,15 @@
-Paste this into a `.env`file which will lie in the sam directory as your `.py` file.
+To switch to this branch, run `$ git checkout v2` after running `$ git clone https://github.com/volovikariel/moodle-notifier.git`.
+
+Alternatively, you should be able to run `$ git clone -b v2 https://github.com/volovikariel/moodle-notifier.git` and not need to checkout.
+
+Once you've cloned the repository, change directory into MoodleNotifier.
+
+Then install all the dependencies by running 
+`$ python3 -m pip install requests bs4 python-dotenv lxml`.
+
+*note*: I only tested the code by using version 3+ of python so I recommend you do the same.
+
+Paste this into a `.env`file which will lie in the same directory as your `.py` files.
 ```
 USERNAME="concordia.ca\\..."
 PASSWORD="CONCORDIA_PASSWORD_HERE"
@@ -19,32 +30,18 @@ Put in your email app password.
 # 4. Select the app as "Mail" and the device as "Other (Custom name)" and name it (e.g: moodle_notifications).
 # 5. Copy the app password, it will be in a yellow box and looks like: "XXXX XXXX XXXX XXXX"
 ```
-Put in your email as a recipient and any of your friends who also want to be notified.
+Put in the email(s) who you want to receive the notification emails.
 
-Try running the program by calling python3 or above (type hints don't seem to work for other versions?) by calling 
+Try running the program by running `$ python3 moodle_notifier.py`
 
-`$ python3 moodle_notifier.py`
-
-If you get error messages saying that you don't have some modules installed, put in
-`$ python3 -m pip install package_which_it_says_you_dont_have`
-
-You'll have to do this a few times..sorry.
-
-If you're on linux you can run 
-`$ nohup python3 moodle_notifier.py &` 
+## Running the program in the background
+### If you're on linux
+You can run `$ nohup python3 moodle_notifier.py &` 
 and then close the terminal and it'll run in the background.
-If you want to kill the process you can do 
 
-`$ps -e | grep python3` and then do `$ kill -9 id_returned`
-- do note that if you get several things returned, I don't really know how to help you kill the right one - good luck~
+If you ever want to kill the process you can do `$ps -e | grep python3` and then do `$ kill -9 id_returned`.
+*note:* If you have several programs running on `python3`, then I'm not sure how further help you narrow it down. I use `python3.10` and I never have other processes using it, so perhaps do the same?
 
-If you're on MacOS you can run 
-`$ screen`
-then run 
-`$ python3 moodle_notifier.py`
-and then press ctrl+A and then press D - it should be running in the background now.
-If you ever want to resume the screen and kill the process - run `$ screen -x` and press ctrl+D or whatever else to kill the python script.
-
-```
-$ python3 -m pip install requests bs4 python-dotenv lxml
-```
+### If you're on MacOS
+You can run `$ screen` then run `$ python3 moodle_notifier.py` and then press cmnd+A and then press D - it should be running in the background now.
+If you ever want to kill the process - run `$ screen -x` to resume the screen in question and then type cmnd+Z (or cmnd+C or cmnd+D) to kill the python script.
