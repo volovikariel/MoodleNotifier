@@ -4,3 +4,4 @@ __pycache__
 *.html
 CourseSequencer/CourseSequences
 MoodleNotifier/Pickles
+nohup.out
