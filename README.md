@@ -35,16 +35,12 @@ Now put in the delay you'd like to have before a fetch happens. Note that very l
 You can now try running the program by running `$ python3 moodle_notifier.py`
 
 ## Running the program in the background
-### If you're on linux
+### If you're on linux or OSX
 You can run `$ nohup python3 moodle_notifier.py &` 
 and then close the terminal and it'll run in the background.
 
 If you ever want to kill the process you can do `$ ps -e | grep python3` and then do `$ kill -9 id_returned`.
 *note:* If you have several programs running on `python3`, then I'm not sure how further help you narrow it down. I use `python3.10` and I never have other processes using it, so perhaps do the same?
-
-### If you're on MacOS
-You can run `$ screen` then run `$ python3 moodle_notifier.py` and then press cmnd+A and then press D - it should be running in the background now.
-If you ever want to kill the process - run `$ screen -x` to resume the screen in question and then type cmnd+Z (or cmnd+C or cmnd+D) to kill the python script.
 
 ### If you're on Windows
 You can run `$ pythonw.exe moodle_notifier.py` in command prompt to run the process in the background.
