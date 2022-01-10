@@ -6,7 +6,7 @@ from typing import List
 from dotenv import load_dotenv
 
 from credentials import EmailCredentials, get_env_variable
-from utils import get_formatted_time
+from utils import get_formatted_time, log_with_time
 
 
 @dataclass
@@ -46,7 +46,7 @@ class Email:
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
             server.starttls()
             server.login(email_sender_credentials.email, email_sender_credentials.app_password)
-            print("Sending email", flush=True)
+            log_with_time("Sending an email")
             server.send_message(message)
 
 def getEnvEmailRecipients() -> List[str]:
