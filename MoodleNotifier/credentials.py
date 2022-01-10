@@ -19,7 +19,7 @@ class NetnameCredentials:
 @dataclass
 class EmailCredentials:
     """A person's email login information"""
-    email: str
+    email       : str
     app_password: str
 
 def get_env_variable(key: str) -> str:
