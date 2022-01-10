@@ -36,3 +36,6 @@ def create_default_env_file() -> None:
                             DELAY_SECONDS=0""")
     with open(".env", "w+") as env_file:
         env_file.write(file_content)
+
+def log_with_time(message: str) -> None:
+    print(f"[{get_formatted_time()}] {message}", flush=True)
