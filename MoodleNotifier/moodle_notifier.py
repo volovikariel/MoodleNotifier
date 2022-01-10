@@ -7,16 +7,15 @@ from typing import List, Set
 
 import requests
 from bs4 import BeautifulSoup
+from requests.exceptions import HTTPError, Timeout
 from requests.models import Response
 from requests.sessions import Session
-from dotenv import load_dotenv
 
 from credentials import (NetnameCredentials, get_env_email_credentials,
                          get_env_netname_credentials, get_env_variable)
 from email_utils import Email, EmailContent, getEnvEmailRecipients
-from utils import create_default_env_file, file_exists, get_formatted_time
+from utils import create_default_env_file, file_exists, log_with_time
 
-MOODLE_LOGIN_PAGE = "https://moodle.concordia.ca/moodle/login/index.php"
 
 def grant_session_iDP(response: Response, session: Session) -> Response:
     """Grants the current session an iDP by posting the SAMLResponse to a specific url. Return the response page."""
@@ -32,7 +31,7 @@ def goto_login_page(response: Response, session: Session) -> Response:
     """Go to the (Concordia) Netname login page. Return the response page."""
     # The "Click here to log in using your Netname" button's URL
     url      = BeautifulSoup(response.content, "lxml").select_one("a[href^='https://moodle.concordia.ca/moodle/auth/saml2/login.php']").get("href")
-    response = session.get(url)
+    response = session.get(url, timeout=3)
     
     return response
 
@@ -59,8 +58,12 @@ def get_session(credentials: NetnameCredentials) -> Session:
     # The session to be returned. This will store all of the cookies as we go along
     session  = requests.Session()
 
+    # Setting a User-Agent
+    session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"})
+
     # We try to access the MOODLE_LOGIN_PAGE which will lead to a series of redirections which grant us necessary cookies to proceed 
-    response = session.get(MOODLE_LOGIN_PAGE)
+    MOODLE_LOGIN_PAGE = "https://moodle.concordia.ca/moodle/login/index.php"
+    response = session.get(MOODLE_LOGIN_PAGE, timeout=3)
     
     # HTML contains a hidden form with a URL to POST to and a SAMLResponse value
     response = grant_session_iDP(response, session)
@@ -76,14 +79,15 @@ def get_session(credentials: NetnameCredentials) -> Session:
 
     return session
 
-def get_mainpage_content(session: Session) -> bytes:
-    """Returns the main moodle page content."""
+def get_moodlepage(session: Session = Session()) -> Response:
+    """Returns the moodle page response."""
     MOODLE_PAGE = "https://moodle.concordia.ca/moodle/"
-    return session.get(MOODLE_PAGE).content
+    response    = session.get(MOODLE_PAGE, timeout=3)
+    return response
 
 def get_course_links(session: Session) -> List[str] or List[None]:
     """Returns the course links present in the sidebar."""
-    moodle_page_content = get_mainpage_content(session)
+    moodle_page_content = get_moodlepage(session).content
     return [el.parent.get("href") for el in BeautifulSoup(moodle_page_content, "lxml").select(".list-group-item .ml-1")]
 
 def guarantee_directory_existance(directory_path: str) -> None:
@@ -127,7 +131,7 @@ def is_logged_in(session: Session) -> bool:
     Return true or false depending on if the given Session is logged into Moodle.
     Does this by checking the footer of the page moodle page which indicates whether the user is logged in.
     """
-    main_page_content = get_mainpage_content(session)
+    main_page_content = get_moodlepage(session).content
     soup              = BeautifulSoup(main_page_content, 'lxml')
     login_status      = soup.select_one(".logininfo").text
 
@@ -147,22 +151,22 @@ def hours_to_seconds(hours: int) -> int:
     return hours * 60 * 60 
 
 def get_scheduler_delay() -> int:
-    """Get the scheduler delay from the given 'DELAY_HOURS', 'DELAY_MINUTES' and 'DELAY_SECONDS' present in the environment variables"""
-    num_hours   = int(get_env_variable("DELAY_HOURS"))
-    num_minutes = int(get_env_variable("DELAY_MINUTES"))
-    num_seconds = int(get_env_variable("DELAY_SECONDS"))
-    hours_in_seconds:   int = hours_to_seconds(num_hours)
+    """Get the scheduler delay in seconds from the given 'DELAY_HOURS', 'DELAY_MINUTES' and 'DELAY_SECONDS' present in the environment variables"""
+    num_hours               = int(get_env_variable("DELAY_HOURS"))
+    num_minutes             = int(get_env_variable("DELAY_MINUTES"))
+    num_seconds             = int(get_env_variable("DELAY_SECONDS"))
+    hours_in_seconds  : int = hours_to_seconds(num_hours)
     minutes_in_seconds: int = minutes_to_seconds(num_minutes)
-    seconds:            int = num_seconds
+    seconds           : int = num_seconds
     return hours_in_seconds + minutes_in_seconds + seconds
 
 # TODO: Fetch & Notify = decouple somehow???
 def fetch_and_notify(session: Session, scheduler: scheduler) -> None:
-    print(f"[{get_formatted_time()}] Fetching everything", flush=True)
+    log_with_time(f"Fetching everything")
     
     # Check if the user is properly logged in
     while not is_logged_in(session):
-        print("Not logged in, attempting to get a new session", flush=True)
+        print("Not logged in, getting a new session", flush=True)
         session = get_session(get_env_netname_credentials())
 
     # Fetch the course links
@@ -171,7 +175,7 @@ def fetch_and_notify(session: Session, scheduler: scheduler) -> None:
 
     # Go through each course's page
     for course_link in course_links:
-        course_page_soup = BeautifulSoup(session.get(course_link).content, "lxml")
+        course_page_soup = BeautifulSoup(session.get(course_link, timeout=3).content, "lxml")
         course_name      = course_page_soup.select_one(".page-context-header").text
         posts            = course_page_soup.select("li[id^=module]")
         current_post_ids = { post.get("id") for post in posts }
@@ -210,22 +214,40 @@ def fetch_and_notify(session: Session, scheduler: scheduler) -> None:
 
     scheduler.enter(get_scheduler_delay(), 1, fetch_and_notify, (session, scheduler))
 
-    print(f"[{get_formatted_time()}] Done fetching and rescheduling.", end="\n\n", flush=True)
- 
-if __name__ == "__main__":
+    log_with_time(f"Done fetching and rescheduling.\n\n")
+
+def main() -> None:
     try:
+        # Raises an HTTPError exception if moodle is not properly up
+        get_moodlepage().raise_for_status()
+
+        # Create a .env file if it doesn't exist
         if not file_exists(".env"):
             create_default_env_file()
+        
+        # Get our session set up
         user_credentials = get_env_netname_credentials()
         session          = get_session(user_credentials)
         
-        print(f"[{get_formatted_time()}] Starting scheduler", flush=True)
+        # Get the fetch_and_notify function running repeatedly
+        log_with_time("Starting scheduler")
         scheduler = sched.scheduler()
         scheduler.enter(0, 1, fetch_and_notify, (session, scheduler))
         scheduler.run()
+    except HTTPError as e:
+        log_with_time(f"HTTPError occured (status code is 4xx or 5xx):\n{e}")
+    except (ConnectionError, Timeout) as e:
+        log_with_time(f"Moodle website appears to be down (ConnectionError or Timeout):\n{e}")
     except Exception as e:
-        print(f"Exception:\n{e}", flush=True)
-        # TODO: Handle exception somehow ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        log_with_time(f"General Exception:\n{e}")
+
+    log_with_time(f"Rescheduling the main method to run in {get_scheduler_delay()} seconds in the hopes that it'll fix everything :|")
+    scheduler = sched.scheduler()
+    scheduler.enter(get_scheduler_delay(), 1, main)
+    scheduler.run()
+    
+if __name__ == "__main__":
+    main()
 
 # Miscellaneous info
 # Activities
