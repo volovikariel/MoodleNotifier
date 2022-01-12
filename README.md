@@ -62,5 +62,9 @@ kill -9 id_returned
 *note:* If you have several programs running on `python3`, then I'm not sure how further help you narrow it down. I use `python3.10` and I never have other processes using it.
 
 ### If you're on Windows
-You can run `$ pythonw.exe moodle_notifier.py` in command prompt to run the process in the background.
-To kill the process, you can open the task manager and kill `pythonw.exe`.
+You can run the following in your terminal to run the script in the background
+```bash
+pythonw.exe moodle_notifier.py
+```
+
+To kill the process, you can open the task manager and kill the process called `pythonw.exe`.
