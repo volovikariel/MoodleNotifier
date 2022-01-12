@@ -2,22 +2,21 @@ Run `$ git clone -b v2 https://github.com/volovikariel/moodle-notifier.git` to c
 
 Alternatively, you should be able toswitch to this branch after cloning by running `$ git checkout v2` after running `$ git clone https://github.com/volovikariel/moodle-notifier.git`.
 
-Once you've cloned the repository, change directory into MoodleNotifier.
-
 Then install all the dependencies by running 
 `$ python3 -m pip -r requirements.txt`.
 
 *note*: Run py -3 instead of python3 on Windows
+*note*: You need python version 3+ to run the code so make sure to install that [here](https://www.python.org/downloads/)
 
-*note*: I only tested the code by using version 3+ of python so I recommend you do the same. 
+Now try to run the program by running `$ python3 moodle_notifier.py` (this will generate you a `.env` file).
 
-Now try to run the program (this will generate you a `.env` file). Do this inside the `.env` file:
+Do this inside the `.env` file:
 
 Put in your concordia username.
 
 Put in your concordia password.
 
-Put in your email (only works with GMAIL right now).
+Put in your email (only works with GMAIL).
 
 Put in your email app password.
 ```
@@ -35,9 +34,8 @@ Now put in the delay you'd like to have before a fetch happens. Note that very l
 You can now try running the program by running `$ python3 moodle_notifier.py`
 
 ## Running the program in the background
-### If you're on linux or OSX
-You can run `$ nohup python3 moodle_notifier.py &` 
-and then close the terminal and it'll run in the background.
+### If you're on Linux or Mac OSX
+You can run `$ nohup python3 moodle_notifier.py &` and then close the terminal and it'll run in the background.
 
 If you ever want to kill the process you can do `$ ps -e | grep python3` and then do `$ kill -9 id_returned`.
 *note:* If you have several programs running on `python3`, then I'm not sure how further help you narrow it down. I use `python3.10` and I never have other processes using it, so perhaps do the same?
