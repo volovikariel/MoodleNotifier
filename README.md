@@ -41,15 +41,25 @@ Inside the `.env` file, do the following:
 ### Running the program
 You can now try running the program by running 
 ```bash
-$ python3 moodle_notifier.py
+python3 moodle_notifier.py
 ```
 
 ## Running the program in the background
 ### If you're on Linux or Mac OSX
-You can run `$ nohup python3 moodle_notifier.py &` and then close the terminal and it'll run in the background.
+You can run the following in your terminal before closing it to have the script run in the background.
+```bash
+nohup python3 moodle_notifier.py &
+```
 
-If you ever want to kill the process you can do `$ ps -e | grep python3` and then do `$ kill -9 id_returned`.
-*note:* If you have several programs running on `python3`, then I'm not sure how further help you narrow it down. I use `python3.10` and I never have other processes using it, so perhaps do the same?
+If you ever want to kill the process you can run the following in your terminal to first find the process id, and then kill that process.
+```bash
+ps -e | grep python3
+``` 
+```bash
+kill -9 id_returned
+```
+
+*note:* If you have several programs running on `python3`, then I'm not sure how further help you narrow it down. I use `python3.10` and I never have other processes using it.
 
 ### If you're on Windows
 You can run `$ pythonw.exe moodle_notifier.py` in command prompt to run the process in the background.
