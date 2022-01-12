@@ -41,6 +41,9 @@ def login(response: Response, session: Session, credentials: NetnameCredentials)
     url        = BeautifulSoup(response.content, "lxml").select_one("form[action^='https://fas.concordia.ca:443']").get("action")
     login_info = {"UserName": credentials.username,"Password": credentials.password}
     response   = session.post(url, login_info)
+    
+    if "Incorrect netname or password. Type the correct netname and password, and try again." in response.text:
+        raise Exception("The provided Concordia login information is incorrect")
 
     return response
 
@@ -224,6 +227,7 @@ def main() -> None:
         # Create a .env file if it doesn't exist
         if not file_exists(".env"):
             create_default_env_file()
+            log_with_time("The '.env' file has been created")
         
         # Get our session set up
         user_credentials = get_env_netname_credentials()
@@ -239,9 +243,9 @@ def main() -> None:
     except (ConnectionError, Timeout) as e:
         log_with_time(f"Moodle website appears to be down (ConnectionError or Timeout):\n{e}")
     except Exception as e:
-        log_with_time(f"General Exception:\n{e}")
+        log_with_time(f"Exception:\n{e}")
 
-    log_with_time(f"Rescheduling the main method to run in {get_scheduler_delay()} seconds in the hopes that it'll fix everything :|")
+    log_with_time(f"Rescheduling the main method to run in {get_scheduler_delay()} seconds")
     scheduler = sched.scheduler()
     scheduler.enter(get_scheduler_delay(), 1, main)
     scheduler.run()
