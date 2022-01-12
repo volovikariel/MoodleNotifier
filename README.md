@@ -5,7 +5,7 @@ Alternatively, you should be able toswitch to this branch after cloning by runni
 Once you've cloned the repository, change directory into MoodleNotifier.
 
 Then install all the dependencies by running 
-`$ python3 -m pip install requests bs4 python-dotenv lxml`.
+`$ python3 -m pip -r requirements.txt`.
 
 *note*: Run py -3 instead of python3 on Windows
 
