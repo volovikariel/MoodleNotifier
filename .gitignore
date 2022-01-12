@@ -1,6 +1,12 @@
+# Envrionment file with sensitive information
 .env
 __pycache__
 *.html
+# Unrelated project for testing
 CourseSequencer/
+# Current state of post_ids
 MoodleNotifier/Pickles
+# The virtual environment
+MoodleNotifier/moodle_notifier/
+# Default file created by running nohup 
 nohup.out
