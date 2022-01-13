@@ -22,8 +22,8 @@ Run the following in your terminal to generate a `.env` file (which stores all y
 python3 moodle_notifier.py
 ```
 Inside the `.env` file, do the following:
-1. Put in your concordia username.
-2. Put in your concordia password.
+1. Put in your portal username (it'll be in the format `concordia.ca\X_XXXXXX`).
+2. Put in your portal password.
 3. Put in your email (only works with GMAIL).
 4. Put in your email app password.
 5. Put in the email(s) you want to receive the notifications.
