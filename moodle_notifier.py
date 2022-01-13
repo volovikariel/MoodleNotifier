@@ -13,7 +13,7 @@ from requests.sessions import Session
 
 from credentials import (NetnameCredentials, get_env_email_credentials,
                          get_env_netname_credentials, get_env_variable)
-from email_utils import Email, EmailContent, getEnvEmailRecipients
+from email_utils import Email, EmailContent, get_env_email_recipients
 from utils import create_default_env_file, file_exists, log_with_time
 
 
@@ -211,7 +211,7 @@ def fetch_and_notify(session: Session, scheduler: scheduler) -> None:
                 
                 email_subject = f"[{course_name}] +{num_additions} -{num_deletions}"
                 # Send the email
-                Email(email_subject, email_content).send(get_env_email_credentials(), getEnvEmailRecipients())
+                Email(email_subject, email_content).send(get_env_email_credentials(), get_env_email_recipients())
         # Update the current state in the course_file
         dump_post_ids(course_filepath, current_post_ids)
 

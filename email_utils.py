@@ -49,7 +49,7 @@ class Email:
             log_with_time("Sending an email")
             server.send_message(message)
 
-def getEnvEmailRecipients() -> List[str]:
+def get_env_email_recipients() -> List[str]:
     """Returns environment variable called 'EMAIL_RECIPIENTS'"""
     load_dotenv()
     import json
