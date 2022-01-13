@@ -12,7 +12,7 @@ git clone https://github.com/volovikariel/moodle-notifier.git
 ### Installing the depdencies
 Then install all dependencies required to run the script by by running the following in your terminal. 
 ```bash
-python3 -m pip -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 NOTE: On Windows, you may have to use `py -3` instead of `python3` 
 
