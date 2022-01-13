@@ -6,7 +6,7 @@ Make sure you have the following installed: [git](https://git-scm.com/book/en/v2
 ### Downloading the repository
 To clone the repo run the following in your terminal. 
 ```bash
-git clone -b v2 https://github.com/volovikariel/moodle-notifier.git
+git clone https://github.com/volovikariel/moodle-notifier.git
 ``` 
 
 ### Installing the depdencies
