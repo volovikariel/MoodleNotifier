@@ -26,6 +26,8 @@ Inside the `.env` file, do the following:
 2. Put in your concordia password.
 3. Put in your email (only works with GMAIL).
 4. Put in your email app password.
+5. Put in the email(s) you want to receive the notifications.
+6. Now put in the delay between fetches you'd like to have.
 <details>
   <summary>How to get an app password</summary>
   
@@ -35,8 +37,7 @@ Inside the `.env` file, do the following:
   4. Select the app as "Mail" and the device as "Other (Custom name)" and name it (e.g: moodle_notifications).
   5. Copy the app password, it will be in a yellow box and looks like: "XXXX XXXX XXXX XXXX".
 </details>
-5. Put in the email(s) you want to receive the notifications.
-6. Now put in the delay between fetches you'd like to have.
+
 
 ### Running the program
 You can now try running the program by running 
