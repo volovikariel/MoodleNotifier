@@ -22,7 +22,7 @@ Run the following in your terminal to generate a `.env` file (which stores all y
 python3 moodle_notifier.py
 ```
 Inside the `.env` file, do the following:
-1. Put in your portal username (it'll be in the format `concordia.ca\X_XXXXXX`).
+1. Put in your portal username (the X_XXXXXX in `concordia.ca\X_XXXXXX`).
 2. Put in your portal password.
 3. Put in your email (only works with GMAIL).
 4. Put in your email app password.
@@ -69,3 +69,36 @@ pythonw.exe moodle_notifier.py
 ```
 
 To kill the process, you can open the task manager and kill the process called `pythonw.exe`.
+
+## Running the script on startup
+### If you're on Linux and using Systemd
+Create a systemd service by creating a file called `moodle-notifier.service` under `/etc/systemd/system/`.
+
+Set its contents to the following (**remember to** modify the directories and paths):
+```
+[Unit]
+Description=Moodle Notification startup service
+Documentation=https://github.com/volovikariel/moodle-notifier
+After=network-online.target
+
+[Service]
+User=your_user
+WorkingDirectory=/path/to/directory/containing/the/script
+ExecStart=/path/to/python (e.g: /usr/bin/python) /path/to/directory/containing/the/script/moodle_notifier.py
+Restart=always
+StandardOutput=file:/path/to/where/you/want/to/save/your/logs
+StandardError=file:/path/to/where/you/want/to/save/your/logs
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then reload the daemon to recognize the new service: 
+```bash
+systemctl daemon-reload
+```
+
+Then you can start the service:
+```bash
+systemctl start moodle-notifier.service
+```
