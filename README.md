@@ -1,6 +1,5 @@
 # ⚠️ Attention ⚠️
 Concordia added 2-factor authentication, this means that the application can no longer log itself in to moodle and make requests on your behalf.
-There's most certainly a way around this I would imagine, I'll probably check it out at the start of Fall 2023!  
 
 ## Pre-requisites:
 Make sure you have the following installed: [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [python3+](https://www.python.org/downloads/)
